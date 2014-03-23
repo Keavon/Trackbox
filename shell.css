@@ -1,0 +1,375 @@
+html, body, body > div
+{
+	height:100%;
+	width:100%;
+	margin:0;
+}
+body > div
+{
+	height:100%;
+	width:100%;
+	margin:0;
+	display:table;
+}
+a
+{
+	cursor:pointer;
+}
+.row
+{
+	height:auto;
+	width:100%;
+}
+.row-left
+{
+	display:inline-block;
+}
+.row-right
+{
+	display:inline-block;
+	float:right;
+}
+*
+{
+	font-family:'Open Sans';
+	font-weight:300;
+	color:#666;
+
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+.selectable
+{
+	-webkit-user-select:text;
+	-khtml-user-select:text;
+	-moz-user-select:text;
+	-ms-user-select:text;
+	user-select:text;
+}
+/**********
+ Row 1
+ **********/
+/* Logo and title */
+#app-logo
+{
+	width:25px;
+	height:25px;
+	margin:10px;
+	display:inline-block;
+	vertical-align:middle;
+	background-image:url("assets/trackbox_logo.png");
+}
+#app-logo > div
+{
+	width:100%;
+	height:100%;
+	-webkit-transition:background-color 0.1s;
+	transition:background-color 0.1s;
+}
+#app-logo:hover > div
+{
+	-webkit-transition:background-color 0.1s;
+	transition:background-color 0.1s;
+	background-color:rgba(26, 130, 184, 0.5);
+}
+#app-title
+{
+	margin:0;
+	display:inline-block;
+	font-size:24px;
+	color:#666;
+	line-height:0;
+	vertical-align:middle;
+	cursor:default;
+}
+
+/* Window buttons */
+#app-window-buttons
+{
+	display:inline-block;
+	margin:0;
+	height:auto;
+}
+#app-window-buttons > a
+{
+	-webkit-transition:background-color 0.1s;
+	transition:background-color 0.1s;
+	padding:10px;
+	margin:0;
+	height:auto;
+	display:inline-block;
+}
+#app-window-buttons > a > svg
+{
+	padding:0;
+	margin:0;
+	display:block;
+}
+
+/* User account */
+#app-user
+{
+	-webkit-transition:background-color 0.1s;
+	transition:background-color 0.1s;
+	display:inline-block;
+	margin:0;
+	padding:0 10px;
+	vertical-align:top;
+}
+#app-user > img
+{
+	display:inline-block;
+	vertical-align:middle;
+}
+#app-user > p
+{
+	font-size:16px;
+	margin:0;
+	margin-right:4px;
+	display:inline-block;
+	color:#666;
+	vertical-align:middle;
+}
+#app-user:hover, #app-window-buttons > a:hover
+{
+	-webkit-transition:background-color 0.1s;
+	transition:background-color 0.1s;
+	background-color:#eee;
+}
+
+/**********
+ Row 2
+ **********/
+/* Playback control buttons */
+.app-playback-control
+{
+	margin:0;
+	height:40px;
+	display:table-cell;
+	vertical-align:middle;
+	line-height:0;
+	text-align:center;
+}
+.app-playback-control > div > svg > *, #app-window-buttons > a:hover > svg > *
+{
+	fill:#666;
+	-webkit-transition:fill 0.1s;
+	transition:fill 0.1s;
+}
+.app-playback-control:hover > div > svg > *, #app-window-buttons > a:hover > svg > *
+{
+	fill:#333;
+	-webkit-transition:fill 0.1s;
+	transition:fill 0.1s;
+}
+.app-playback-control > div > svg
+{
+	margin:0;
+}
+.app-playback-control > div
+{
+	display:block;
+	width:40px;
+}
+
+/* Spacer */
+.app-playback-control-spacer
+{
+	margin:0;
+	height:40px;
+	display:table-cell;
+}
+.app-playback-control-spacer > div
+{
+	display:block;
+	width:10px;
+}
+
+/* Slider */
+.slider
+{
+	display:table-cell;
+	vertical-align:middle;
+	line-height:0;
+	margin-left:10px;
+	margin-right:10px;
+	height:40px;
+	overflow:hidden;
+}
+#app-playback-slider
+{
+	width:100%;
+	overflow:visible;
+}
+.slider > div
+{
+	display:block;
+	margin-left:10px;
+	margin-right:10px;
+	position:relative;
+}
+.slider > div > div
+{
+	height:3px;
+	background-color:#999;
+	width:100%;
+}
+.slider > div > div > div
+{
+	position:absolute;
+	height:0;
+	width:100%;
+}
+.slider > div > div > div > div
+{
+	position:absolute;
+	left:0;
+	right:20px;
+}
+.slider > div > div > div > div > div
+{
+	background-color:#41a4bf;
+	position:absolute;
+	height:5px;
+	width:20px;
+	margin-top:-1px;
+	cursor:pointer;
+	left:100%;
+}
+.slider > div > div > div > div > div:hover
+{
+	height:9px;
+	margin-top:-3px;
+}
+.slider > div > p:first-child
+{
+	display:inline-block;
+	position:absolute;
+	font-size:18px;
+	color:#666;
+	margin:-12px 0 0 0;
+}
+.slider > div > p:first-child a:hover
+{
+	color:#333;
+}
+.slider > div > p:not(:first-child)
+{
+	display:inline-block;
+	position:absolute;
+	font-size:12px;
+	color:#666;
+	margin:10px 0 0 0;
+}
+.slider > div > p:not(:first-child):hover
+{
+	color:#333;
+}
+.slider > div > p:last-child
+{
+	float:left;
+}
+.slider > div > p:last-child
+{
+	right:0;
+}
+
+/* Animated volume slider popout */
+#app-volume-button:hover + #app-volume-slider > div, #app-volume-slider:hover > div
+{
+	-webkit-transition:margin 0.25s, width 0.25s;
+	transition:margin 0.25s, width 0.25s;
+	width:200px;
+}
+#app-volume-button:hover + #app-volume-slider, #app-volume-slider:hover
+{
+	-webkit-transition:margin 0.25s, width 0.25s;
+	transition:margin 0.25s, width 0.25s;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+#app-volume-slider
+{
+	-webkit-transition:margin 0.25s, width 0.25s;
+	transition:margin 0.25s, width 0.25s;
+	margin-left:0;
+	margin-right:0;
+}
+#app-volume-slider > div
+{
+	-webkit-transition:margin 0.25s, width 0.25s;
+	transition:margin 0.25s, width 0.25s;
+	width:0;
+	margin:0;
+}
+
+/**********
+ Row 3
+ **********/
+#content
+{
+	display:table;
+	width:100%;
+	height:calc(100% - 95px);
+}
+/* Left sidebar */
+#sidebar
+{
+	display:table-cell;
+	height:100%;
+	padding-right:2px;
+}
+.sidebar-menu-item
+{
+	background-color:#93c47d;
+	width:200px;
+	display:block;
+	margin-bottom:2px;
+}
+.sidebar-menu-item:hover
+{
+	-webkit-transition:background-color 0.1s;
+	transition:background-color 0.1s;
+	background-color:#8cba77;
+}
+.sidebar-menu-item > div
+{
+	padding:10px;
+}
+.sidebar-menu-item > div > p
+{
+	font-size:24px;
+	color:#fff;
+	margin:0;
+}
+#album-art
+{
+	width:200px;
+	height:auto;
+	line-height:0;
+	vertical-align:bottom;
+}
+#album-art > img
+{
+	width:100%;
+	height:auto;
+	display:block;
+}
+
+/* Right frame */
+#frame
+{
+	display:table-cell;
+	width:100%;
+	height:100%;
+	vertical-align:top;
+}
+#frame > div
+{
+	width:100%;
+	height:100%;
+}

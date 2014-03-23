@@ -1,0 +1,1 @@
+// All JavaScript for a view goes here
