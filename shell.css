@@ -211,7 +211,7 @@ a
 	margin-right:10px;
 	position:relative;
 }
-.slider > div > div
+/*.slider > div > div
 {
 	height:3px;
 	background-color:#999;
@@ -239,11 +239,11 @@ a
 	cursor:pointer;
 	left:100%;
 }
-.slider > div > div > div > div > div:hover
+.slider > div > div > div > div > div:hover, .slider-hover
 {
-	height:9px;
-	margin-top:-3px;
-}
+	height:7px !important;
+	margin-top:-2px !important;
+}*/
 .slider > div > p:first-child
 {
 	display:inline-block;
@@ -276,6 +276,57 @@ a
 {
 	right:0;
 }
+input[type=range]
+{
+	-webkit-appearance:none;
+	width:100%;
+	margin:0;
+	height:7px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+	input[type=range]
+	{
+		height:3px;
+		background-color:#999;
+	}
+}
+input[type=range]:focus
+{
+	outline:0;
+}
+input[type=range]::-moz-range-track
+{
+	height:3px;
+	background-color:#999;
+	border:0;
+}
+input[type=range]::-webkit-slider-thumb
+{
+	width:20px;
+	height:5px;
+	border:0;
+	border-radius:0;
+	background:none;
+	background:#41a4bf;
+	background-color:#41a4bf;
+	-webkit-appearance:none;
+}
+input[type=range]::-moz-range-thumb
+{
+	width:20px;
+	height:5px;
+	border:0;
+	border-radius:0;
+	background:none;
+	background:#41a4bf;
+	background-color:#41a4bf;
+}
+input[type=range]:hover::-moz-range-thumb
+{
+	height:7px;
+}
+
+
 
 /* Animated volume slider popout */
 #app-volume-button:hover + #app-volume-slider > div, #app-volume-slider:hover > div
