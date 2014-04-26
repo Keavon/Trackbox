@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -40,7 +40,7 @@
 			<div class="slider" id="app-playback-slider">
 				<div>
 					<p><a>Track Name</a> &#8226; <a>Album Name</a> &#8226; <a>Artist Name</a></p>
-					<input type="range" name="points" min="1" max="10000">
+					<input type="range" name="points" min="1" max="10000" value="0">
 					<!--<div><div><div><div></div></div></div></div>-->
 					<p class="no-select"><span>0:00</span></p>
 					<p class="no-select"><span>2:56</span>/<span>2:56</span></p>
@@ -52,7 +52,7 @@
 
 			<div class="slider" id="app-volume-slider">
 				<div>
-					<input type="range" name="points" min="1" max="10000">
+					<input type="range" name="points" min="1" max="10000" value="10000">
 					<!--<div><div><div><div></div></div></div></div>-->
 				</div>
 			</div>
@@ -103,12 +103,12 @@
 				</div>
 			</div>
 			<div id="frame">
-				<div></div>
+				<div><div></div></div>
 				<script>
-					var viewName = "album_list";
-					$('#frame > div').load('frames/library/' + viewName + '/view.html');
-					$('head').append('<link href="frames/library/' + viewName + '/view.css" rel="stylesheet" />');
-					$('head').append('<script src="frames/library/' + viewName + '/view.js"><' + '/script>');
+					var viewName = "covers";
+					$('#frame > div').load('pages/albums/' + viewName + '/page.html');
+					$('head').append('<link href="pages/albums/' + viewName + '/page.css" rel="stylesheet" />');
+					$('head').append('<script src="pages/albums/' + viewName + '/page.js"><' + '/script>');
 				</script>
 			</div>
 		</div>
