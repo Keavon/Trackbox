@@ -1,0 +1,165 @@
+﻿html, body
+{
+	width:100%;
+	height:100%;
+	font-family:'Open Sans';
+	font-weight:300;
+}
+h1
+{
+	font-size:36px;
+}
+h2
+{
+	font-size:24px;
+}
+
+header
+{
+	background-color:#243743;
+}
+section
+{
+	background-color:#f2f2f2;
+}
+section:nth-child(2n)
+{
+	background-color:#fff;
+}
+footer
+{
+	background-color:#243743;
+	line-height:0;
+	color:#fff;
+}
+header > div, section > div, footer > div
+{
+	max-width:1000px;
+	min-width:320px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+section > div
+{
+	padding:100px 0;
+}
+section h2
+{
+	margin-bottom:20px;
+}
+#banner h2
+{
+	margin-bottom:0;
+}
+
+header > div
+{
+	padding:50px 0;
+}
+header svg
+{
+	display:inline-block;
+}
+header h1
+{
+	margin-left:15px;
+	color:#fff;
+	line-height:0;
+	font-size:42px;
+	display:inline-block;
+}
+header a.button
+{
+	float:right;
+	margin-top:-2px;
+}
+
+#banner
+{
+	background-color:#28B78D;
+	/*background-image:url(noise.png);*/
+	background-image:url(background.jpg);
+	-moz-background-size:cover;
+	-webkit-background-size:cover;
+	-o-background-size:cover;
+	background-size:cover;
+	background-position:center;
+	color:#fff;
+	text-align:center;
+}
+#banner > div
+{
+	padding:200px 0;
+}
+#banner h1
+{
+	font-weight:400;
+	margin-bottom:20px;
+}
+
+section > div > h2
+{
+	text-align:center;
+}
+
+footer > div
+{
+	padding:50px 0;
+	text-align: justify;
+}
+footer > div > div
+{
+	display:inline-block;
+	vertical-align:top;
+	margin-right:50px;
+}
+footer > div > div:nth-last-of-type(1)
+{
+	margin-right:0;
+}
+footer p, footer a
+{
+	text-align:left;
+	line-height:22px;
+}
+footer p
+{
+	color:#ddd;
+}
+footer p.footer-head, footer a
+{
+	font-weight:400;
+	text-decoration:none;
+	margin-bottom:10px;
+	display:block;
+}
+footer a
+{
+	color:#fff;
+}
+footer a:hover
+{
+	text-decoration:underline;
+}
+
+.button
+{
+	color:#fff;
+	text-decoration:none;
+	border:solid 1px #fff;
+	padding:10px;
+	border-radius:5px;
+	-moz-transition:background-color 100ms;
+	-webkit-transition:background-color 100ms;
+	-o-transition:background-color 100ms;
+	transition:background-color 100ms;
+}
+.button:hover
+{
+	background-color:rgba(255, 255, 255, 0.1);
+	-moz-transition:background-color 100ms;
+	-webkit-transition:background-color 100ms;
+	-o-transition:background-color 100ms;
+	transition:background-color 100ms;
+}
