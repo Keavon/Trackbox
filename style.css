@@ -18,6 +18,10 @@ p
 	font-size:24px;
 	line-height:36px;
 }
+a
+{
+	color:#000;
+}
 
 header
 {
@@ -75,8 +79,8 @@ header h1
 {
 	margin-left:15px;
 	color:#fff;
-	line-height:42px;
 	font-size:42px;
+	line-height:1;
 	display:inline-block;
 }
 header a.button
@@ -87,8 +91,6 @@ header a.button
 
 #banner
 {
-	background-color:#28B78D;
-	/*background-image:url(noise.png);*/
 	background-image:url(background.jpg);
 	-moz-background-size:cover;
 	-webkit-background-size:cover;
@@ -119,6 +121,25 @@ header a.button
 	height:auto;
 }
 
+#release form
+{
+	text-align:center;
+}
+#release input
+{
+	font-size:24px;
+	font-family:'Open Sans';
+	width:100%;
+	max-width:450px;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}
+#complete:target
+{
+	display:none;
+}
+
 footer > div
 {
 	padding:25px 0;
@@ -141,7 +162,9 @@ footer > div > div:last-child
 	display:inline-block;
 	font-size:0;
 	line-height:0;
+	text-align:center;
 }
+
 footer p, footer a
 {
 	text-align:left;
