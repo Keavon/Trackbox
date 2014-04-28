@@ -135,9 +135,19 @@ header a.button
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
 }
-#complete:target
+#complete:target input, #complete:target p
 {
 	display:none;
+}
+#complete:target + p
+{
+	display:block;
+}
+#complete + p
+{
+	display:none;
+	text-align:center;
+	color:#ff0000;
 }
 
 footer > div
