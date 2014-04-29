@@ -44,10 +44,13 @@ footer
 header > div, section > div, footer > div
 {
 	max-width:1000px;
-	min-width:400px;
+	min-width:420px;
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
+}
+header > div > div, section > div > div, footer > div > div {
+	margin: 0 10px;
 }
 section > div
 {
@@ -135,19 +138,63 @@ header a.button
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
 }
-#complete:target input, #complete:target p
+
+#release form p:last-of-type
 {
-	display:none;
+	text-align:center;
 }
-#complete:target + p
-{
-	display:block;
-}
-#complete + p
+#success + p, #failure + p
 {
 	display:none;
 	text-align:center;
-	color:#ff0000;
+	color:#f00;
+
+	-moz-animation:flash 2s linear;
+	-webkit-animation:flash 2s linear;
+	-o-animation:flash 2s linear;
+	animation:flash 2s linear;
+
+}
+@-moz-keyframes flash
+{
+	1% {color:#f00;}
+	50% {color:#fff;}
+	100% {color:#f00;}
+}
+@-webkit-keyframes flash
+{
+	1% {color:#f00;}
+	50% {color:#fff;}
+	100% {color:#f00;}
+}
+@-o-keyframes flash
+{
+	1% {color:#f00;}
+	50% {color:#fff;}
+	100% {color:#f00;}
+}
+@keyframes flash
+{
+	1% {color:#f00;}
+	50% {color:#fff;}
+	100% {color:#f00;}
+}
+
+#failure:target + p
+{
+	display:block;
+}
+#failure:target ~ p:last-of-type
+{
+	display:none;
+}
+#success:target + p
+{
+	display:block;
+}
+#success:target ~ input, #success:target ~ p:last-of-type
+{
+	display:none;
 }
 
 footer > div
@@ -155,7 +202,7 @@ footer > div
 	padding:25px 0;
 	text-align: justify;
 }
-footer > div > div
+footer > div > div > div
 {
 	display:inline-block;
 	vertical-align:top;
