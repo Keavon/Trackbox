@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -11,8 +11,8 @@
 	<script src="shell.js"></script>
 </head>
 <body>
-	<div id="shell">
-		<div class="row">
+	<div id="wrapper">
+		<div class="row" style="height:45px;">
 			<div class="row-left">
 				<a id="app-logo" class="no-select"><div></div></a>
 				<h1 id="app-title">Trackbox</h1>
@@ -27,7 +27,7 @@
 			</div>
 		</div>
 
-		<div class="row" style="margin-bottom:10px;">
+		<div class="row" style="height:50px;">
 			<a class="app-playback-control no-select"><div><svg x="0px" y="0px" width="24px" height="18px" viewBox="0 0 700 500" enable-background="new 0 0 700 500" xml:space="preserve"><polygon fill="#666" points="700,500 700,0 400,250" /><polygon fill="#666" points="400,500 400,0 100,245" /><rect fill="#666" width="100" height="450" y="25" /></svg></div></a>
 			<a class="app-playback-control no-select"><div><svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><polygon fill="#666" points="0,0 0,512 512,256" /></svg></div></a>
 			<a class="app-playback-control no-select"><div><svg x="0px" y="0px" width="24px" height="18px" viewBox="0 0 700 500" enable-background="new 0 0 700 500" xml:space="preserve"><polygon fill="#666" points="0,0 0,500 300,250" /><polygon fill="#666" points="300,0 300,500 600,250" /><rect x="600" fill="#666" width="100" height="450" y="25" /></svg></div></a>
@@ -60,56 +60,57 @@
 		</div>
 
 		<div id="content" class="row">
-			<script>document.getElementById('content').style = 'height:calc(100% - ' + document.getElementById('content').getBoundingClientRect().top - 1 + 'px);';</script>
-			<div id="sidebar">
-				<div style="display: -webkit-box; display: -moz-box; display: box; -webkit-box-orient: vertical; -moz-box-orient: vertical; box-orient: vertical; -webkit-box-align: stretch; -moz-box-align: stretch; box-align: stretch; -webkit-box-direction: normal; -moz-box-direction: normal; box-direction: normal; -webkit-box-pack: start; -moz-box-pack: start; box-pack: start; height:100%;">
-					<div style="-webkit-box-flex: 1; -moz-box-flex: 1; box-flex: 1; -webkit-box-ordinal-group: 1; -moz-box-ordinal-group: 1; box-ordinal-group: 1;">
-						<a class="sidebar-menu-item">
-							<div>
-								<p class="no-select">Library</p>
+			<div>
+				<div id="sidebar">
+					<div>
+						<div>
+							<a class="sidebar-menu-item">
+								<div>
+									<p class="no-select">Library</p>
+								</div>
+							</a>
+							<a class="sidebar-menu-item">
+								<div>
+									<p class="no-select">Discover</p>
+								</div>
+							</a>
+							<a class="sidebar-menu-item">
+								<div>
+									<p class="no-select">Artists</p>
+								</div>
+							</a>
+							<a class="sidebar-menu-item">
+								<div>
+									<p class="no-select">Mixes</p>
+								</div>
+							</a>
+							<a class="sidebar-menu-item">
+								<div>
+									<p class="no-select">Tags</p>
+								</div>
+							</a>
+							<a class="sidebar-menu-item">
+								<div>
+									<p class="no-select">Pages</p>
+								</div>
+							</a>
+						</div>
+						<div>
+							<div id="album-art">
+								<img src="assets/album_art.png" />
 							</div>
-						</a>
-						<a class="sidebar-menu-item">
-							<div>
-								<p class="no-select">Discover</p>
-							</div>
-						</a>
-						<a class="sidebar-menu-item">
-							<div>
-								<p class="no-select">Artists</p>
-							</div>
-						</a>
-						<a class="sidebar-menu-item">
-							<div>
-								<p class="no-select">Mixes</p>
-							</div>
-						</a>
-						<a class="sidebar-menu-item">
-							<div>
-								<p class="no-select">Tags</p>
-							</div>
-						</a>
-						<a class="sidebar-menu-item">
-							<div>
-								<p class="no-select">Pages</p>
-							</div>
-						</a>
-					</div>
-					<div style="-webkit-box-flex: 0; -moz-box-flex: 0; box-flex: 0; -webkit-box-ordinal-group: 1; -moz-box-ordinal-group: 1; box-ordinal-group: 1;">
-						<div id="album-art">
-							<img src="assets/album_art.png" />
 						</div>
 					</div>
 				</div>
-			</div>
-			<div id="frame">
-				<div><div></div></div>
-				<script>
-					var viewName = "covers";
-					$('#frame > div').load('pages/albums/' + viewName + '/page.html');
-					$('head').append('<link href="pages/albums/' + viewName + '/page.css" rel="stylesheet" />');
-					$('head').append('<script src="pages/albums/' + viewName + '/page.js"><' + '/script>');
-				</script>
+				<div id="frame">
+					<div><div></div></div>
+					<script>
+						var viewName = "covers";
+						$('#frame > div').load('pages/albums/' + viewName + '/page.html');
+						$('head').append('<link href="pages/albums/' + viewName + '/page.css" rel="stylesheet" />');
+						//$('head').append('<script src="pages/albums/' + viewName + '/page.js"><' + '/script>');
+					</script>
+				</div>
 			</div>
 		</div>
 	</div>
