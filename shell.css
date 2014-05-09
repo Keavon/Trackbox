@@ -126,7 +126,7 @@ a
 }
 
 /* User account */
-#app-user
+/*#app-user
 {
 	-webkit-transition:background-color 0.1s;
 	-moz-transition:background-color 0.1s;
@@ -158,7 +158,7 @@ a
 	-o-transition:background-color 0.1s;
 	transition:background-color 0.1s;
 	background-color:#eee;
-}
+}*/
 
 /**********
  Row 2
