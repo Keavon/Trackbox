@@ -6,8 +6,8 @@ html, body, body > div
 }
 body
 {
-	font-family:'Open Sans';
-	font-weight:300;
+	font-family:'Open Sans', sans-serif;
+	font-weight:400;
 	color:#666;
 	-webkit-user-select:none;
 	-moz-user-select:none;
@@ -93,7 +93,7 @@ a
 	margin:0;
 	display:inline-block;
 	font-size:24px;
-	font-weight:300;
+	font-weight:400;
 	color:#666;
 	line-height:0;
 	vertical-align:middle;
@@ -463,7 +463,8 @@ input[type=range]:hover::-moz-range-thumb
 
 .sidebar-menu-item
 {
-	background-color:#93c47d;
+	/*background-color:#93c47d;*/
+	background-color:#89B6CB;
 	width:100%;
 	display:block;
 	margin-bottom:2px;
@@ -478,7 +479,8 @@ input[type=range]:hover::-moz-range-thumb
 	-moz-transition:background-color 0.1s;
 	-o-transition:background-color 0.1s;
 	transition:background-color 0.1s;
-	background-color:#8cba77;
+	/*background-color:#8cba77;*/
+	background-color:#7fa8bb;
 }
 .sidebar-menu-item > div
 {

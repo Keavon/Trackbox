@@ -1,3 +1,16 @@
+/* Regular - 300 */
+@font-face {
+  font-family: "Open Sans Clear";
+  font-weight: 300;
+  src:url('OpenSans-Light.svg') format('svg'),
+	  url('OpenSans-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: "Open Sans";
+  font-weight: 300;
+  src:url('OpenSans-Light.ttf') format('truetype');
+}
+
 /* Regular - 400 */
 @font-face {
   font-family: "Open Sans Clear";
