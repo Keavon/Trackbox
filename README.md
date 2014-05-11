@@ -1,4 +1,2 @@
-trackboxfoundation.github.io
+Website for [Trackbox](https://github.com/Trackbox/Trackbox) running at http://TrackboxApp.com
 ============================
-
-Website for trackbox. Hosted at http://trackboxapp.com
