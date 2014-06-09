@@ -1,0 +1,56 @@
+#standard-list > div {
+	display:inline-block;
+	margin:10px 20px 10px 10px;
+	float:left;
+}
+#standard-list > div:last-child {
+	margin-right:10px;
+}
+#standard-list h1 {
+	font-weight:200;
+}
+.tag {
+	display:inline-block;
+	clear:both;
+	width:auto;
+	margin:5px 0;
+	vertical-align:middle;
+}
+.tag > div {
+	float:left;
+	background-color:#ccc;
+	line-height:1;
+	padding:10px 5px 10px 10px;
+	border-radius:5px 0 0 5px;
+	transition:background-color linear 0.1s;
+}
+.tag:hover > div {
+	background-color:#bbb;
+	transition:background-color linear 0.1s;
+}
+.tag:hover > span {
+	border-left: 10px solid #bbb;
+	transition:border-left linear 0.1s;
+}
+.tag > div > p {
+	margin:0;
+	font-weight:200;
+	color:#000;
+}
+.tag > div > p > span {
+	font-size:12px;
+	color:#b5b5b5;
+}
+.tag > span {
+	display:inline-block;
+	width: 0;
+	height: 0;
+	border-top: 18px solid transparent;
+	border-bottom: 18px solid transparent;
+	border-left: 10px solid #ccc;
+	transition:border-left linear 0.1s;
+}
+#standard-list > div > p {
+	display:inline-block;
+	vertical-align:middle;
+}

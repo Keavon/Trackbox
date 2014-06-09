@@ -1,0 +1,9 @@
+/* HIGHLIGHT SELECTED ROW */
+.list-row-selected {
+	background-color: rgba(56, 116, 167, 0.1);
+}
+
+/* LAST COLUMN FLOATS TO RIGHT */
+.list-row > div:last-child {
+	float: right;
+}

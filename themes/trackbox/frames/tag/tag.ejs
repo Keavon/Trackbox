@@ -1,0 +1,16 @@
+<link href="themes/trackbox/frames/tag/tag.css" rel="stylesheet" />
+<% var categories = getTagCategories(); %>
+<% for (var cat = 0; cat < categories.length; cat++) { %>
+<div>
+	<h1><%= categories[cat] %></h1>
+	<% var tagNames = getTagNamesByCategory(categories[cat]); %>
+	<% for (var i = 0; i < tagNames.names.length; i++) { %>
+	<a class="tag">
+		<div><p><%= tagNames.names[i] %></p></div>
+		<span></span>
+	</a>
+	<p><%= tagNames.population[i] %></p>
+	<br />
+	<% } %>
+</div>
+<% } %>
