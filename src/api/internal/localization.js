@@ -43,3 +43,12 @@ trackbox.api.internal.localization.language.es = {
 	"Tags"    : "Etiqueta",
 	"Pages"   : "Páginas"
 }
+
+trackbox.api.internal.localization.language.jp = {
+	"Title"   : "トラクーバカス",
+	"Songs"   : "歌",
+	"Albums"  : "アルバム",
+	"Artists" : "アーティスト",
+	"Tags"    : "荷札",
+	"Pages"   : "頁"
+}
