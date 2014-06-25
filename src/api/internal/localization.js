@@ -1,22 +1,45 @@
 trackbox.api.internal.localization = {};
 
-trackbox.api.internal.localization.set = function () {
-	$("#app-title").html(trackbox.api.internal.localization.get("title"));
+// Add localized text to every textual element on the page.
+trackbox.api.internal.localization.load = function() {
+	$("#app-title").html(trackbox.api.internal.localization.get("Title"));
 };
 
-trackbox.api.internal.localization.get = function (key) {
+
+// Load localized word from key.
+trackbox.api.internal.localization.get = function(key) {
 	if (trackbox.api.internal.localization.language[trackbox.api.internal.localization.language.perfered][key]) {
 		return trackbox.api.internal.localization.language[trackbox.api.internal.localization.language.perfered][key]
 	} else if (trackbox.api.internal.localization.language.en[key]) {
 		return trackbox.api.internal.localization.language.en[key];
 	} else {
 		console.log("The key " + key + " was not found in the perfered language or in english.");
-		return "";
+		return key;
 	}
 }
+
+trackbox.api.internal.localization.set = function(language) {
+	trackbox.api.internal.localization.language.perfered = language;
+	trackbox.api.internal.localization.load();
+	trackbox.api.internal.buttons.reset();
+};
 
 trackbox.api.internal.localization.language = {};
 trackbox.api.internal.localization.language.perfered = "en";
 trackbox.api.internal.localization.language.en = {
-	"title" : "Trackbox"
+	"Title"   : "Trackbox",
+	"Songs"   : "Songs",
+	"Albums"  : "Albums",
+	"Artists" : "Artists",
+	"Tags"    : "Tags",
+	"Pages"   : "Pages"
 };
+
+trackbox.api.internal.localization.language.es = {
+	"Title"   : "Trackbox",
+	"Songs"   : "Canciones",
+	"Albums"  : "Álbumes",
+	"Artists" : "Artistas",
+	"Tags"    : "Etiqueta",
+	"Pages"   : "Páginas"
+}

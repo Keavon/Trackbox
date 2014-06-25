@@ -14,6 +14,9 @@ trackbox.api.internal.theme.interface.list = function() {
 	throw "Not Implemented";
 };
 
+trackbox.api.internal.theme.interface.default.button = {};
+trackbox.api.internal.theme.interface.default.button.path = "themes/trackbox/button.ejs";
+
 // Choose a default style to apply to the interface at startup
 trackbox.api.internal.theme.interface.style = {};
 trackbox.api.internal.theme.interface.style.default = {};
