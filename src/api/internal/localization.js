@@ -44,7 +44,7 @@ trackbox.api.internal.localization.language.es = {
 	"Pages"   : "Páginas"
 }
 
-trackbox.api.internal.localization.language.jp = {
+trackbox.api.internal.localization.language.ja = {
 	"Title"   : "トラクーバカス",
 	"Songs"   : "歌",
 	"Albums"  : "アルバム",
