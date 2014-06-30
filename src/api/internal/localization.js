@@ -32,7 +32,7 @@ trackbox.api.internal.localization.language.en = {
 	"Albums"  : "Albums",
 	"Artists" : "Artists",
 	"Tags"    : "Tags",
-	"Pages"   : "Pages"
+	"Pages"   : "Groupings"
 };
 
 trackbox.api.internal.localization.language.es = {
