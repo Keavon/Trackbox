@@ -32,7 +32,7 @@ trackbox.api.internal.localization.language.en = {
 	"Albums"  : "Albums",
 	"Artists" : "Artists",
 	"Tags"    : "Tags",
-	"Pages"   : "Groupings"
+	"Boxes"   : "Boxes"
 };
 
 trackbox.api.internal.localization.language.es = {
@@ -41,7 +41,7 @@ trackbox.api.internal.localization.language.es = {
 	"Albums"  : "Álbumes",
 	"Artists" : "Artistas",
 	"Tags"    : "Etiqueta",
-	"Pages"   : "Páginas"
+	"Boxes"   : "Cajas"
 }
 
 trackbox.api.internal.localization.language.ja = {
@@ -50,5 +50,5 @@ trackbox.api.internal.localization.language.ja = {
 	"Albums"  : "アルバム",
 	"Artists" : "アーティスト",
 	"Tags"    : "荷札",
-	"Pages"   : "頁"
+	"Boxes"   : "ボックス"
 }
