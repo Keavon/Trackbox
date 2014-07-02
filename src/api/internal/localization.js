@@ -35,6 +35,15 @@ trackbox.api.internal.localization.language.en = {
 	"Boxes"   : "Boxes"
 };
 
+trackbox.api.internal.localization.language.da = {
+	"Title"   : "Trackbox",
+	"Songs"   : "Sange",
+	"Albums"  : "Albums",
+	"Artists" : "Kunstnere",
+	"Tags"    : "Tags",
+	"Boxes"   : "Kasser"
+}
+
 trackbox.api.internal.localization.language.es = {
 	"Title"   : "Trackbox",
 	"Songs"   : "Canciones",
