@@ -79,3 +79,12 @@ trackbox.api.internal.localization.language.ja = {
 	"Tags"    : "荷札",
 	"Boxes"   : "ボックス"
 }
+
+trackbox.api.internal.localization.language.sv = {
+	"Title"   : "Trackbox",
+	"Songs"   : "Låtar",
+	"Albums"  : "Album",
+	"Artists" : "Artister",
+	"Tags"    : "Taggar",
+	"Boxes"   : "Lådor"
+}
