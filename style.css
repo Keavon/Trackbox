@@ -124,11 +124,11 @@ header a.button
 	height:auto;
 }
 
-#release form
+#email form
 {
 	text-align:center;
 }
-#release input
+#email input
 {
 	font-size:24px;
 	font-family:'Open Sans';
@@ -139,7 +139,7 @@ header a.button
 	box-sizing:border-box;
 }
 
-#release form p:last-of-type
+#email form p:last-of-type
 {
 	text-align:center;
 }
