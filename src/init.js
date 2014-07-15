@@ -1,6 +1,11 @@
 // Initializes the Trackbox Interface
 $(document).ready(function () {
-	$(document.body).html(trackbox.api.internal.theme.interface.default.html);
-	trackbox.api.internal.localization.load();
-	trackbox.api.internal.buttons.load();
+	init();
 });
+
+// Initalizes Trackbox.
+function init(){
+	trackbox.api.internal.theme.shell.render();
+	trackbox.api.internal.localization.load();
+	trackbox.api.internal.theme.page.load();
+}

@@ -20,8 +20,7 @@ trackbox.api.internal.localization.get = function(key) {
 
 trackbox.api.internal.localization.set = function(language) {
 	trackbox.api.internal.localization.language.perfered = language;
-	trackbox.api.internal.localization.load();
-	trackbox.api.internal.buttons.reset();
+	init();
 };
 
 trackbox.api.internal.localization.language = {};
