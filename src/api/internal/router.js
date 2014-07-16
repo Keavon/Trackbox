@@ -2,15 +2,11 @@
 trackbox.api.internal.router = {};
 
 // Chose a frame to render based on hash tag on the url.
-trackbox.api.internal.router.route = function() {
-	trackbox.api.internal.router.selectFrame(window.location.hash);
-};
-
-// Select and render the proper frame
-trackbox.api.internal.router.selectFrame = function(frameName) {
-	if(trackbox.api.internal.theme.frame.exists(frameName) {
-		trackbox.api.internal.theme.frame.render(frameName);
+trackbox.api.internal.router.route =  function() {
+	pageName = window.location.hash.substring(1);
+	if(trackbox.api.internal.theme.page.pages[pageName]) {
+		trackbox.api.internal.theme.page.set(pageName);
 	} else {
-		trackbox.api.internal.theme.render(trackbox.api.internal.theme.frame.default);
+		window.location.href = window.location.origin  + window.location.pathname + "#" + trackbox.api.internal.theme.page.default
 	}
-};
+}
