@@ -21,20 +21,12 @@ trackbox.api.internal.theme.shell.current.css         = trackbox.api.internal.th
 
 // Render the shell
 trackbox.api.internal.theme.shell.render = function () {
-	$("body").html('<div id="shell-scripts"> <!-- Dynamically Generated Content --> </div><div id="shell-styles"> <!-- Dynamically Generated Content --> </div>');
-
-	trackbox.api.internal.theme.style.apply();
-
-	//for (var javascript in trackbox.api.internal.theme.shell.current.javascripts) {
-	//	$("#shell-scripts").append('<script type="text/javascript" src="' + trackbox.api.internal.theme.shell.current.javascripts[javascript] + '"></script>');
-	//}
-
 	// Get shell HTML and apply it to the document body
 	$.ajax({
 		url: trackbox.api.internal.theme.shell.current.shell,
 		dataType: "text",
 		success: function (data) {
-			$("body").append(data);
+			$("body").html(data);
 		}
 	});
 };

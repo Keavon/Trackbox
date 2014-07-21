@@ -28,6 +28,9 @@ a {
 	fill: #333;
 	transition: fill 0.1s;
 }
+.active-button {
+	background-color:rgba(0, 0, 0, 0.1);
+}
 
 /**********
  Document
@@ -171,7 +174,6 @@ body {
 	padding:16px 15px;
 }
 
-
 /* /Right buttons container */
 #title-bar-right {
 	float:right;
@@ -219,9 +221,6 @@ body {
 }
 #view-selector a svg {
     display: block;
-}
-.active-button {
-	background-color:rgba(0, 0, 0, 0.1);
 }
 
 /**********
