@@ -2,4 +2,6 @@
 var trackbox          = {};
 trackbox.api          = {};
 trackbox.api.internal = {};
-trackbox.api.v1       = {};
+
+// Is trackbox loaded?
+trackbox.api.internal.isLoaded = false;
