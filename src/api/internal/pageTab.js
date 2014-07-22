@@ -25,10 +25,10 @@ trackbox.api.internal.pageTab.add = function(icon, id, titleText){
 
 trackbox.api.internal.pageTab.select = function(id){
 	if(trackbox.api.internal.pageTab.selected) {
-		$("#" + trackbox.api.internal.pageTab.selected).removeClass("page-selector-active");
+		$("#" + trackbox.api.internal.pageTab.selected + "-button").removeClass("page-selector-active");
 	}
 
-	$("#" + id).addClass("page-selector-active");
+	$("#" + id + "-button").addClass("page-selector-active");
 	trackbox.api.internal.pageTab.selected = id;
 }
 
