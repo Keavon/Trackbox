@@ -1,0 +1,61 @@
+/* Background Backgrounds */
+.palette-background-primary-bg {
+	background-color:#fff;
+}
+.palette-background-secondary-bg {
+	background-color:#f5f5f5;
+}
+.palette-background-tertiary-bg {
+	background-color:#ddd;
+}
+
+/* Solid Colors */
+.palette-solid-primary-color {
+	color:#333;
+}
+.palette-solid-secondary-color {
+	color:#666;
+}
+.palette-solid-tertiary-color {
+	color:#999;
+}
+
+/* Solid Fill */
+.palette-solid-primary-fill svg * {
+	fill:#333;
+	transition: fill 0.1s;
+}
+.palette-solid-secondary-fill svg * {
+	fill:#666;
+	transition: fill 0.1s;
+}
+.palette-solid-tertiary-fill svg * {
+	fill:#999;
+	transition: fill 0.1s;
+}
+
+/* Solid Fill Hover */
+.palette-solid-primary-hover-secondary-fill:hover svg * {
+	fill:#666;
+	transition: fill 0.1s;
+}
+.palette-solid-primary-hover-tertiary-fill:hover svg * {
+	fill:#999;
+	transition: fill 0.1s;
+}
+.palette-solid-secondary-hover-primary-fill:hover svg * {
+	fill:#333;
+	transition: fill 0.1s;
+}
+.palette-solid-secondary-hover-tertiary-fill:hover svg * {
+	fill:#999;
+	transition: fill 0.1s;
+}
+.palette-solid-tertiary-hover-primary-fill:hover svg * {
+	fill:#333;
+	transition: fill 0.1s;
+}
+.palette-solid-tertiary-hover-secondary-fill:hover svg * {
+	fill:#666;
+	transition: fill 0.1s;
+}

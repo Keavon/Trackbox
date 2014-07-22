@@ -20,14 +20,6 @@ a {
 	flex:1 1 auto;
 	-webkit-flex:1 1 auto;
 }
-.icon-color svg * {
-	fill: #666;
-	transition: fill 0.1s;
-}
-.icon-color:hover svg * {
-	fill: #333;
-	transition: fill 0.1s;
-}
 .active-button {
 	background-color:#ddd;
 }
@@ -230,13 +222,7 @@ body {
 	flex: auto;
 	-webkit-flex: auto;
 	height: 100%;
-	background-color:#fff;
 	overflow-y: auto;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	#page {
-		height: calc(100% - 136px) !important;
-	}
 }
 
 /**********
