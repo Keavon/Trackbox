@@ -7,14 +7,15 @@ trackbox.api.internal.theme.shell.shells.trackbox = {
 	"name": "Trackbox",
 	"location": "themes/shells/trackbox/",
 	"shell": "themes/shells/trackbox/shell.html",
-	"button": "themes/shells/trackbox/button.ejs"
+	"pageTab": "themes/shells/trackbox/page-tab.html"
 };
 
 // Shell currently in use.
 trackbox.api.internal.theme.shell.current             = {};
 trackbox.api.internal.theme.shell.current.id          = "trackbox";
 trackbox.api.internal.theme.shell.current.location    = trackbox.api.internal.theme.shell.shells[trackbox.api.internal.theme.shell.current.id].location;
-trackbox.api.internal.theme.shell.current.button      = trackbox.api.internal.theme.shell.shells[trackbox.api.internal.theme.shell.current.id].button;
+trackbox.api.internal.theme.shell.current.pageTab     = trackbox.api.internal.theme.shell.shells[trackbox.api.internal.theme.shell.current.id].pageTab;
+trackbox.api.internal.theme.shell.current.name        = trackbox.api.internal.theme.shell.shells[trackbox.api.internal.theme.shell.current.id].name;
 trackbox.api.internal.theme.shell.current.shell       = trackbox.api.internal.theme.shell.shells[trackbox.api.internal.theme.shell.current.id].shell;
 
 // Render the shell
