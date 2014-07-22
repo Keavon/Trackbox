@@ -21,13 +21,13 @@ trackbox.api.internal.theme.shell.current.shell       = trackbox.api.internal.th
 // Render the shell
 trackbox.api.internal.theme.shell.render = function () {
 	// Get shell HTML and apply it to the document body
-	$.ajax({
-		url: trackbox.api.internal.theme.shell.current.shell,
-		dataType: "text",
-		success: function (data) {
-			$("body").html(data);
-		}
-	});
+	shell = $.ajax({
+				async: false,
+				url: trackbox.api.internal.theme.shell.current.shell,
+				dataType: "text"
+			}).responseText;
+
+	$("body").html(shell);
 };
 
 // Change the shell
