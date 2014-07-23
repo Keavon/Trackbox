@@ -59,16 +59,12 @@ trackbox.api.internal.theme.page.set = function (name) {
 trackbox.api.internal.theme.page.load = function () {
 	// Add all of the pages as buttons to the tab bar
 	for (var page in trackbox.api.internal.theme.page.pages) {
-		var isActive = false;
-		if (page == trackbox.api.internal.theme.page.default) {
-			isActive = true;
-		}
 		var icon = $.ajax({
 			url: trackbox.api.internal.theme.page.pages[page].icon,
 			dataType: "text",
 			async: false
 		}).responseText;
 		var translatedName = trackbox.api.internal.localization.get(trackbox.api.internal.theme.page.pages[page].name);
-		trackbox.api.internal.pageTab.add(icon, page, translatedName, isActive);
+		trackbox.api.internal.pageTab.add(icon, page, translatedName);
 	}
 };
