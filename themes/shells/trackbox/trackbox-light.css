@@ -20,8 +20,11 @@ a {
 	flex:1 1 auto;
 	-webkit-flex:1 1 auto;
 }
-.active-button {
-	background-color:#ddd;
+path, rect, circle, ellipse, line, polyline, polygon {
+	transition: fill 0.1s;
+}
+a, div {
+	transition:background-color 0.1s;
 }
 
 /**********
@@ -34,19 +37,16 @@ body {
 	height: 100%;
 	width: 100%;
 	margin: 0;
-	display: -ms-flex;
 	display: -webkit-flex;
 	display: flex;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
-	color: #666;
 	user-select: none;
 }
 #wrapper {
 	height: 100%;
 	width: 100%;
 	margin: 0;
-	display: -ms-flex;
 	display: -webkit-flex;
 	display: flex;
 	flex-direction: column;
@@ -58,7 +58,6 @@ body {
  Title Bar
  **********/
 #title-bar {
-	display: -ms-flex;
 	display: -webkit-flex;
 	display: flex;
 	flex-direction: row;
@@ -86,10 +85,8 @@ body {
 #logo-and-title a > div {
 	width: 100%;
 	height: 100%;
-	transition: background-color 0.1s;
 }
 #logo-and-title a:hover > div {
-	transition: background-color 0.1s;
 	background-color: rgba(26, 130, 184, 0.5);
 }
 #logo-and-title h1 {
@@ -97,16 +94,9 @@ body {
 	display: inline-block;
 	font-size: 30px;
 	font-weight: 400;
-	color: #666;
 	line-height: 0;
 	vertical-align: middle;
 	cursor: default;
-	margin-top:-2px;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	#logo-and-title h1 {
-		margin-top:1px;
-	}
 }
 
 /* /Search bar */
@@ -117,16 +107,15 @@ body {
 	height:33px;
 }
 #search-bar div {
-	border:1px solid #999;
+	border-width:1px;
+	border-style:solid;
 	float:left;
-	background-color:#fff;
 	width:100%;
 	max-width:600px;
-	min-width:100px;
+	min-width:50px;
 	position:relative;
 }
 #search-bar div input {
-	background-color:#fff;
 	border:none;
 	font-family:'Open Sans';
 	font-size:16px;
@@ -136,15 +125,13 @@ body {
 	padding:0;
 	outline:none;
 	box-shadow:none;
+	background:transparent;
 }
 #search-bar div a {
 	position:absolute;
 	right:0;
 	padding:7px;
 	padding-top:8px;
-}
-#search-bar div a:hover {
-	background-color:rgba(0, 0, 0, 0.1);
 }
 #search-bar div a svg {
 	display:block;
@@ -161,8 +148,8 @@ body {
 	padding:17px 15px 16px 15px;
 }
 .page-selector-active {
-	background-color:#fff;
-	border-top:1px solid #43acd3;
+	border-top-width:1px;
+	border-top-style:solid;
 	padding:16px 15px;
 }
 
@@ -182,7 +169,6 @@ body {
 	font-size:0;
 }
 #window-buttons a {
-	transition: background-color 0.1s;
 	padding: 10px;
 	margin: 0;
 	height: auto;
@@ -192,10 +178,6 @@ body {
 	padding: 0;
 	margin: 0;
 	display: block;
-}
-#window-buttons a:hover {
-	background-color:rgba(0, 0, 0, 0.1);
-	transition: background-color 0.1s;
 }
 
 /* //View type buttons  */
@@ -230,15 +212,12 @@ body {
  **********/
 #timeline {
 	height:3px;
-	background-color:#ccc;
-	overflow:hidden;
 	position:relative;
 	z-index:100;
 }
 #timeline-bar {
 	height: 100%;
 	width: 70%;
-	background-color: #43acd3;
 }
 
 /**********
@@ -263,7 +242,6 @@ body {
 	width:15px;
 	height:15px;
 	border-radius:50%;
-	background-color:#43acd3;
 	position:absolute;
 	left:-7.5px;
 }

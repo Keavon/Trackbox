@@ -34,10 +34,10 @@ trackbox.api.internal.theme.page.pages.boxes = {
 	"icon": "themes/pages/boxes/boxes.svg"
 };
 
-// default page to render
+// Default page to render
 trackbox.api.internal.theme.page.default = "albums";
 
-// page currently in use.
+// Page currently in use
 trackbox.api.internal.theme.page.current = {};
 trackbox.api.internal.theme.page.current.id = "albums";
 trackbox.api.internal.theme.page.current.page = trackbox.api.internal.theme.page.pages[trackbox.api.internal.theme.page.current.id].page;
@@ -53,19 +53,22 @@ trackbox.api.internal.theme.page.set = function (name) {
 		async: false
 	}).responseText;
 	$("#page").html(page);
-	$("#" + trackbox.api.internal.theme.page.current.id + "-button").addClass("page-selector-active");
 };
 
 // Load all of the pages and add them as a button to the interface
 trackbox.api.internal.theme.page.load = function () {
 	// Add all of the pages as buttons to the tab bar
 	for (var page in trackbox.api.internal.theme.page.pages) {
+		var isActive = false;
+		if (page == trackbox.api.internal.theme.page.default) {
+			isActive = true;
+		}
 		var icon = $.ajax({
 			url: trackbox.api.internal.theme.page.pages[page].icon,
 			dataType: "text",
 			async: false
 		}).responseText;
-		translatedName = trackbox.api.internal.localization.get(trackbox.api.internal.theme.page.pages[page].name);
-		trackbox.api.internal.pageTab.add(icon, page, translatedName);
+		var translatedName = trackbox.api.internal.localization.get(trackbox.api.internal.theme.page.pages[page].name);
+		trackbox.api.internal.pageTab.add(icon, page, translatedName, isActive);
 	}
 };

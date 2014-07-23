@@ -2,7 +2,11 @@
 trackbox.api.internal.pageTab = {};
 
 // Add a tab to the interface.
-trackbox.api.internal.pageTab.add = function(icon, id, titleText){
+trackbox.api.internal.pageTab.add = function(icon, id, titleText, activeTab){
+	var activeClass = "";
+	if(activeTab) {
+		activeClass = " page-selector-active palette-hint-primary-border palette-background-primary-bg";
+	}
 	$.ajax({
 		url: trackbox.api.internal.theme.shell.current.pageTab,
 		dataType: "text",
@@ -11,9 +15,11 @@ trackbox.api.internal.pageTab.add = function(icon, id, titleText){
 			var idRegExp   = new RegExp("%ID%", "g");
 			var iconRegExp = new RegExp("%ICON%", "g");
 			var titleTextRegExp = new RegExp("%TITLE_TEXT%", "g");
+			var activeRegExp = new RegExp("%ACTIVE%", "g");
 			tabHTML = tabHTML.replace(idRegExp, id);
 			tabHTML = tabHTML.replace(iconRegExp, icon);
 			tabHTML = tabHTML.replace(titleTextRegExp, titleText);
+			tabHTML = tabHTML.replace(activeRegExp, activeClass);
 
 			$("#page-tabs").append(tabHTML);
 		},
