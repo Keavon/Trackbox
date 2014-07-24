@@ -319,17 +319,6 @@ body {
 }
 
 /* /Playback buttons */
-.bottom-bar-button {
-	height: 40px;
-	width:auto;
-	display: table-cell;
-	vertical-align: middle;
-	line-height: 0;
-	text-align: center;
-	padding: 15px 0;
-	margin:0;
-}
-
 #playback-buttons .bar-item, #playback-order-buttons .bar-item {
 	display: table-cell;
 	height: 40px;
