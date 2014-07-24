@@ -1,7 +1,7 @@
 // Initializes the Trackbox Interface
 $(document).ready(function () {
-	window.onhashchange = 
 	init();
+	window.onhashchange = trackbox.api.internal.router.route;
 });
 
 // Initalizes Trackbox.
@@ -11,5 +11,4 @@ function init() {
 	trackbox.api.internal.localization.load();
 	trackbox.api.internal.router.route();
 	trackbox.api.internal.isLoaded = true;
-	$("#page-tabs").click(function(){trackbox.api.internal.router.route();});
 }

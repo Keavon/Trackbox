@@ -47,11 +47,16 @@ trackbox.api.internal.theme.page.current.location = trackbox.api.internal.theme.
 // Render the page
 trackbox.api.internal.theme.page.set = function (name) {
 	trackbox.api.internal.theme.page.current.id = name;
-	var page = $.ajax({
+	var page = "";
+	$.ajax({
 		url: trackbox.api.internal.theme.page.pages[name].page,
 		dataType: "text",
-		async: false
-	}).responseText;
+		async: false,
+		success: function (data) {
+			page = data;
+		}
+	});
+	trackbox.api.internal.pageTab.select(name);
 	$("#page").html(page);
 };
 

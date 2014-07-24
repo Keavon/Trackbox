@@ -6,7 +6,7 @@ trackbox.api.internal.pageTab.add = function(icon, id, titleText){
 	$.ajax({
 		url: trackbox.api.internal.theme.shell.current.pageTab,
 		dataType: "text",
-		success: function(data) {
+		success: function (data) {
 			var tabHTML    = data;
 			var idRegExp   = new RegExp("%ID%", "g");
 			var iconRegExp = new RegExp("%ICON%", "g");
@@ -23,13 +23,11 @@ trackbox.api.internal.pageTab.add = function(icon, id, titleText){
 	});
 };
 
-trackbox.api.internal.pageTab.select = function(id){
+trackbox.api.internal.pageTab.selected = null;
+trackbox.api.internal.pageTab.select = function (id) {
 	if(trackbox.api.internal.pageTab.selected) {
-		$("#" + trackbox.api.internal.pageTab.selected + "-button").removeClass("page-selector-active");
+		$("#" + trackbox.api.internal.pageTab.selected + "-button").removeClass("page-selector-active palette-hint-primary-border palette-background-primary-bg");
 	}
-
-	$("#" + id + "-button").addClass("page-selector-active");
+	$("#" + id + "-button").addClass("page-selector-active palette-hint-primary-border palette-background-primary-bg");
 	trackbox.api.internal.pageTab.selected = id;
 }
-
-trackbox.api.internal.pageTab.selected = null;
