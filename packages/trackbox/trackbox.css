@@ -217,7 +217,7 @@ body {
 }
 #timeline-bar {
 	height: 100%;
-	width: 70%;
+	width: 0;
 }
 
 /**********
@@ -235,7 +235,7 @@ body {
 #timeline-knob {
 	position:absolute;
 	width:0;
-	left:70%;
+	left:0;
 	cursor:pointer;
 }
 #timeline-knob div {

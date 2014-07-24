@@ -68,10 +68,14 @@
 		function scrubMouseDownListener(evt) {
 			evt.preventDefault();
 			document.addEventListener("mousemove", scrubMouseDownListener, false);
+			//enableSliderUpdate(false);
 			scrubMouseMoveListener(evt);
 		}
 		function scrubMouseUpListener(evt) {
 			document.removeEventListener("mousemove", scrubMouseDownListener, false);
+			//if (!music.paused) {
+			//	enableSliderUpdate(true);
+			//}
 		}
 		function scrubMouseMoveListener(evt) {
 			var percentage = (evt.clientX / document.body.clientWidth) * 100;
@@ -85,13 +89,62 @@
 			$("#timeline-bar").css("width", percentage + "%");
 		}
 
+		var music = new Audio('http://media.steampowered.com/apps/portal2/soundtrack/01/mp3/01_Science_is_Fun.mp3');
+		var duration = 0.0;
+		var durationTotal = "-:--";
+		var notYetPlayed = true;
+
+		music.addEventListener('loadedmetadata', function () {
+			duration = music.duration;
+			durationTotal = Math.floor(duration / 60) + ":" + Math.floor(duration % 60);
+			$("#song-time").html("0:00/" + durationTotal);
+		});
+
+		function sliderUpdate() {
+			console.log("test");
+			var durationMinutes = Math.floor(music.currentTime / 60);
+			var durationSeconds = Math.floor(music.currentTime % 60);
+			if (durationSeconds < 10) {
+				durationSeconds = "0" + durationSeconds;
+			}
+			var percentage = (music.currentTime / duration) * 100;
+			$("#timeline-knob").css("left", percentage + "%");
+			$("#timeline-bar").css("width", percentage + "%");
+			$("#song-time").html(durationMinutes + ":" + durationSeconds + "/" + durationTotal);
+		}
+
+		var sliderLoop;
+		//function enableSliderUpdate(enable) {
+		//	if (enable) {
+		//		sliderLoop = setInterval(sliderUpdate, 50);
+		//	}
+		//	else {
+		//		clearInterval(sliderLoop);
+		//		console.log("clear");
+		//	}
+		//}
+
+		$("#playback-play").click(function () {
+			if (music.paused || notYetPlayed) {
+				music.play();
+				//enableSliderUpdate(true);
+				sliderLoop = setInterval(sliderUpdate, 50);
+				notYetPlayed = false;
+			}
+			else {
+				music.pause();
+				console.log("here");
+				clearInterval(sliderLoop);
+				//enableSliderUpdate(false);
+			}
+		});
 	</script>
 
 	<!-- Playback bar -->
 	<div id="playback" class="row palette-background-secondary-bg">
 		<!-- /Album art -->
 		<a id="playback-art" class="row-item">
-			<img src="covers/deus_ex.jpg" />
+			<img src="covers/portal_2.jpg" />
 		</a>
 
 		<!-- /Spacer: 15px -->
@@ -101,7 +154,7 @@
 		<div id="current-track" class="row-item">
 			<!-- //Title -->
 			<div id="current-track-upper">
-				<a id="current-track-title">Icarus - Main Theme</a>
+				<a id="current-track-title">Science is Fun</a>
 			</div>
 
 			<!-- //Vertical spacer -->
@@ -109,8 +162,8 @@
 
 			<!-- //Album and artist-->
 			<div id="current-track-lower">
-				<a id="current-track-album">Deus Ex: Human Revolution</a>
-				<a id="current-track-artist">Michael McCann</a>
+				<a id="current-track-album">Portal 2: Songs to Test By Volume 1</a>
+				<a id="current-track-artist">Aperture Science Psychoacoustics Laboratory</a>
 			</div>
 		</div>
 
@@ -131,7 +184,7 @@
 			</a>
 
 			<!-- //Pause/Play -->
-			<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg">
+			<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" id="playback-play">
 				<div>
 					<svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 					<polygon points="0,0 0,512 512,256" />
@@ -178,6 +231,6 @@
 		<div class="bar-item-pusher"></div>
 
 		<!-- /Track times -->
-		<p id="song-time">2:30 / 3:34</p>
+		<p id="song-time">0:00 / 2:29</p>
 	</div>
 </div>
