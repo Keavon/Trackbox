@@ -1,13 +1,14 @@
-#standard-list > div {
+#page > div {
 	display:inline-block;
 	margin:10px 20px 10px 10px;
 	float:left;
 }
-#standard-list > div:last-child {
+#page > div:last-child {
 	margin-right:10px;
 }
-#standard-list h1 {
-	font-weight:200;
+#page h1, #page p {
+	font-weight:300;
+	margin:0;
 }
 .tag {
 	display:inline-block;
@@ -15,6 +16,7 @@
 	width:auto;
 	margin:5px 0;
 	vertical-align:middle;
+	line-height:0;
 }
 .tag > div {
 	float:left;
@@ -50,7 +52,8 @@
 	border-left: 10px solid #ccc;
 	transition:border-left linear 0.1s;
 }
-#standard-list > div > p {
+.tag-population {
 	display:inline-block;
 	vertical-align:middle;
+	line-height:0;
 }
