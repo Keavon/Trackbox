@@ -5,9 +5,9 @@ trackbox.api.internal.theme.shell = {};
 trackbox.api.internal.theme.shell.shells = {};
 trackbox.api.internal.theme.shell.shells.trackbox = {
 	"name": "Trackbox",
-	"location": "themes/shells/trackbox/",
-	"shell": "themes/shells/trackbox/shell.html",
-	"pageTab": "themes/shells/trackbox/templates/page-tab.html"
+	"location": "packages/trackbox/",
+	"shell": "packages/trackbox/trackbox.html",
+	"pageTab": "packages/trackbox/templates/page-tab.html"
 };
 
 // Shell currently in use.

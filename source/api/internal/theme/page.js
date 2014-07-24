@@ -5,33 +5,33 @@ trackbox.api.internal.theme.page = {};
 trackbox.api.internal.theme.page.pages = {};
 trackbox.api.internal.theme.page.pages.songs = {
 	"name": "Songs",
-	"page": "themes/pages/songs/songs.html",
-	"location": "themes/pages/songs/",
-	"icon": "themes/pages/songs/songs.svg"
+	"page": "packages/songs/songs.html",
+	"location": "packages/songs/",
+	"icon": "packages/songs/songs.svg"
 };
 trackbox.api.internal.theme.page.pages.albums = {
 	"name": "Albums",
-	"page": "themes/pages/albums/albums.html",
-	"location": "themes/pages/albums/",
-	"icon": "themes/pages/albums/albums.svg"
+	"page": "packages/albums/albums.html",
+	"location": "packages/albums/",
+	"icon": "packages/albums/albums.svg"
 };
 trackbox.api.internal.theme.page.pages.artists = {
 	"name": "Artists",
-	"page": "themes/pages/artists/artists.html",
-	"location": "themes/pages/artists/",
-	"icon": "themes/pages/artists/artists.svg"
+	"page": "packages/artists/artists.html",
+	"location": "packages/artists/",
+	"icon": "packages/artists/artists.svg"
 };
 trackbox.api.internal.theme.page.pages.tags = {
 	"name": "Tags",
-	"page": "themes/pages/tags/tags.html",
-	"location": "themes/pages/tags/",
-	"icon": "themes/pages/tags/tags.svg"
+	"page": "packages/tags/tags.html",
+	"location": "packages/tags/",
+	"icon": "packages/tags/tags.svg"
 };
 trackbox.api.internal.theme.page.pages.boxes = {
 	"name": "Boxes",
-	"page": "themes/pages/boxes/boxes.html",
-	"location": "themes/pages/boxes/",
-	"icon": "themes/pages/boxes/boxes.svg"
+	"page": "packages/boxes/boxes.html",
+	"location": "packages/boxes/",
+	"icon": "packages/boxes/boxes.svg"
 };
 
 // Default page to render
