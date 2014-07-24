@@ -17,7 +17,7 @@ trackbox.api.internal.pageTab.add = function(icon, id, titleText){
 
 			$("#page-tabs").append(tabHTML);
 		},
-		error: function(data) {
+		error: function() {
 			console.log("Error loading tab file.");
 		}
 	});
@@ -25,9 +25,9 @@ trackbox.api.internal.pageTab.add = function(icon, id, titleText){
 
 trackbox.api.internal.pageTab.selected = null;
 trackbox.api.internal.pageTab.select = function (id) {
-	if(trackbox.api.internal.pageTab.selected) {
-		$("#" + trackbox.api.internal.pageTab.selected + "-button").removeClass("page-selector-active palette-hint-primary-border palette-background-primary-bg");
+	if (trackbox.api.internal.pageTab.selected) {
+		$("#" + trackbox.api.internal.pageTab.selected + "-button").removeClass("page-selector-active palette-hint-primary-border palette-background-primary-bg").addClass("palette-background-quaternary-hover-bg");
 	}
-	$("#" + id + "-button").addClass("page-selector-active palette-hint-primary-border palette-background-primary-bg");
+	$("#" + id + "-button").addClass("page-selector-active palette-hint-primary-border palette-background-primary-bg").removeClass("palette-background-quaternary-hover-bg");
 	trackbox.api.internal.pageTab.selected = id;
-}
+};
