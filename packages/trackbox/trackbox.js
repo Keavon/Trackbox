@@ -1,19 +1,19 @@
-﻿document.getElementById("timeline-bar-sensor").addEventListener("mousedown", scrubMouseDownListener, false);
+﻿$("#timeline-bar-sensor")[0].addEventListener("mousedown", scrubMouseDownListener);
 var seeking = false;
 
 function scrubMouseDownListener(evt) {
 	seeking = true;
-	window.addEventListener("mouseup", scrubMouseUpListener, false);
+	window.addEventListener("mouseup", scrubMouseUpListener);
 	evt.preventDefault();
-	document.addEventListener("mousemove", scrubMouseDownListener, false);
+	document.addEventListener("mousemove", scrubMouseDownListener);
 	scrubMouseMoveListener(evt);
 	if (!music.paused) {
 		enableSliderUpdate(false);
 	}
 }
 function scrubMouseUpListener() {
-	window.removeEventListener("mouseup", scrubMouseUpListener, false);
-	document.removeEventListener("mousemove", scrubMouseDownListener, false);
+	window.removeEventListener("mouseup", scrubMouseUpListener);
+	document.removeEventListener("mousemove", scrubMouseDownListener);
 	if (!music.paused) {
 		enableSliderUpdate(true);
 	}
@@ -32,14 +32,17 @@ function scrubMouseMoveListener(evt) {
 }
 
 var music = new Audio('http://media.steampowered.com/apps/portal2/soundtrack/01/mp3/01_Science_is_Fun.mp3');
-music.addEventListener("ended", function () { $("#playback-play-pause > #pause").hide(); $("#playback-play-pause > #play").show(); }, false);
+music.addEventListener("ended", function () {
+	$("#playback-play-pause > #pause").hide();
+	$("#playback-play-pause > #play").show();
+});
 var duration = 0.0;
 var durationTotal = "-:--";
 
-getFileContents("packages/trackbox/icons/playback_play.svg", function (data) {
+tb.getFileContents.v1("packages/trackbox/icons/playback_play.svg", function (data) {
 	$("#playback-play-pause > #play").html(data);
 });
-getFileContents("packages/trackbox/icons/playback_pause.svg", function (data) {
+tb.getFileContents.v1("packages/trackbox/icons/playback_pause.svg", function (data) {
 	$("#playback-play-pause > #pause").hide().html(data);
 });
 
