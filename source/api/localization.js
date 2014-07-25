@@ -1,30 +1,30 @@
-trackbox.api.internal.localization = {};
+trackbox.api.localization = {};
 
 // Add localized text to every textual element on the page.
-trackbox.api.internal.localization.load = function () {
-	$("#app-title").html(trackbox.api.internal.localization.get("Title"));
+trackbox.api.localization.load = function () {
+	$("#app-title").html(trackbox.api.localization.get("Title"));
 };
 
 // Load localized word from key.
-trackbox.api.internal.localization.get = function (key) {
-	if (trackbox.api.internal.localization.language[trackbox.api.internal.localization.language.perfered][key]) {
-		return trackbox.api.internal.localization.language[trackbox.api.internal.localization.language.perfered][key];
-	} else if (trackbox.api.internal.localization.language.en[key]) {
-		return trackbox.api.internal.localization.language.en[key];
+trackbox.api.localization.get = function (key) {
+	if (trackbox.api.localization.language[trackbox.api.localization.language.perfered][key]) {
+		return trackbox.api.localization.language[trackbox.api.localization.language.perfered][key];
+	} else if (trackbox.api.localization.language.en[key]) {
+		return trackbox.api.localization.language.en[key];
 	} else {
 		console.log("The key " + key + " was not found in the perfered language or in english.");
 		return key;
 	}
 };
 
-trackbox.api.internal.localization.set = function(language) {
-	trackbox.api.internal.localization.language.perfered = language;
+trackbox.api.localization.set = function(language) {
+	trackbox.api.localization.language.perfered = language;
 	init();
 };
 
-trackbox.api.internal.localization.language = {};
-trackbox.api.internal.localization.language.perfered = "en";
-trackbox.api.internal.localization.language.en = {
+trackbox.api.localization.language = {};
+trackbox.api.localization.language.perfered = "en";
+trackbox.api.localization.language.en = {
 	"Title"   : "Trackbox",
 	"Songs"   : "Songs",
 	"Albums"  : "Albums",
@@ -33,7 +33,7 @@ trackbox.api.internal.localization.language.en = {
 	"Boxes"   : "Boxes"
 };
 
-trackbox.api.internal.localization.language.da = {
+trackbox.api.localization.language.da = {
 	"Title": "Trackbox",
 	"Songs": "Sange",
 	"Albums": "Albums",
@@ -42,7 +42,7 @@ trackbox.api.internal.localization.language.da = {
 	"Boxes": "Kasser"
 };
 
-trackbox.api.internal.localization.language.de = {
+trackbox.api.localization.language.de = {
 	"Title": "Trackbox",
 	"Songs": "Lieder",
 	"Albums": "Alben",
@@ -51,7 +51,7 @@ trackbox.api.internal.localization.language.de = {
 	"Boxes": "Kisten"
 };
 
-trackbox.api.internal.localization.language.es = {
+trackbox.api.localization.language.es = {
 	"Title": "Trackbox",
 	"Songs": "Canciones",
 	"Albums": "Álbumes",
@@ -60,7 +60,7 @@ trackbox.api.internal.localization.language.es = {
 	"Boxes": "Cajas"
 };
 
-trackbox.api.internal.localization.language.fi = {
+trackbox.api.localization.language.fi = {
 	"Title": "Trackbox",
 	"Songs": "Laulut",
 	"Albums": "Albumit",
@@ -69,7 +69,7 @@ trackbox.api.internal.localization.language.fi = {
 	"Boxes": "Boxit"
 };
 
-trackbox.api.internal.localization.language.ja = {
+trackbox.api.localization.language.ja = {
 	"Title": "トラクーバカス",
 	"Songs": "歌",
 	"Albums": "アルバム",
@@ -78,7 +78,7 @@ trackbox.api.internal.localization.language.ja = {
 	"Boxes": "ボックス"
 };
 
-trackbox.api.internal.localization.language.sv = {
+trackbox.api.localization.language.sv = {
 	"Title": "Trackbox",
 	"Songs": "Låtar",
 	"Albums": "Album",

@@ -36,17 +36,10 @@ music.addEventListener("ended", function () { $("#playback-play-pause > #pause")
 var duration = 0.0;
 var durationTotal = "-:--";
 
-$.ajax({
-	url: "packages/trackbox/icons/playback_play.svg",
-	dataType: "text"
-}).done(function (data) {
+getFileContents("packages/trackbox/icons/playback_play.svg", function (data) {
 	$("#playback-play-pause > #play").html(data);
 });
-
-$.ajax({
-	url: "packages/trackbox/icons/playback_pause.svg",
-	dataType: "text"
-}).done(function (data) {
+getFileContents("packages/trackbox/icons/playback_pause.svg", function (data) {
 	$("#playback-play-pause > #pause").hide().html(data);
 });
 
