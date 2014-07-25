@@ -64,18 +64,25 @@
 	</div>
 	<script>
 		document.getElementById("timeline-bar-sensor").addEventListener("mousedown", scrubMouseDownListener, false);
-		window.addEventListener("mouseup", scrubMouseUpListener, false);
+		var seeking = false;
+
 		function scrubMouseDownListener(evt) {
+			seeking = true;
+			window.addEventListener("mouseup", scrubMouseUpListener, false);
 			evt.preventDefault();
 			document.addEventListener("mousemove", scrubMouseDownListener, false);
-			//enableSliderUpdate(false);
 			scrubMouseMoveListener(evt);
+			if (!music.paused) {
+				enableSliderUpdate(false);
+			}
 		}
 		function scrubMouseUpListener(evt) {
+			window.removeEventListener("mouseup", scrubMouseUpListener, false);
 			document.removeEventListener("mousemove", scrubMouseDownListener, false);
-			//if (!music.paused) {
-			//	enableSliderUpdate(true);
-			//}
+			if (!music.paused) {
+				enableSliderUpdate(true);
+			}
+			seeking = false;
 		}
 		function scrubMouseMoveListener(evt) {
 			var percentage = (evt.clientX / document.body.clientWidth) * 100;
@@ -92,7 +99,6 @@
 		var music = new Audio('http://media.steampowered.com/apps/portal2/soundtrack/01/mp3/01_Science_is_Fun.mp3');
 		var duration = 0.0;
 		var durationTotal = "-:--";
-		var notYetPlayed = true;
 
 		music.addEventListener('loadedmetadata', function () {
 			duration = music.duration;
@@ -100,44 +106,47 @@
 			$("#song-time").html("0:00/" + durationTotal);
 		});
 
-		function sliderUpdate() {
-			console.log("test");
-			var durationMinutes = Math.floor(music.currentTime / 60);
-			var durationSeconds = Math.floor(music.currentTime % 60);
-			if (durationSeconds < 10) {
-				durationSeconds = "0" + durationSeconds;
+		var sliderLoop;
+		function enableSliderUpdate(enable) {
+			if (enable) {
+				sliderLoop = setInterval(function () {
+					var durationMinutes = Math.floor(music.currentTime / 60);
+					var durationSeconds = Math.floor(music.currentTime % 60);
+					if (durationSeconds < 10) {
+						durationSeconds = "0" + durationSeconds;
+					}
+					var percentage = (music.currentTime / duration) * 100;
+					$("#timeline-knob").css("left", percentage + "%");
+					$("#timeline-bar").css("width", percentage + "%");
+					$("#song-time").html(durationMinutes + ":" + durationSeconds + "/" + durationTotal);
+				}, 50);
 			}
-			var percentage = (music.currentTime / duration) * 100;
-			$("#timeline-knob").css("left", percentage + "%");
-			$("#timeline-bar").css("width", percentage + "%");
-			$("#song-time").html(durationMinutes + ":" + durationSeconds + "/" + durationTotal);
+			else {
+				clearInterval(sliderLoop);
+			}
 		}
 
-		var sliderLoop;
-		//function enableSliderUpdate(enable) {
-		//	if (enable) {
-		//		sliderLoop = setInterval(sliderUpdate, 50);
-		//	}
-		//	else {
-		//		clearInterval(sliderLoop);
-		//		console.log("clear");
-		//	}
-		//}
-
+		$('body').keyup(function (e) {
+			if (e.keyCode == 32) {
+				pausePlay();
+			}
+		});
 		$("#playback-play").click(function () {
-			if (music.paused || notYetPlayed) {
+			pausePlay();
+		});
+
+		function pausePlay() {
+			if (music.paused) {
 				music.play();
-				//enableSliderUpdate(true);
-				sliderLoop = setInterval(sliderUpdate, 50);
-				notYetPlayed = false;
+				if (!seeking) {
+					enableSliderUpdate(true);
+				}
 			}
 			else {
 				music.pause();
-				console.log("here");
-				clearInterval(sliderLoop);
-				//enableSliderUpdate(false);
+				enableSliderUpdate(false);
 			}
-		});
+		}
 	</script>
 
 	<!-- Playback bar -->
