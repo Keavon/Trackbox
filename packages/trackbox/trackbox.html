@@ -97,8 +97,23 @@
 		}
 
 		var music = new Audio('http://media.steampowered.com/apps/portal2/soundtrack/01/mp3/01_Science_is_Fun.mp3');
+		music.addEventListener("ended", function () { $("#playback-play-pause > #pause").hide(); $("#playback-play-pause > #play").show(); }, false);
 		var duration = 0.0;
 		var durationTotal = "-:--";
+
+		$.ajax({
+			url: "packages/trackbox/icons/playback_play.svg",
+			dataType: "text"
+		}).done(function (data) {
+			$("#playback-play-pause > #play").html(data);
+		});
+
+		$.ajax({
+			url: "packages/trackbox/icons/playback_pause.svg",
+			dataType: "text"
+		}).done(function (data) {
+			$("#playback-play-pause > #pause").hide().html(data);
+		});
 
 		music.addEventListener('loadedmetadata', function () {
 			duration = music.duration;
@@ -131,7 +146,7 @@
 				pausePlay();
 			}
 		});
-		$("#playback-play").click(function () {
+		$("#playback-play-pause").click(function () {
 			pausePlay();
 		});
 
@@ -141,10 +156,14 @@
 				if (!seeking) {
 					enableSliderUpdate(true);
 				}
+				$("#playback-play-pause > #play").hide();
+				$("#playback-play-pause > #pause").show();
 			}
 			else {
 				music.pause();
 				enableSliderUpdate(false);
+				$("#playback-play-pause > #pause").hide();
+				$("#playback-play-pause > #play").show();
 			}
 		}
 	</script>
@@ -193,12 +212,9 @@
 			</a>
 
 			<!-- //Pause/Play -->
-			<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" id="playback-play">
-				<div>
-					<svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-					<polygon points="0,0 0,512 512,256" />
-					</svg>
-				</div>
+			<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" id="playback-play-pause">
+				<div id="play"></div>
+				<div id="pause"></div>
 			</a>
 			<!-- //Next track -->
 			<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg">
