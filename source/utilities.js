@@ -74,7 +74,7 @@ var packages = ["songs", "albums", "artists", "tags", "boxes"];
 
 tb.packageStartup = {};
 tb.packageStartup.v1 = function () {
-	for (packs in packages) {
+	for (var packs in packages) {
 		var packPath = "packages/" + packages[packs] + "/startup.js";
 
 		tb.getFileContents.v1(packPath, function (script) {
@@ -83,13 +83,35 @@ tb.packageStartup.v1 = function () {
 			$("head").append(script);
 		});
 	}
-}
+};
 
 tb.addPageButton = {};
 tb.addPageButton.v1 = function (id, displayName, link, iconLink) {
 	tb.getFileContents.v1(iconLink, function (icon) {
-		tb.renderTemplate.v1("packages/trackbox/templates/page-tab.html", { "ID": id, "LINK": link, "NAME": displayName, "ICON": icon }, function (template) {
+		tb.renderTemplate.v1("packages/trackbox/templates/page-button.html", { "ID": id + "-button", "LINK": link, "NAME": displayName, "ICON": icon }, function (template) {
 			$("#page-tabs").append(template);
 		});
 	});
-}
+};
+
+pageButtonSelectedAdd = "";
+pageButtonSelectedRemove = "";
+pageButtonSelected = "";
+
+tb.selectPageButton = {};
+tb.selectPageButton.v1 = function (id) {
+	if (pageButtonSelectedAdd === "" && pageButtonSelectedRemove === "") {
+		tb.getFileContents.v1("packages/trackbox/templates/page-button-selected.html", function (text) {
+			text = text.split('\n');
+			pageButtonSelectedAdd = text[0];
+			pageButtonSelectedRemove = text[1];
+			tb.selectPageButton.v1(id);
+		});
+	} else {
+		$("#" + pageButtonSelected + "-button").addClass(pageButtonSelectedRemove);
+		$("#" + pageButtonSelected + "-button").removeClass(pageButtonSelectedAdd);
+		pageButtonSelected = id;
+		$("#" + id + "-button").addClass(pageButtonSelectedAdd);
+		$("#" + id + "-button").removeClass(pageButtonSelectedRemove);
+	}
+};

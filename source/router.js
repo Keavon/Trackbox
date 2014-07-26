@@ -34,6 +34,13 @@ tb.router.v1 = function () {
 
 	// Check if hash equals any of the page names, otherwise set it to the default
 	if (packageNames.indexOf(pageName) !== -1) {
+		tb.selectPageButton.v1(pageName);
+		if ($("#" + pageName + "-button").length === 0) {
+			$("body").on("DOMNodeInserted", "#" + pageName + "-button", function () {
+				tb.selectPageButton.v1(pageName);
+				$("body").off("DOMNodeInserted", "#" + pageName + "-button");
+			});
+		}
 		tb.loadPage.v1(pageName);
 	} else {
 		window.location.hash = "#" + defaultPage;
