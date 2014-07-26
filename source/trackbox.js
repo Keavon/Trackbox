@@ -4,4 +4,4 @@ var tb = {};
 tb.loadTrackbox = {};
 tb.loadTrackbox.v1 = function () {
 	tb.loadShell.v1("Trackbox");
-}
+};

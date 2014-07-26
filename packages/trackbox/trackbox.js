@@ -39,13 +39,6 @@ music.addEventListener("ended", function () {
 var duration = 0.0;
 var durationTotal = "-:--";
 
-tb.getFileContents.v1("packages/trackbox/icons/playback_play.svg", function (data) {
-	$("#playback-play-pause > #play").html(data);
-});
-tb.getFileContents.v1("packages/trackbox/icons/playback_pause.svg", function (data) {
-	$("#playback-play-pause > #pause").hide().html(data);
-});
-
 music.addEventListener('loadedmetadata', function () {
 	duration = music.duration;
 	durationTotal = Math.floor(duration / 60) + ":" + Math.floor(duration % 60);
@@ -88,10 +81,12 @@ function pausePlay() {
 		}
 		$("#playback-play-pause > #play").hide();
 		$("#playback-play-pause > #pause").show();
+		$("#playback-play-pause").attr("title", tb.getTranslation.v1("Pause"));
 	} else {
 		music.pause();
 		enableSliderUpdate(false);
 		$("#playback-play-pause > #pause").hide();
 		$("#playback-play-pause > #play").show();
+		$("#playback-play-pause").attr("title", tb.getTranslation.v1("Play"));
 	}
 }

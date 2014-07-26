@@ -25,7 +25,7 @@ tb.loadShell.v1 = function (shellName) {
 	}
 
 	// Fill document body with shell and call router
-	tb.getFileContents.v1(shellPath, function (shell) {
+	tb.renderTemplate.v1(shellPath, function (shell) {
 		$("body").html(shell);
 		tb.router.v1();
 	});
