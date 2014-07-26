@@ -27,6 +27,7 @@ tb.loadShell.v1 = function (shellName) {
 	// Fill document body with shell and call router
 	tb.renderTemplate.v1(shellPath, function (shell) {
 		$("body").html(shell);
+		tb.packageStartup.v1();
 		tb.router.v1();
 	});
 };

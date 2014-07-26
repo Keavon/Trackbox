@@ -69,3 +69,27 @@ tb.getTranslation.v1 = function (key, language) {
 	// Return value
 	return translation;
 };
+
+var packages = ["songs", "albums", "artists", "tags", "boxes"];
+
+tb.packageStartup = {};
+tb.packageStartup.v1 = function () {
+	for (packs in packages) {
+		var packPath = "packages/" + packages[packs] + "/startup.js";
+
+		tb.getFileContents.v1(packPath, function (script) {
+			script = '<script type="text/javascript">' + script;
+			script += '</' + 'script>';
+			$("head").append(script);
+		});
+	}
+}
+
+tb.addPageButton = {};
+tb.addPageButton.v1 = function (id, displayName, link, iconLink) {
+	tb.getFileContents.v1(iconLink, function (icon) {
+		tb.renderTemplate.v1("packages/trackbox/templates/page-tab.html", { "ID": id, "LINK": link, "NAME": displayName, "ICON": icon }, function (template) {
+			$("#page-tabs").append(template);
+		});
+	});
+}

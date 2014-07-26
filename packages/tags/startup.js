@@ -1,0 +1,1 @@
+﻿tb.addPageButton.v1("tags", "Tags", "tags", "packages/tags/tags.svg");

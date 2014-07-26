@@ -1,0 +1,1 @@
+﻿tb.addPageButton.v1("albums", "Albums", "albums", "packages/albums/albums.svg");
