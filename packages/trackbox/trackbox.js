@@ -1,6 +1,12 @@
-﻿$("#timeline-bar-sensor")[0].addEventListener("mousedown", scrubMouseDownListener);
+﻿var music = new Audio('http://media.steampowered.com/apps/portal2/soundtrack/01/mp3/01_Science_is_Fun.mp3');
 var seeking = false;
+var duration = 0.0;
+var durationTotal = "-:--";
+var sliderLoop;
+var pauseKeyDown = false;
 
+/* Mouse Down */
+$("#timeline-bar-sensor")[0].addEventListener("mousedown", scrubMouseDownListener);
 function scrubMouseDownListener(evt) {
 	seeking = true;
 	window.addEventListener("mouseup", scrubMouseUpListener);
@@ -11,14 +17,24 @@ function scrubMouseDownListener(evt) {
 		enableSliderUpdate(false);
 	}
 }
+
+/* Mouse Up */
 function scrubMouseUpListener() {
 	window.removeEventListener("mouseup", scrubMouseUpListener);
 	document.removeEventListener("mousemove", scrubMouseDownListener);
+
+	var timePercent = $("#timeline-knob")[0].style.left;
+	timePercent = timePercent.substring(0, timePercent.length - 1);
+	timePercent = timePercent / 100;
+	music.currentTime = timePercent * duration;
+
 	if (!music.paused) {
 		enableSliderUpdate(true);
 	}
 	seeking = false;
 }
+
+/* Mouse Movement */
 function scrubMouseMoveListener(evt) {
 	var percentage = (evt.clientX / document.body.clientWidth) * 100;
 	if (percentage < 0) {
@@ -31,21 +47,21 @@ function scrubMouseMoveListener(evt) {
 	$("#timeline-bar").css("width", percentage + "%");
 }
 
-var music = new Audio('http://media.steampowered.com/apps/portal2/soundtrack/01/mp3/01_Science_is_Fun.mp3');
+/* Check When Music Ends */
 music.addEventListener("ended", function () {
 	$("#playback-play-pause > #pause").hide();
 	$("#playback-play-pause > #play").show();
+	enableSliderUpdate(false);
 });
-var duration = 0.0;
-var durationTotal = "-:--";
 
+/* Get and Display Track Length */
 music.addEventListener('loadedmetadata', function () {
 	duration = music.duration;
 	durationTotal = Math.floor(duration / 60) + ":" + Math.floor(duration % 60);
 	$("#song-time").html("0:00/" + durationTotal);
 });
 
-var sliderLoop;
+/* Update Slider Position Every 50 ms */
 function enableSliderUpdate(enable) {
 	if (enable) {
 		sliderLoop = setInterval(function () {
@@ -63,16 +79,24 @@ function enableSliderUpdate(enable) {
 		clearInterval(sliderLoop);
 	}
 }
-
-$('body').keyup(function (e) {
-	if (e.keyCode === 32) {
+/* Spacebar Pause */
+$("body").keydown(function (e) {
+	if (e.keyCode === 32 && !pauseKeyDown) {
+		pauseKeyDown = true;
 		pausePlay();
 	}
+}).keyup(function (e) {
+	if (e.keyCode === 32 && pauseKeyDown) {
+		pauseKeyDown = false;
+	}
 });
+
+/* Play/Pause Button Click */
 $("#playback-play-pause").click(function () {
 	pausePlay();
 });
 
+/* Pause/Play */
 function pausePlay() {
 	if (music.paused) {
 		music.play();
