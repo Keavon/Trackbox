@@ -89,7 +89,46 @@ tb.addPageButton = {};
 tb.addPageButton.v1 = function (id, displayName, link, iconLink) {
 	tb.getFileContents.v1(iconLink, function (icon) {
 		tb.renderTemplate.v1("packages/trackbox/templates/page-button.html", { "ID": id + "-button", "LINK": link, "NAME": displayName, "ICON": icon }, function (template) {
-			$("#page-tabs").append(template);
+			var buttons = interfacePreferences.trackbox.buttonLayout.topRow.right.pageButtons.buttonOrder;
+			var value = buttons[id].order;
+			var nextLowest;
+			var offset;
+			var array = [];
+
+			// Fill an array with all the currently loaded buttons in the interface
+			var existingButtons = [];
+			$("#page-tabs").children().each(function () {
+				existingButtons.push(this.id);
+			});
+
+			// Turn array of names into array of orders
+			for (var name in existingButtons) {
+				existingButtons[name] = existingButtons[name].substring(0, existingButtons[name].length - 7);
+				array.push(buttons[existingButtons[name]].order);
+			}
+
+			// Find the highest value that is lower than the given value
+			for (var item in array) {
+				if (array[item] < value) {
+					if (typeof offset === "undefined" || value - array[item] < offset) {
+						offset = value - array[item];
+						nextLowest = array[item];
+					}
+				}
+			}
+
+			// Apply to the top if first or after the appropriate sibling
+			if (typeof nextLowest === "undefined") {
+				$("#page-tabs").prepend(template);
+			} else {
+				var afterElement;
+				for (var next in buttons) {
+					if (buttons[next].order === nextLowest) {
+						afterElement = next;
+					}
+				}
+				$("#" + afterElement + "-button").after(template);
+			}
 		});
 	});
 };

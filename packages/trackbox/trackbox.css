@@ -162,11 +162,12 @@ body {
 
 /* //Window buttons */
 #window-buttons {
-	display: inline-block;
-	margin: 0;
-	height: auto;
-	float: right;
-	font-size:0;
+    display: inline-block;
+    height: auto;
+    width: auto;
+    float: right;
+	clear: both;
+    font-size: 0;
 }
 #window-buttons a {
 	padding: 10px;
@@ -184,8 +185,8 @@ body {
 #view-selector {
     display: inline-block;
     height: auto;
-    float: right;
     width: auto;
+    float: right;
 	clear: both;
     font-size: 0;
 }
