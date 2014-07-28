@@ -81,9 +81,15 @@ function enableSliderUpdate(enable) {
 }
 /* Spacebar Pause */
 $("body").keydown(function (e) {
-	if (e.keyCode === 32 && !pauseKeyDown) {
-		pauseKeyDown = true;
-		pausePlay();
+	var target = e.target || e.srcElement;
+	if (target.tagName !== "textarea" && target.type !== "text") {
+		if (e.keyCode === 32) {
+			if (!pauseKeyDown) {
+				pauseKeyDown = true;
+				pausePlay();
+			}
+			return false;
+		}
 	}
 }).keyup(function (e) {
 	if (e.keyCode === 32 && pauseKeyDown) {
@@ -114,3 +120,14 @@ function pausePlay() {
 		$("#playback-play-pause").attr("title", tb.getTranslation.v1("Play"));
 	}
 }
+
+$("#search-bar > div > a").click(function () {
+	$("#search-bar > div > input").val("");
+});
+
+// Usually doesn't work in Firefox for some reason
+$("#search-bar > div > input").keydown(function (key) {
+	if (key.keyCode === 27) {
+		$("#search-bar > div > input").val("");
+	}
+});
