@@ -1,1 +1,1 @@
-﻿tb.addPageButton.v1("songs", "Songs", "songs", "packages/songs/songs.svg");
+﻿tb.addPageButton.v1("songs", "Songs", "packages/songs/songs.svg");

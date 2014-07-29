@@ -1,1 +1,1 @@
-﻿tb.addPageButton.v1("boxes", "Boxes", "boxes", "packages/boxes/boxes.svg");
+﻿tb.addPageButton.v1("boxes", "Boxes", "packages/boxes/boxes.svg");

@@ -70,10 +70,15 @@ tb.getTranslation.v1 = function (key, language) {
 	return translation;
 };
 
-var packages = ["songs", "albums", "artists", "tags", "boxes"];
+tb.listPackages = {};
+tb.listPackages.v1 = function () {
+	var packages = ["songs", "albums", "artists", "tags", "boxes"];
+	return packages;
+};
 
 tb.packageStartup = {};
 tb.packageStartup.v1 = function () {
+	var packages = tb.listPackages.v1();
 	for (var packs in packages) {
 		var packPath = "packages/" + packages[packs] + "/startup.js";
 
@@ -86,10 +91,10 @@ tb.packageStartup.v1 = function () {
 };
 
 tb.addPageButton = {};
-tb.addPageButton.v1 = function (id, displayName, link, iconLink) {
+tb.addPageButton.v1 = function (id, displayName, iconLink) {
 	tb.getFileContents.v1(iconLink, function (icon) {
-		tb.renderTemplate.v1("packages/trackbox/templates/page-button.html", { "ID": id + "-button", "LINK": link, "NAME": displayName, "ICON": icon }, function (template) {
-			var buttons = interfacePreferences.trackbox.buttonLayout.topRow.right.pageButtons.buttonOrder;
+		tb.renderTemplate.v1("packages/trackbox/templates/page-button.html", { "ID": id + "-button", "LINK": id, "NAME": displayName, "ICON": icon }, function (template) {
+			var buttons = interfacePreferences.trackbox.buttonLayout[0].alignment[1].pageButtons.buttonOrder;
 			var value = buttons[id].order;
 			var nextLowest;
 			var offset;
@@ -133,9 +138,9 @@ tb.addPageButton.v1 = function (id, displayName, link, iconLink) {
 	});
 };
 
-pageButtonSelectedAdd = "";
-pageButtonSelectedRemove = "";
-pageButtonSelected = "";
+var pageButtonSelectedAdd = "";
+var pageButtonSelectedRemove = "";
+var pageButtonSelected = "";
 
 tb.selectPageButton = {};
 tb.selectPageButton.v1 = function (id) {
@@ -153,4 +158,74 @@ tb.selectPageButton.v1 = function (id) {
 		$("#" + id + "-button").addClass(pageButtonSelectedAdd);
 		$("#" + id + "-button").removeClass(pageButtonSelectedRemove);
 	}
+};
+
+var music = new Audio();
+tb.loadTrack = {};
+tb.loadTrack.v1 = function (path, autoPlay) {
+	if (typeof path === "string") {
+		music.src = path;
+		if (autoPlay === true) {
+			music.play();
+		}
+	}
+};
+
+tb.metadataLoaded = {};
+tb.metadataLoaded.v1 = function(callback){
+	music.addEventListener('loadedmetadata', function () {
+		callback();
+	});
+};
+
+tb.playbackState = {};
+tb.playbackState.v1 = function (action) {
+	if (typeof action === "undefined") {
+		if (music.paused) {
+			return "paused";
+		} else {
+			return "playing";
+		}
+	} else {
+		if (action === "play") {
+			music.play();
+		} else if (action === "pause") {
+			music.pause();
+		} else if (action === "toggle") {
+			if (music.paused) {
+				music.play();
+			} else {
+				music.pause();
+			}
+		}
+	}
+};
+
+tb.playbackStateChange = {};
+tb.playbackStateChange.v1 = function (callback) {
+	$(music).on("pause", function () {
+		callback("pause");
+	});
+	$(music).on("play", function () {
+		callback("play");
+	});
+};
+
+tb.trackTime = {};
+tb.trackTime.v1 = function (time) {
+	if (typeof time !== "undefined") {
+		music.currentTime = time;
+	} else {
+		return music.currentTime;
+	}
+};
+
+tb.getTrackDuration = {};
+tb.getTrackDuration.v1 = function () {
+	return music.duration;
+};
+
+tb.trackEnded = {};
+tb.trackEnded.v1 = function (callback) {
+	music.addEventListener("ended", callback());
 };

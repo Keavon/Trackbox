@@ -1,6 +1,5 @@
-﻿var music = new Audio('http://media.steampowered.com/apps/portal2/soundtrack/01/mp3/01_Science_is_Fun.mp3');
+﻿tb.loadTrack.v1("http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/02%20The%20dome.mp3", false);
 var seeking = false;
-var duration = 0.0;
 var durationTotal = "-:--";
 var sliderLoop;
 var pauseKeyDown = false;
@@ -13,7 +12,7 @@ function scrubMouseDownListener(evt) {
 	evt.preventDefault();
 	document.addEventListener("mousemove", scrubMouseDownListener);
 	scrubMouseMoveListener(evt);
-	if (!music.paused) {
+	if (tb.playbackState.v1() === "playing") {
 		enableSliderUpdate(false);
 	}
 }
@@ -23,12 +22,12 @@ function scrubMouseUpListener() {
 	window.removeEventListener("mouseup", scrubMouseUpListener);
 	document.removeEventListener("mousemove", scrubMouseDownListener);
 
+	// Set time
 	var timePercent = $("#timeline-knob")[0].style.left;
 	timePercent = timePercent.substring(0, timePercent.length - 1);
 	timePercent = timePercent / 100;
-	music.currentTime = timePercent * duration;
-
-	if (!music.paused) {
+	tb.trackTime.v1(timePercent * tb.getTrackDuration.v1());
+	if (tb.playbackState.v1() === "playing") {
 		enableSliderUpdate(true);
 	}
 	seeking = false;
@@ -48,16 +47,15 @@ function scrubMouseMoveListener(evt) {
 }
 
 /* Check When Music Ends */
-music.addEventListener("ended", function () {
+tb.trackEnded.v1(function () {
 	$("#playback-play-pause > #pause").hide();
 	$("#playback-play-pause > #play").show();
 	enableSliderUpdate(false);
 });
 
 /* Get and Display Track Length */
-music.addEventListener('loadedmetadata', function () {
-	duration = music.duration;
-	durationTotal = Math.floor(duration / 60) + ":" + Math.floor(duration % 60);
+tb.metadataLoaded.v1(function () {
+	durationTotal = Math.floor(tb.getTrackDuration.v1() / 60) + ":" + Math.floor(tb.getTrackDuration.v1() % 60);
 	$("#song-time").html("0:00/" + durationTotal);
 });
 
@@ -65,12 +63,12 @@ music.addEventListener('loadedmetadata', function () {
 function enableSliderUpdate(enable) {
 	if (enable) {
 		sliderLoop = setInterval(function () {
-			var durationMinutes = Math.floor(music.currentTime / 60);
-			var durationSeconds = Math.floor(music.currentTime % 60);
+			var durationMinutes = Math.floor(tb.trackTime.v1() / 60);
+			var durationSeconds = Math.floor(tb.trackTime.v1() % 60);
 			if (durationSeconds < 10) {
 				durationSeconds = "0" + durationSeconds;
 			}
-			var percentage = (music.currentTime / duration) * 100;
+			var percentage = (tb.trackTime.v1() / tb.getTrackDuration.v1()) * 100;
 			$("#timeline-knob").css("left", percentage + "%");
 			$("#timeline-bar").css("width", percentage + "%");
 			$("#song-time").html(durationMinutes + ":" + durationSeconds + "/" + durationTotal);
@@ -86,7 +84,7 @@ $("body").keydown(function (e) {
 		if (e.keyCode === 32) {
 			if (!pauseKeyDown) {
 				pauseKeyDown = true;
-				pausePlay();
+				tb.playbackState.v1("toggle");
 			}
 			return false;
 		}
@@ -97,37 +95,35 @@ $("body").keydown(function (e) {
 	}
 });
 
-/* Play/Pause Button Click */
-$("#playback-play-pause").click(function () {
-	pausePlay();
+/* Clear search bar */
+$("#search-bar > div > a").click(function () {
+	$("#search-bar > div > input").val("");
+});
+$("#search-bar > div > input").keydown(function (key) {
+	// Usually doesn't work in Firefox for some reason
+	if (key.keyCode === 27) {
+		$("#search-bar > div > input").val("");
+	}
 });
 
-/* Pause/Play */
-function pausePlay() {
-	if (music.paused) {
-		music.play();
+/* Play/Pause Button Click */
+$("#playback-play-pause").click(function () {
+	tb.playbackState.v1("toggle");
+});
+
+// Change button when song is played or paused
+tb.playbackStateChange.v1(function (state) {
+	if (state === "play") {
 		if (!seeking) {
 			enableSliderUpdate(true);
 		}
 		$("#playback-play-pause > #play").hide();
 		$("#playback-play-pause > #pause").show();
 		$("#playback-play-pause").attr("title", tb.getTranslation.v1("Pause"));
-	} else {
-		music.pause();
+	} else if (state === "pause") {
 		enableSliderUpdate(false);
 		$("#playback-play-pause > #pause").hide();
 		$("#playback-play-pause > #play").show();
 		$("#playback-play-pause").attr("title", tb.getTranslation.v1("Play"));
-	}
-}
-
-$("#search-bar > div > a").click(function () {
-	$("#search-bar > div > input").val("");
-});
-
-// Usually doesn't work in Firefox for some reason
-$("#search-bar > div > input").keydown(function (key) {
-	if (key.keyCode === 27) {
-		$("#search-bar > div > input").val("");
 	}
 });
