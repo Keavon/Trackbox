@@ -1,4 +1,4 @@
-﻿tb.loadTrack.v1("http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/02%20The%20dome.mp3", false);
+﻿tb.loadTrack("http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/02%20The%20dome.mp3", false);
 var seeking = false;
 var durationTotal = "-:--";
 var sliderLoop;
@@ -12,7 +12,7 @@ function scrubMouseDownListener(evt) {
 	evt.preventDefault();
 	document.addEventListener("mousemove", scrubMouseDownListener);
 	scrubMouseMoveListener(evt);
-	if (tb.playbackState.v1() === "playing") {
+	if (tb.playbackState() === "playing") {
 		enableSliderUpdate(false);
 	}
 }
@@ -26,8 +26,8 @@ function scrubMouseUpListener() {
 	var timePercent = $("#timeline-knob")[0].style.left;
 	timePercent = timePercent.substring(0, timePercent.length - 1);
 	timePercent = timePercent / 100;
-	tb.trackTime.v1(timePercent * tb.getTrackDuration.v1());
-	if (tb.playbackState.v1() === "playing") {
+	tb.trackTime(timePercent * tb.getTrackDuration());
+	if (tb.playbackState() === "playing") {
 		enableSliderUpdate(true);
 	}
 	seeking = false;
@@ -47,15 +47,15 @@ function scrubMouseMoveListener(evt) {
 }
 
 /* Check When Music Ends */
-tb.trackEnded.v1(function () {
+tb.trackEnded(function () {
 	$("#playback-play-pause > #pause").hide();
 	$("#playback-play-pause > #play").show();
 	enableSliderUpdate(false);
 });
 
 /* Get and Display Track Length */
-tb.metadataLoaded.v1(function () {
-	durationTotal = Math.floor(tb.getTrackDuration.v1() / 60) + ":" + Math.floor(tb.getTrackDuration.v1() % 60);
+tb.metadataLoaded(function () {
+	durationTotal = Math.floor(tb.getTrackDuration() / 60) + ":" + Math.floor(tb.getTrackDuration() % 60);
 	$("#song-time").html("0:00/" + durationTotal);
 });
 
@@ -63,12 +63,12 @@ tb.metadataLoaded.v1(function () {
 function enableSliderUpdate(enable) {
 	if (enable) {
 		sliderLoop = setInterval(function () {
-			var durationMinutes = Math.floor(tb.trackTime.v1() / 60);
-			var durationSeconds = Math.floor(tb.trackTime.v1() % 60);
+			var durationMinutes = Math.floor(tb.trackTime() / 60);
+			var durationSeconds = Math.floor(tb.trackTime() % 60);
 			if (durationSeconds < 10) {
 				durationSeconds = "0" + durationSeconds;
 			}
-			var percentage = (tb.trackTime.v1() / tb.getTrackDuration.v1()) * 100;
+			var percentage = (tb.trackTime() / tb.getTrackDuration()) * 100;
 			$("#timeline-knob").css("left", percentage + "%");
 			$("#timeline-bar").css("width", percentage + "%");
 			$("#song-time").html(durationMinutes + ":" + durationSeconds + "/" + durationTotal);
@@ -84,7 +84,7 @@ $("body").keydown(function (e) {
 		if (e.keyCode === 32) {
 			if (!pauseKeyDown) {
 				pauseKeyDown = true;
-				tb.playbackState.v1("toggle");
+				tb.playbackState("toggle");
 			}
 			return false;
 		}
@@ -108,22 +108,22 @@ $("#search-bar > div > input").keydown(function (key) {
 
 /* Play/Pause Button Click */
 $("#playback-play-pause").click(function () {
-	tb.playbackState.v1("toggle");
+	tb.playbackState("toggle");
 });
 
 // Change button when song is played or paused
-tb.playbackStateChange.v1(function (state) {
+tb.playbackStateChange(function (state) {
 	if (state === "play") {
 		if (!seeking) {
 			enableSliderUpdate(true);
 		}
 		$("#playback-play-pause > #play").hide();
 		$("#playback-play-pause > #pause").show();
-		$("#playback-play-pause").attr("title", tb.getTranslation.v1("Pause"));
+		$("#playback-play-pause").attr("title", tb.getTranslation("Pause"));
 	} else if (state === "pause") {
 		enableSliderUpdate(false);
 		$("#playback-play-pause > #pause").hide();
 		$("#playback-play-pause > #play").show();
-		$("#playback-play-pause").attr("title", tb.getTranslation.v1("Play"));
+		$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
 	}
 });

@@ -1,5 +1,4 @@
-﻿tb.getFileContents = {};
-tb.getFileContents.v1 = function (path, callback) {
+﻿tb.getFileContents = function (path, callback) {
 	$.ajax({
 		"url": path,
 		"cache": false,
@@ -7,14 +6,13 @@ tb.getFileContents.v1 = function (path, callback) {
 	}).done(callback);
 };
 
-tb.renderTemplate = {};
-tb.renderTemplate.v1 = function (templatePath, replacements, callback) {
+tb.renderTemplate = function (templatePath, replacements, callback) {
 	if (!callback && typeof replacements === 'function') {
 		callback = replacements;
 		replacements = undefined;
 	}
 
-	tb.getFileContents.v1(templatePath, function (template) {
+	tb.getFileContents(templatePath, function (template) {
 		// If replacements are given, replace custom tempate tags
 		if (typeof replacements !== "undefined") {
 			for (var replace in replacements) {
@@ -34,7 +32,7 @@ tb.renderTemplate.v1 = function (templatePath, replacements, callback) {
 			var cleanKey = key.substring(2, key.length - 2);
 
 			// Get translation
-			var translation = tb.getTranslation.v1(cleanKey);
+			var translation = tb.getTranslation(cleanKey);
 
 			// Apply translation to template
 			template = template.replace(key, translation);
@@ -45,8 +43,7 @@ tb.renderTemplate.v1 = function (templatePath, replacements, callback) {
 	});
 };
 
-tb.renderTextTemplate = {};
-tb.renderTextTemplate.v1 = function (template, replacements, callback) {
+tb.renderTextTemplate = function (template, replacements, callback) {
 	if (!callback && typeof replacements === 'function') {
 		callback = replacements;
 		replacements = undefined;
@@ -71,7 +68,7 @@ tb.renderTextTemplate.v1 = function (template, replacements, callback) {
 		var cleanKey = key.substring(2, key.length - 2);
 
 		// Get translation
-		var translation = tb.getTranslation.v1(cleanKey);
+		var translation = tb.getTranslation(cleanKey);
 
 		// Apply translation to template
 		template = template.replace(key, translation);
@@ -81,9 +78,7 @@ tb.renderTextTemplate.v1 = function (template, replacements, callback) {
 	callback(template);
 };
 
-
-tb.getTranslation = {};
-tb.getTranslation.v1 = function (key, language) {
+tb.getTranslation = function (key, language) {
 	// Set language to default if language paramater is omitted
 	language = language || tb.defaultLanguage;
 
@@ -107,19 +102,17 @@ tb.getTranslation.v1 = function (key, language) {
 	return translation;
 };
 
-tb.listPackages = {};
-tb.listPackages.v1 = function () {
+tb.listPackages = function () {
 	var packages = ["songs", "albums", "artists", "tags", "boxes"];
 	return packages;
 };
 
-tb.packageStartup = {};
-tb.packageStartup.v1 = function () {
-	var packages = tb.listPackages.v1();
+tb.packageStartup = function () {
+	var packages = tb.listPackages();
 	for (var packs in packages) {
 		var packPath = "packages/" + packages[packs] + "/startup.js";
 
-		tb.getFileContents.v1(packPath, function (script) {
+		tb.getFileContents(packPath, function (script) {
 			script = '<script type="text/javascript">' + script;
 			script += '</' + 'script>';
 			$("head").append(script);
@@ -127,10 +120,9 @@ tb.packageStartup.v1 = function () {
 	}
 };
 
-tb.addPageButton = {};
-tb.addPageButton.v1 = function (id, displayName, iconLink) {
-	tb.getFileContents.v1(iconLink, function (icon) {
-		tb.renderTemplate.v1("packages/trackbox/templates/page-button.html", { "ID": id + "-button", "LINK": id, "NAME": displayName, "ICON": icon }, function (template) {
+tb.addPageButton = function (id, displayName, iconLink) {
+	tb.getFileContents(iconLink, function (icon) {
+		tb.renderTemplate("packages/trackbox/templates/page-button.html", { "ID": id + "-button", "LINK": id, "NAME": displayName, "ICON": icon }, function (template) {
 			var buttons = interfacePreferences.trackbox.buttonLayout[0].alignment[1].pageButtons.buttonOrder;
 			var value = buttons[id].order;
 			var nextLowest;
@@ -175,31 +167,29 @@ tb.addPageButton.v1 = function (id, displayName, iconLink) {
 	});
 };
 
-var pageButtonSelectedAdd = "";
-var pageButtonSelectedRemove = "";
-var pageButtonSelected = "";
+tb.private.pageButtonSelectedAdd = "";
+tb.private.pageButtonSelectedRemove = "";
+tb.private.pageButtonSelected = "";
 
-tb.selectPageButton = {};
-tb.selectPageButton.v1 = function (id) {
-	if (pageButtonSelectedAdd === "" && pageButtonSelectedRemove === "") {
-		tb.getFileContents.v1("packages/trackbox/templates/page-button-selected.html", function (text) {
+tb.selectPageButton = function (id) {
+	if (tb.private.pageButtonSelectedAdd === "" && tb.private.pageButtonSelectedRemove === "") {
+		tb.getFileContents("packages/trackbox/templates/page-button-selected.html", function (text) {
 			text = text.split('\n');
-			pageButtonSelectedAdd = text[0];
-			pageButtonSelectedRemove = text[1];
-			tb.selectPageButton.v1(id);
+			tb.private.pageButtonSelectedAdd = text[0];
+			tb.private.pageButtonSelectedRemove = text[1];
+			tb.selectPageButton(id);
 		});
 	} else {
-		$("#" + pageButtonSelected + "-button").addClass(pageButtonSelectedRemove);
-		$("#" + pageButtonSelected + "-button").removeClass(pageButtonSelectedAdd);
-		pageButtonSelected = id;
-		$("#" + id + "-button").addClass(pageButtonSelectedAdd);
-		$("#" + id + "-button").removeClass(pageButtonSelectedRemove);
+		$("#" + tb.private.pageButtonSelected + "-button").addClass(tb.private.pageButtonSelectedRemove);
+		$("#" + tb.private.pageButtonSelected + "-button").removeClass(tb.private.pageButtonSelectedAdd);
+		tb.private.pageButtonSelected = id;
+		$("#" + id + "-button").addClass(tb.private.pageButtonSelectedAdd);
+		$("#" + id + "-button").removeClass(tb.private.pageButtonSelectedRemove);
 	}
 };
 
 var music = new Audio();
-tb.loadTrack = {};
-tb.loadTrack.v1 = function (path, autoPlay) {
+tb.loadTrack = function (path, autoPlay) {
 	if (typeof path === "string") {
 		music.src = path;
 		if (autoPlay === true) {
@@ -208,15 +198,13 @@ tb.loadTrack.v1 = function (path, autoPlay) {
 	}
 };
 
-tb.metadataLoaded = {};
-tb.metadataLoaded.v1 = function(callback){
+tb.metadataLoaded = function(callback){
 	music.addEventListener('loadedmetadata', function () {
 		callback();
 	});
 };
 
-tb.playbackState = {};
-tb.playbackState.v1 = function (action) {
+tb.playbackState = function (action) {
 	if (typeof action === "undefined") {
 		if (music.paused) {
 			return "paused";
@@ -238,8 +226,7 @@ tb.playbackState.v1 = function (action) {
 	}
 };
 
-tb.playbackStateChange = {};
-tb.playbackStateChange.v1 = function (callback) {
+tb.playbackStateChange = function (callback) {
 	$(music).on("pause", function () {
 		callback("pause");
 	});
@@ -248,8 +235,7 @@ tb.playbackStateChange.v1 = function (callback) {
 	});
 };
 
-tb.trackTime = {};
-tb.trackTime.v1 = function (time) {
+tb.trackTime = function (time) {
 	if (typeof time !== "undefined") {
 		music.currentTime = time;
 	} else {
@@ -257,18 +243,15 @@ tb.trackTime.v1 = function (time) {
 	}
 };
 
-tb.getTrackDuration = {};
-tb.getTrackDuration.v1 = function () {
+tb.getTrackDuration = function () {
 	return music.duration;
 };
 
-tb.trackEnded = {};
-tb.trackEnded.v1 = function (callback) {
+tb.trackEnded = function (callback) {
 	music.addEventListener("ended", callback());
 };
 
-tb.formatTime = {};
-tb.formatTime.v1 = function (time) {
+tb.formatTime = function (time) {
 	var hours = Math.floor(time / 3600);
 	time -= 3600 * hours;
 
@@ -290,4 +273,4 @@ tb.formatTime.v1 = function (time) {
 		seconds = "0" + seconds;
 	}
 	return hours + minutes + seconds;
-}
+};

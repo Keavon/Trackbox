@@ -1,10 +1,18 @@
-﻿var library = tb.find({});
+﻿var library = tb.library();
 
-library.sort(tb.sortByPriority.v1(["album", "disk", "track", "title"]));
+library.sort(tb.sortByPriority("+album", "+disk", "+track", "+title"));
 
-tb.getFileContents.v1("packages/songs/templates/list-row.html", function (data) {
+tb.getFileContents("packages/songs/templates/list-row.html", function (data) {
 	for (var songs in library) {
-		tb.renderTextTemplate.v1(data, { "TITLE": library[songs].title, "NUMBER": library[songs].track, "ALBUM": library[songs].album, "ARTIST": library[songs].artists[0], "TIME": tb.formatTime.v1(library[songs].time) }, function (template) {
+		library[songs].title = library[songs].title || "";
+		library[songs].artists[0] = library[songs].artists[0] || "";
+		library[songs].album = library[songs].album || "";
+		library[songs].year = library[songs].year || "";
+		library[songs].track = library[songs].track || "";
+		library[songs].disk = library[songs].disk || "";
+		library[songs].time = library[songs].time || "";
+
+		tb.renderTextTemplate(data, { "TITLE": library[songs].title, "NUMBER": library[songs].track, "ALBUM": library[songs].album, "ARTIST": library[songs].artists[0], "TIME": tb.formatTime(library[songs].time) }, function (template) {
 			$("#list-frame").append(template);
 		});
 	}

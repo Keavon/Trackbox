@@ -1,1 +1,1 @@
-﻿tb.addPageButton.v1("artists", "Artists", "packages/artists/artists.svg");
+﻿tb.addPageButton("artists", "Artists", "packages/artists/artists.svg");

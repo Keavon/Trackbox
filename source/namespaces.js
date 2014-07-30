@@ -1,1 +1,2 @@
+var tb = {};
 tb.private = {};

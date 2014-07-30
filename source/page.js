@@ -1,7 +1,6 @@
-tb.loadPage = {};
-tb.loadPage.v1 = function (name) {
+tb.loadPage = function (name) {
 	var pagePath = "packages/" + name + "/" + name + ".html";
-	tb.renderTemplate.v1(pagePath, function (page) {
+	tb.renderTemplate(pagePath, function (page) {
 		page = '<div id="includes"></div>' + page;
 		$("#page").html(page);
 	});

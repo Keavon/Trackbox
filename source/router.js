@@ -22,8 +22,7 @@ var pages = [
 ];
 var defaultPage = "albums";
 
-tb.router = {};
-tb.router.v1 = function () {
+tb.router = function () {
 	// Get hash string and remove hash
 	var pageName = window.location.hash.substring(1);
 
@@ -34,16 +33,16 @@ tb.router.v1 = function () {
 
 	// Check if hash equals any of the page names, otherwise set it to the default
 	if (packageNames.indexOf(pageName) !== -1) {
-		tb.selectPageButton.v1(pageName);
+		tb.selectPageButton(pageName);
 		if ($("#" + pageName + "-button").length === 0) {
 			$("body").on("DOMNodeInserted", "#" + pageName + "-button", function () {
-				tb.selectPageButton.v1(pageName);
+				tb.selectPageButton(pageName);
 				$("body").off("DOMNodeInserted", "#" + pageName + "-button");
 			});
 		}
-		tb.loadPage.v1(pageName);
+		tb.loadPage(pageName);
 	} else {
 		window.location.hash = "#" + defaultPage;
-		tb.router.v1();
+		tb.router();
 	}
 };

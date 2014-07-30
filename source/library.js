@@ -1,5 +1,3 @@
-// Array of JSON objects that store the music library.
-
 tb.private.library = [
 	{ "title": "40 Years Later", "location": "http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/01%2040%20years%20later.mp3", "artists": ["Joram Letwory"], "album": "Tears of Steel", "year": 2012, "track": 1, "disk": 1, "time": 31 },
 	{ "title": "The Dome", "location": "http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/02%20The%20dome.mp3", "artists": ["Joram Letwory"], "album": "Tears of Steel", "year": 2012, "track": 2, "disk": 1, "time": 311 },
@@ -8,11 +6,11 @@ tb.private.library = [
 
 	{ "title": "The Wires", "location": "http://download.blender.org/ED/1-TheWires.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 1, "disk": 1, "time": 75 },
 	{ "title": "Typewriter Dance", "location": "http://download.blender.org/ED/2-TypewriterDance.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 2, "disk": 1, "time": 70 },
-	{ "title": "The Safest Place", "location": "http://download.blender.org/ED/3-TheSafestPlace.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 3, "disk": 1, "time": 45 },
-	{ "title": "Emo Creates", "location": "http://download.blender.org/ED/4-EmoCreates.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 4, "disk": 1, "time": 60 },
+	{ "title": "The Safest Place", "location": "http://download.blender.org/ED/3-TheSafestPlace.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, /*"track": 3,*/ "disk": 1, "time": 45 },
+	{ "title": "Emo Creates", "location": "http://download.blender.org/ED/4-EmoCreates.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, /*"track": 4,*/ "disk": 1, "time": 60 },
 	{ "title": "End Title", "location": "http://download.blender.org/ED/5-EndTitle.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 5, "disk": 1, "time": 91 },
 	{ "title": "Teaser Music", "location": "http://download.blender.org/ED/6-TeaserMusic.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 6, "disk": 1, "time": 75 },
-	{ "title": "Ambience", "location": "http://download.blender.org/ED/7-Ambience.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 7, "disk": 1, "time": 110 }
+	{ "title": "Ambience", "location": "http://download.blender.org/ED/7-Ambience.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, /*"track": 7,*/ "disk": 1, "time": 110 }
 ];
 
 // Return a read only copy of the library.
@@ -109,24 +107,28 @@ tb.find = function (parameters) {
 	return array;
 };
 
-tb.sortByPriority = {};
-tb.sortByPriority.v1 = function (opt) {
+tb.sortByPriority = function (opt) {
 	if (!(opt instanceof Array)) {
-		opt = [];
+		opt = Array.prototype.slice.call(arguments);
 	}
 	return function (a, b) {
 		for (var i = 0; i < opt.length; ++i) {
-			var option = opt[i];
-			if (typeof option === 'string') {
-				option = [option, '+'];
+			var order = opt[i].substr(0, 1);
+			var key = opt[i].substr(1);
+			if (order !== '-' && order !== '+') {
+				key = opt[i];
+				order = '+';
 			}
-			if (option.length < 2) {
-				option[1] = '+';
-			}
-			if (a[option[0]] !== b[option[0]]) {
-				return option[1] === '+' ? a[option[0]] > b[option[0]] : a[option[0]] < b[option[0]];
+			if (a[key] !== b[key]) {
+				if (a[key] === undefined) { return 1; }
+				if (b[key] === undefined) { return -1; }
+				if (typeof a[key] === 'string' || typeof b[key] === 'string') {
+					return (order === '+' ? String(a[key]).toLowerCase() < String(b[key]).toLowerCase() : String(a[key]).toLowerCase() > String(b[key]).toLowerCase()) ? -1 : 1;
+				} else {
+					return (order === '+' ? a[key] < b[key] : a[key] > b[key]) ? -1 : 1;
+				}
 			}
 		}
-		return false;
+		return 0;
 	};
-}
+};

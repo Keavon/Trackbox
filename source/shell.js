@@ -10,8 +10,7 @@ var shells = [
 ];
 
 // Loads a shell of a given name into the document body
-tb.loadShell = {};
-tb.loadShell.v1 = function (shellName) {
+tb.loadShell = function (shellName) {
 	var packageName = "";
 	var shellPath = "";
 
@@ -25,9 +24,9 @@ tb.loadShell.v1 = function (shellName) {
 	}
 
 	// Fill document body with shell and call router
-	tb.renderTemplate.v1(shellPath, function (shell) {
+	tb.renderTemplate(shellPath, function (shell) {
 		$("body").html(shell);
-		tb.packageStartup.v1();
-		tb.router.v1();
+		tb.packageStartup();
+		tb.router();
 	});
 };
