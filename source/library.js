@@ -20,91 +20,99 @@ tb.library = function () {
 
 // Find tracks matching given parameters and returns an array with all matching songs
 // Parameters filter the returned objects, which each item in the JSON array checked against every song's metadata to see if it matches
-tb.find = function (parameters) {
-	var array = [];
-	for (var song in tb.private.library) {
-		var matched = true;
-
-		if (parameters.album && matched !== false) {
-			if (parameters.album !== tb.private.library[song].album) {
-				matched = false;
-			}
-		}
-
-		if (parameters.track && matched !== false) {
-			if (parameters.track !== tb.private.library[song].track) {
-				matched = false;
-			}
-		}
-
-		if (parameters.disk && matched !== false) {
-			if (parameters.disk !== tb.private.library[song].disk) {
-				matched = false;
-			}
-		}
-
-		if (parameters.duration && parameters.duration.seconds && matched !== false) {
-			if (parameters.duration.seconds !== tb.private.library[song].duration.seconds) {
-				matched = false;
-			}
-		}
-
-		if (parameters.duration && parameters.duration.mintues && matched !== false) {
-			if (parameters.duration.minutes !== tb.private.library[song].duration.minutes) {
-				matched = false;
-			}
-		}
-
-		if (parameters.duration && parameters.duration.hours && matched !== false) {
-			if (parameters.duration.hours !== tb.private.library[song].duration.hours) {
-				matched = false;
-			}
-		}
-
-		if (parameters.location && matched !== false) {
-			if (parameters.location !== tb.private.library[song].location) {
-				matched = false;
-			}
-		}
-
-		if (parameters.year && matched !== false) {
-			if (parameters.year !== tb.private.library[song].year) {
-				matched = false;
-			}
-		}
-
-		if (parameters.title && matched !== false) {
-			if (parameters.title !== tb.private.library[song].title) {
-				matched = false;
-			}
-		}
-
-		if (parameters.artists && matched !== false) {
-			// Check if the selected artist in parameters matches one of the artists in selected song in the library.
-			for (var artist in parameters.artists) {
-				var songMatched = false;
-
-				for (var libraryArtist in tb.private.library[song].artists) {
-					if (parameters.artists[artist] === tb.private.library[song].artists[libraryArtist]) {
-						songMatched = true;
+tb.find = function (parameters, contains, callback) {
+	
+	setTimeout(function(){
+			var matchedSongs = [];
+	
+			function stringMatches(stringOne, stringTwo) {
+				if(contains) {
+					if(stringTwo.search(stringOne) >= 0) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					if(stringOne === stringTwo) {
+						return true;
+					} else {
+						return false;
 					}
 				}
-				if (songMatched !== true) {
-					matched = false;
+			}
+	
+			for (var song in tb.private.library) {
+				var matched = true;
+	
+				if (parameters.album && matched !== false) {
+					if (! stringMatches(parameters.album, tb.private.library[song].album)) {
+						matched = false;
+					}
 				}
-
-				if (matched === false) {
-					break;
+	
+				if (parameters.track && matched !== false) {
+					if (! stringMatches(parameters.track, tb.private.library[song].track)) {
+						matched = false;
+					}
+				}
+	
+				if (parameters.disk && matched !== false) {
+					if (! stringMatches(parameters.disk, tb.private.library[song].disk)) {
+						matched = false;
+					}
+				}
+	
+				if (parameters.time && matched !== false) {
+					if (parameters.time !== tb.private.library[song].time) {
+						matched = false;
+					}
+				}
+	
+				if (parameters.location && matched !== false) {
+					if (! stringMatches(parameters.location, tb.private.library[song].location)) {
+						matched = false;
+					}
+				}
+	
+				if (parameters.year && matched !== false) {
+					if (! stringMatches(parameters.year, tb.private.library[song].year)) {
+						matched = false;
+					}
+				}
+	
+				if (parameters.title && matched !== false) {
+					if (! stringMatches(parameters.title, tb.private.library[song].title)) {
+						matched = false;
+					}
+				}
+	
+				if (parameters.artists && matched !== false) {
+					// Check if the selected artist in parameters matches one of the artists in selected song in the library.
+					for (var artist in parameters.artists) {
+						var songMatched = false;
+	
+						for (var libraryArtist in tb.private.library[song].artists) {
+							if (! stringMatches(parameters.artists[artist], tb.private.library[song].artists[libraryArtist])) {
+								songMatched = true;
+							}
+						}
+						if (songMatched !== true) {
+							matched = false;
+						}
+	
+						if (matched === false) {
+							break;
+						}
+					}
+				}
+	
+				if (matched === true) {
+					// If the song matched, send it to the calling function.
+					matchedSongs.push(tb.private.library[song]);
 				}
 			}
-		}
-
-		if (matched === true) {
-			// If the song matched, send it to the calling function.
-			array.push(tb.private.library[song]);
-		}
-	}
-	return array;
+		callback(matchedSongs);
+	}, 0);
 };
 
 tb.sortByPriority = function (opt) {
