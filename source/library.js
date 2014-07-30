@@ -20,7 +20,7 @@ tb.private.library = [
 	{ "title": "Cave Fight / Lament", "location": "https://archive.org/download/Sintel_Original_Film_Score-9838/Jan_Morgenstern_-_06_-_Cave_Fight__Lament.mp3", "artists": ["Jan Morgenstern"], "album": "Sintel", "year": 2010, "track": 6, "disk": 1, "time": 145, "entryId": 16 },
 	{ "title": "I Move On (Sintel's Song)", "location": "https://archive.org/download/Sintel_Original_Film_Score-9838/Jan_Morgenstern__Performed_by_Helena_Fix_-_07_-_I_Move_On_Sintels_Song.mp3", "artists": ["Jan Morgenstern"], "album": "Sintel", "year": 2010, "track": 7, "disk": 1, "time": 169, "entryId": 17 },
 	{ "title": "Circling Dragons", "location": "https://archive.org/download/Sintel_Original_Film_Score-9838/Jan_Morgenstern_-_08_-_Circling_Dragons.mp3", "artists": ["Jan Morgenstern"], "album": "Sintel", "year": 2010, "track": 8, "disk": 1, "time": 28, "entryId": 18 },
-	{ "title": "Trailer Music", "location": "https://archive.org/download/Sintel_Original_Film_Score-9838/Jan_Morgenstern_-_09_-_Trailer_Music.mp3", "artists": ["Jan Morgenstern"], "album": "Sintel", "year": 2010, "track": 9, "disk": 1, "time": 44, "entryId": 19 }
+	{ "title": "Trailer Music", "location": "https://archive.org/download/Sintel_Original_Film_Score-9838/Jan_Morgenstern_-_09_-_Trailer_Music.mp3", "artists": ["Jan Morgenstern"], "album": "Sintel", "year": 2010, "track": 9, "disk": 1, "time": 44, "id": 19 }
 ];
 
 // Return a read only copy of the library.
