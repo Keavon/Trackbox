@@ -1,7 +1,7 @@
 ﻿tb.getFileContents = {};
-tb.getFileContents.v1 = function (url, callback) {
+tb.getFileContents.v1 = function (path, callback) {
 	$.ajax({
-		"url": url,
+		"url": path,
 		"cache": false,
 		"dataType": "text"
 	}).done(callback);
@@ -44,6 +44,43 @@ tb.renderTemplate.v1 = function (templatePath, replacements, callback) {
 		callback(template);
 	});
 };
+
+tb.renderTextTemplate = {};
+tb.renderTextTemplate.v1 = function (template, replacements, callback) {
+	if (!callback && typeof replacements === 'function') {
+		callback = replacements;
+		replacements = undefined;
+	}
+
+	// If replacements are given, replace custom tempate tags
+	if (typeof replacements !== "undefined") {
+		for (var replace in replacements) {
+			template = template.replace("{{" + replace + "}}", replacements[replace]);
+		}
+	}
+
+	// Match localization template tags
+	var matches = template.match(/%%((?:(?!%%).)+)%%/g);
+
+	// Replace localization template tags with translations
+	for (var match in matches) {
+		// Get iteration's match
+		var key = matches[match];
+
+		// Remove %% tags
+		var cleanKey = key.substring(2, key.length - 2);
+
+		// Get translation
+		var translation = tb.getTranslation.v1(cleanKey);
+
+		// Apply translation to template
+		template = template.replace(key, translation);
+	}
+
+	// Return value
+	callback(template);
+};
+
 
 tb.getTranslation = {};
 tb.getTranslation.v1 = function (key, language) {
@@ -229,3 +266,28 @@ tb.trackEnded = {};
 tb.trackEnded.v1 = function (callback) {
 	music.addEventListener("ended", callback());
 };
+
+tb.formatTime = {};
+tb.formatTime.v1 = function (time) {
+	var hours = Math.floor(time / 3600);
+	time -= 3600 * hours;
+
+	var minutes = Math.floor(time / 60);
+	time -= 60 * minutes;
+	if (hours > 0 && minutes < 10) {
+		minutes = "0" + minutes;
+	}
+	minutes += ":";
+
+	if (hours > 0) {
+		hours = hours + ":";
+	} else {
+		hours = "";
+	}
+
+	var seconds = time;
+	if (seconds < 10) {
+		seconds = "0" + seconds;
+	}
+	return hours + minutes + seconds;
+}

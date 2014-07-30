@@ -1,114 +1,132 @@
 // Array of JSON objects that store the music library.
 
 tb.private.library = [
-	{"name" : "Overture", "location" : "file://path/to/a/file/at/some/point", "artists" : ["Zelda Reorchestrated"], "album" : "Twilight Symphony", "year" : "2013", "track" : "1", "disk" : "1", "duration" : { "hours" : "0", "minutes" : "6", "seconds" : "36"}},
-	{"name" : "Back from the Spring", "location" : "file://path/to/a/file/at/some/point", "artists" : ["Zelda Reorchestrated"], "album" : "Twilight Symphony", "year" : "2013", "track" : "2", "disk" : "1", "duration" : { "hours" : "0", "minutes" : "1", "seconds" : "43"}},
+	{ "title": "40 Years Later", "location": "http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/01%2040%20years%20later.mp3", "artists": ["Joram Letwory"], "album": "Tears of Steel", "year": 2012, "track": 1, "disk": 1, "time": 31 },
+	{ "title": "The Dome", "location": "http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/02%20The%20dome.mp3", "artists": ["Joram Letwory"], "album": "Tears of Steel", "year": 2012, "track": 2, "disk": 1, "time": 311 },
+	{ "title": "The Battle", "location": "http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/03%20The%20battle.mp3", "artists": ["Joram Letwory"], "album": "Tears of Steel", "year": 2012, "track": 3, "disk": 1, "time": 123 },
+	{ "title": "End Credits", "location": "http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/04%20End%20credits.mp3", "artists": ["Joram Letwory"], "album": "Tears of Steel", "year": 2012, "track": 4, "disk": 1, "time": 103 },
+
+	{ "title": "The Wires", "location": "http://download.blender.org/ED/1-TheWires.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 1, "disk": 1, "time": 75 },
+	{ "title": "Typewriter Dance", "location": "http://download.blender.org/ED/2-TypewriterDance.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 2, "disk": 1, "time": 70 },
+	{ "title": "The Safest Place", "location": "http://download.blender.org/ED/3-TheSafestPlace.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 3, "disk": 1, "time": 45 },
+	{ "title": "Emo Creates", "location": "http://download.blender.org/ED/4-EmoCreates.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 4, "disk": 1, "time": 60 },
+	{ "title": "End Title", "location": "http://download.blender.org/ED/5-EndTitle.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 5, "disk": 1, "time": 91 },
+	{ "title": "Teaser Music", "location": "http://download.blender.org/ED/6-TeaserMusic.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 6, "disk": 1, "time": 75 },
+	{ "title": "Ambience", "location": "http://download.blender.org/ED/7-Ambience.mp3", "artists": ["Jan Morgenstern"], "album": "Elephants Dream", "year": 2006, "track": 7, "disk": 1, "time": 110 }
 ];
 
 // Return a read only copy of the library.
-tb.library = function() {
+tb.library = function () {
 	return tb.private.library;
-}
+};
 
-// Find music tracks that match given parameters.
-//
-// Callbacks once for every song found and null when finished.
-//
-// parameters filters the returned objects, which each item in
-// the JSON array checked against every song's metadata to see if it matches
-//
-// Example:
-//
-// tb.find({"track" : "2", "artists" : ["Zelda Reorchestrated"], "duration" : { "minutes" : "1", "seconds" : "43"}}, function(data){
-//     console.log(data);
-// });
-
-
-tb.find = function(parameters, callback) {
-	for(song in tb.private.library) {
+// Find tracks matching given parameters and returns an array with all matching songs
+// Parameters filter the returned objects, which each item in the JSON array checked against every song's metadata to see if it matches
+tb.find = function (parameters) {
+	var array = [];
+	for (var song in tb.private.library) {
 		var matched = true;
 
-		if(parameters.album && matched != false) {
-			if(parameters.album !== tb.private.library[song].album) {
+		if (parameters.album && matched !== false) {
+			if (parameters.album !== tb.private.library[song].album) {
 				matched = false;
 			}
 		}
 
-		if(parameters.track && matched != false) {
-			if(parameters.track !== tb.private.library[song].track) {
+		if (parameters.track && matched !== false) {
+			if (parameters.track !== tb.private.library[song].track) {
 				matched = false;
 			}
 		}
 
-		if(parameters.disk && matched != false) {
-			if(parameters.disk !== tb.private.library[song].disk) {
+		if (parameters.disk && matched !== false) {
+			if (parameters.disk !== tb.private.library[song].disk) {
 				matched = false;
 			}
 		}
 
-		if(parameters.duration && parameters.duration.seconds && matched != false) {
-			if(parameters.duration.seconds !== tb.private.library[song].duration.seconds) {
+		if (parameters.duration && parameters.duration.seconds && matched !== false) {
+			if (parameters.duration.seconds !== tb.private.library[song].duration.seconds) {
 				matched = false;
 			}
 		}
 
-		if(parameters.duration && parameters.duration.mintues && matched != false) {
-			if(parameters.duration.minutes !== tb.private.library[song].duration.minutes) {
+		if (parameters.duration && parameters.duration.mintues && matched !== false) {
+			if (parameters.duration.minutes !== tb.private.library[song].duration.minutes) {
 				matched = false;
 			}
 		}
 
-		if(parameters.duration && parameters.duration.hours && matched != false) {
-			if(parameters.duration.hours !== tb.private.library[song].duration.hours) {
+		if (parameters.duration && parameters.duration.hours && matched !== false) {
+			if (parameters.duration.hours !== tb.private.library[song].duration.hours) {
 				matched = false;
 			}
 		}
 
-		if(parameters.location && matched != false) {
-			if(parameters.location !== tb.private.library[song].location) {
+		if (parameters.location && matched !== false) {
+			if (parameters.location !== tb.private.library[song].location) {
 				matched = false;
 			}
 		}
 
-		if(parameters.year && matched != false) {
-			if(parameters.year !== tb.private.library[song].year) {
+		if (parameters.year && matched !== false) {
+			if (parameters.year !== tb.private.library[song].year) {
 				matched = false;
 			}
 		}
 
-		if(parameters.name && matched != false) {
-			if(parameters.name !== tb.private.library[song].name) {
-				matched = false
+		if (parameters.title && matched !== false) {
+			if (parameters.title !== tb.private.library[song].title) {
+				matched = false;
 			}
 		}
 
-		if(parameters.artists && matched != false) {
+		if (parameters.artists && matched !== false) {
 			// Check if the selected artist in parameters matches one of the artists in selected song in the library.
-			for(artist in parameters.artists) {
+			for (var artist in parameters.artists) {
 				var songMatched = false;
 
-				for(libraryArtist in tb.private.library[song].artists) {
-					if(parameters.artists[artist] === tb.private.library[song].artists[libraryArtist]) {
+				for (var libraryArtist in tb.private.library[song].artists) {
+					if (parameters.artists[artist] === tb.private.library[song].artists[libraryArtist]) {
 						songMatched = true;
 					}
 				}
-				if(songMatched != true) {
+				if (songMatched !== true) {
 					matched = false;
 				}
 
-				if(matched == false)  break;
+				if (matched === false) {
+					break;
+				}
 			}
 		}
 
-		if(matched == true) {
+		if (matched === true) {
 			// If the song matched, send it to the calling function.
-			callback(tb.private.library[song]);
+			array.push(tb.private.library[song]);
 		}
 	}
+	return array;
+};
 
-	// Tell the calling function that the search has completed by sending null.
-	callback(null);
+tb.sortByPriority = {};
+tb.sortByPriority.v1 = function (opt) {
+	if (!(opt instanceof Array)) {
+		opt = [];
+	}
+	return function (a, b) {
+		for (var i = 0; i < opt.length; ++i) {
+			var option = opt[i];
+			if (typeof option === 'string') {
+				option = [option, '+'];
+			}
+			if (option.length < 2) {
+				option[1] = '+';
+			}
+			if (a[option[0]] !== b[option[0]]) {
+				return option[1] === '+' ? a[option[0]] > b[option[0]] : a[option[0]] < b[option[0]];
+			}
+		}
+		return false;
+	};
 }
-
-// Temp testing function
-
