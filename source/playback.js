@@ -1,23 +1,28 @@
 ﻿var music = new Audio();
+var currentTrack;
 tb.loadTrack = function (song, autoPlay) {
 	autoPlay = autoPlay || false;
 	if (typeof song === "number") {
 		tb.libraryFind({ "id": song }, false, function (track) {
+			currentTrack = track[0];
 			console.log(track);
-			tb.loadTrack(track[0].location, true);
+			tb.loadTrack(currentTrack.location, autoPlay);
 		});
 	} else if (typeof song === "string") {
 		music.src = song;
+		$(window).trigger("trackLoaded");
 		if (autoPlay === true) {
 			music.play();
 		}
 	}
 };
 
-tb.metadataLoaded = function(callback){
-	music.addEventListener('loadedmetadata', function () {
+tb.trackLoaded = function (callback) {
+	$(window).on("trackLoaded", function () {
 		callback();
 	});
+	//music.addEventListener('loadedmetadata', function () {
+	//});
 };
 
 tb.playbackState = function (action) {
@@ -59,8 +64,16 @@ tb.trackTime = function (time) {
 	}
 };
 
-tb.getTrackDuration = function () {
-	return music.duration;
+tb.getMetadata = function (metadata) {
+	if (metadata === "duration") {
+		return currentTrack.time;
+	} else if (metadata === "title") {
+		return currentTrack.title;
+	} else if (metadata === "album") {
+		return currentTrack.album;
+	} else if (metadata === "artist") {
+		return currentTrack.artists[0];
+	}
 };
 
 tb.trackEnded = function (callback) {

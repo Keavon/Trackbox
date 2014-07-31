@@ -26,7 +26,7 @@ function scrubMouseUpListener() {
 	var timePercent = $("#timeline-knob")[0].style.left;
 	timePercent = timePercent.substring(0, timePercent.length - 1);
 	timePercent = timePercent / 100;
-	tb.trackTime(timePercent * tb.getTrackDuration());
+	tb.trackTime(timePercent * tb.getMetadata("duration"));
 	if (tb.playbackState() === "playing") {
 		enableSliderUpdate(true);
 	}
@@ -54,9 +54,12 @@ tb.trackEnded(function () {
 });
 
 /* Get and Display Track Length */
-tb.metadataLoaded(function () {
-	durationTotal = Math.floor(tb.getTrackDuration() / 60) + ":" + Math.floor(tb.getTrackDuration() % 60);
+tb.trackLoaded(function () {
+	durationTotal = Math.floor(tb.getMetadata("duration") / 60) + ":" + Math.floor(tb.getMetadata("duration") % 60);
 	$("#song-time").html("0:00/" + durationTotal);
+	$("#current-track-title").html(tb.getMetadata("title"));
+	$("#current-track-album").html(tb.getMetadata("album"));
+	$("#current-track-artist").html(tb.getMetadata("artist"));
 });
 
 /* Update Slider Position Every 50 ms */
@@ -68,7 +71,7 @@ function enableSliderUpdate(enable) {
 			if (durationSeconds < 10) {
 				durationSeconds = "0" + durationSeconds;
 			}
-			var percentage = (tb.trackTime() / tb.getTrackDuration()) * 100;
+			var percentage = (tb.trackTime() / tb.getMetadata("duration")) * 100;
 			$("#timeline-knob").css("left", percentage + "%");
 			$("#timeline-bar").css("width", percentage + "%");
 			$("#song-time").html(durationMinutes + ":" + durationSeconds + "/" + durationTotal);
@@ -132,7 +135,7 @@ tb.playbackStateChange(function (state) {
 $(function () {
 	$(document).keydown(function (objEvent) {
 		if (objEvent.ctrlKey) {
-			if (objEvent.keyCode == 65 || objEvent.keyCode == 97) {
+			if (objEvent.keyCode === 65 || objEvent.keyCode === 97) {
 				return false;
 			}
 		}
