@@ -1,5 +1,6 @@
 ﻿var music = new Audio();
 tb.loadTrack = function (song, autoPlay) {
+	autoPlay = autoPlay || false;
 	if (typeof song === "number") {
 		tb.libraryFind({ "id": song }, false, function (track) {
 			console.log(track);

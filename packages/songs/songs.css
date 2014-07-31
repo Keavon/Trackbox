@@ -21,12 +21,14 @@
 #list-header > div {
 	border-left: solid 1px #eee;
 	line-height: 1;
-	padding: 8px 5px 6px 4px;
+	padding-top: 8px;
+	padding-bottom: 6px;
 	position: relative;
+	padding-left: 4px;
+	padding-right: 5px;
 }
 #list-header > div:first-child {
 	border-left: none;
-	padding-left: 5px;
 }
 
 /* Scrollbar space compensation */
@@ -44,6 +46,8 @@
 	height:0;
 	position: absolute;
 	margin-left:3px;
+	pointer-events:none;
+	cursor:default;
 }
 .sort-down > p > a:after {
 	border-color: #666 transparent transparent transparent;
@@ -70,20 +74,29 @@
 	margin: 0;
 	font-size: 0;
 }
-.list-row:active {
-	background-color: rgba(0, 0, 0, 0.1);
-}
 .list-row-selected {
-	background-color: rgba(56, 116, 167, 0.1);
+	background-color: rgba(0, 0, 0, 0.05);
+}
+.column-queue p, .column-queue a {
+	width:100%;
+	display:block;
+	text-align:center;
+}
+.list-row-playing .column-queue a:not(:hover):after {
+	content:"\25BA";
 }
 .list-row > div {
 	display: inline-block;
-	padding: 0 5px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 .list-row > div > p {
 	margin: 0;
 	font-size: 14px;
 	cursor: default;
+}
+.list-row > div > p > a:hover {
+	text-decoration: underline;
 }
 
 /* Last column floats to right */
@@ -92,8 +105,10 @@
 }
 
 /* Column width */
-.column-queue {
-	width: 16px;
+#list-header div.column-queue, div.column-queue {
+	padding-left:0;
+	padding-right:0;
+	width:25px;
 }
 .column-enabled {
 	width: 12px;
@@ -117,17 +132,49 @@
 	width: 86px;
 }
 
+.column-queue a:after {
+	content:"+";
+	font-weight:800;
+	position:relative;
+	z-index:1;
+}
+#list-frame div.column-queue a:hover {
+	text-decoration:none;
+}
+#list-frame .column-queue a {
+	position:relative;
+}
+#list-frame .column-queue a:before {
+	position:absolute;
+	width:0;
+	height:0;
+	background-color:#666;
+	border-radius:50%;
+	content:"";
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	margin:auto;
+	z-index:0;
+	transition: width 0.1s, height 0.1s;
+}
+#list-frame .column-queue a:hover:before {
+	width:25px;
+	height:25px;
+	transition: width 0.1s, height 0.1s;
+}
+#list-frame .column-queue a:hover:after {
+	color:#fff;
+}
+
+
 /* Rating stars */
 .list-row:not(#list-header) > .column-rating > p > span > a:after {
 	content: "\2606";
 }
 .list-row:not(#list-header) > .column-rating > p > span > a:hover:after {
 	content: "\2605";
-}
-
-/* Column settings */
-.clickable:hover {
-	text-decoration: underline;
 }
 
 /* Play/skip once checkbox */
