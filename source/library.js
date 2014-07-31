@@ -25,12 +25,13 @@ tb.private.library = [
 
 // Return a read only copy of the library.
 tb.library = function () {
-	return tb.private.library;
+	var toReturn = $.parseJSON(JSON.stringify(tb.private.library));
+	return toReturn;
 };
 
 // Find tracks matching given parameters and returns an array with all matching songs
 // Parameters filter the returned objects, which each item in the JSON array checked against every song's metadata to see if it matches
-tb.libraryFind = function (parameters, contains, callback) {
+tb.findInLibrary = function (parameters, contains, callback) {
 	
 	setTimeout(function(){
 			var matchedSongs = [];
@@ -90,10 +91,8 @@ tb.libraryFind = function (parameters, contains, callback) {
 					}
 				}
 
-				if (parameters.id && matched !== false) {
-					if (!stringMatches(parameters.id, tb.private.library[song].id)) {
-						matched = false;
-					}
+				if (parameters.id) {
+					console.error("To find by id, use tb.findById");
 				}
 
 				if (parameters.title && matched !== false) {
@@ -128,6 +127,53 @@ tb.libraryFind = function (parameters, contains, callback) {
 				}
 			}
 		callback(matchedSongs);
+	}, 0);
+};
+
+tb.findById = function(id, callback) {
+	setTimeout(function() {
+		var searchPosition = 0;
+
+		if( id < 0) {
+			console.error("tb.findById: Id must always be greater than or equal to zero");
+			callback(null);
+			return;
+		}
+
+		// Determine the starting position of the search;
+		if(id >= (tb.private.library.length -1)) {
+			searchPosition = tb.private.library.length - 1;
+		} else {
+			searchPosition = id;
+		}
+
+		var lastId = tb.private.library[searchPosition].id;
+
+		while(true) {
+			var currentId = tb.private.library[searchPosition].id;
+			if(currentId === id) {
+				callback(tb.private.library[searchPosition]);
+				break;
+			} else if((lastId > id && id > currentId) || (lastId < id && id < currentId)) {
+				callback(null);
+				break;
+			} else if(currentId > id) {
+				searchPosition--;
+			} else if(currentId < id) {
+				searchPosition++;
+			} else {
+				callback(null);
+				console.error("Issue in tb.findById: Caught a infinite loop edge case");
+				break;
+			}
+
+			if(searchPosition > (tb.private.library.length - 1) || searchPosition < 0) {
+				callback(null);
+				break;
+			}
+
+			lastId = currentId;
+		}
 	}, 0);
 };
 

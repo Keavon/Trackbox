@@ -3,9 +3,8 @@ var currentTrack;
 tb.loadTrack = function (song, autoPlay) {
 	autoPlay = autoPlay || false;
 	if (typeof song === "number") {
-		tb.libraryFind({ "id": song }, false, function (track) {
-			currentTrack = track[0];
-			console.log(track);
+		tb.findById(song, function (track) {
+			currentTrack = track;
 			tb.loadTrack(currentTrack.location, autoPlay);
 		});
 	} else if (typeof song === "string") {
@@ -21,8 +20,6 @@ tb.trackLoaded = function (callback) {
 	$(window).on("trackLoaded", function () {
 		callback();
 	});
-	//music.addEventListener('loadedmetadata', function () {
-	//});
 };
 
 tb.playbackState = function (action) {

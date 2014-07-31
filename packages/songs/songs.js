@@ -1,5 +1,4 @@
 ﻿var library = tb.library();
-
 library.sort(tb.sortByPriority("+album", "+disk", "+track", "+title"));
 
 tb.getFileContents("packages/songs/templates/list-row.html", function (data) {
@@ -15,6 +14,7 @@ tb.getFileContents("packages/songs/templates/list-row.html", function (data) {
 		tb.renderTextTemplate(data, { "ID": "song-" + library[song].id, "TITLE": library[song].title, "NUMBER": library[song].track, "ALBUM": library[song].album, "ARTIST": library[song].artists[0], "TIME": tb.formatTime(library[song].time) }, function (template) {
 			$("#list-frame").append(template);
 		});
+
 	}
 });
 
