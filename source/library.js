@@ -36,14 +36,14 @@ tb.find = function (parameters, contains, callback) {
 			var matchedSongs = [];
 	
 			function stringMatches(stringOne, stringTwo) {
-				if(contains) {
-					if(stringTwo.search(stringOne) >= 0) {
+				if (contains) {
+					if (stringTwo.search(stringOne) >= 0) {
 						return true;
 					} else {
 						return false;
 					}
 				} else {
-					if(stringOne === stringTwo) {
+					if (stringOne === stringTwo) {
 						return true;
 					} else {
 						return false;

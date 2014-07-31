@@ -12,14 +12,18 @@ tb.getFileContents("packages/songs/templates/list-row.html", function (data) {
 		library[song].disk = library[song].disk || "";
 		library[song].time = library[song].time || "";
 
-		tb.renderTextTemplate(data, { "ID" : library[song].id, "TITLE": library[song].title, "NUMBER": library[song].track, "ALBUM": library[song].album, "ARTIST": library[song].artists[0], "TIME": tb.formatTime(library[song].time) }, function (template) {
+		tb.renderTextTemplate(data, { "ID" : "song-" + library[song].id, "TITLE": library[song].title, "NUMBER": library[song].track, "ALBUM": library[song].album, "ARTIST": library[song].artists[0], "TIME": tb.formatTime(library[song].time) }, function (template) {
 			$("#list-frame").append(template);
 		});
 	}
 });
 
-
-$("#list-frame").dblclick(function(event){
-	event.preventDefault();
-	alert(event.target.id);
+$("#list-frame").dblclick(function (event) {
+	if (typeof $(event.target).parents(".list-row").attr("id") === "undefined" && event.target.id.substring(0, 5) === "song-") {
+		alert(event.target.id);
+	} else if (typeof $(event.target).parents(".list-row").attr("id") === "undefined") {
+		return;
+	} else if ($(event.target).parents(".list-row").attr("id").substring(0, 5) === "song-") {
+		alert($(event.target).parents(".list-row").attr("id"));
+	}
 });
