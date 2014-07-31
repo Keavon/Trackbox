@@ -1,7 +1,12 @@
 ﻿var music = new Audio();
-tb.loadTrack = function (path, autoPlay) {
-	if (typeof path === "string") {
-		music.src = path;
+tb.loadTrack = function (song, autoPlay) {
+	if (typeof song === "number") {
+		tb.libraryFind({ "id": song }, false, function (track) {
+			console.log(track);
+			tb.loadTrack(track[0].location, true);
+		});
+	} else if (typeof song === "string") {
+		music.src = song;
 		if (autoPlay === true) {
 			music.play();
 		}

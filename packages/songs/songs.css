@@ -70,6 +70,9 @@
 	margin: 0;
 	font-size: 0;
 }
+.list-row:active {
+	background-color: rgba(0, 0, 0, 0.1);
+}
 .list-row-selected {
 	background-color: rgba(56, 116, 167, 0.1);
 }

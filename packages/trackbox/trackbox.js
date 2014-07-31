@@ -111,7 +111,7 @@ $("#playback-play-pause").click(function () {
 	tb.playbackState("toggle");
 });
 
-// Change button when song is played or paused
+/* Change button when song is played or paused */
 tb.playbackStateChange(function (state) {
 	if (state === "play") {
 		if (!seeking) {
@@ -126,4 +126,15 @@ tb.playbackStateChange(function (state) {
 		$("#playback-play-pause > #play").show();
 		$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
 	}
+});
+
+/* Disable selection with Ctrl + A */
+$(function () {
+	$(document).keydown(function (objEvent) {
+		if (objEvent.ctrlKey) {
+			if (objEvent.keyCode == 65 || objEvent.keyCode == 97) {
+				return false;
+			}
+		}
+	});
 });
