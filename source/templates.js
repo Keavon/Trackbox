@@ -1,5 +1,5 @@
 ﻿tb.renderTemplate = function (templatePath, replacements, callback) {
-	if (!callback && typeof replacements === 'function') {
+	if (!callback && typeof replacements === "function") {
 		callback = replacements;
 	}
 
@@ -11,15 +11,27 @@
 };
 
 tb.renderTextTemplate = function (template, replacements, callback) {
-	if (!callback && typeof replacements === 'function') {
+	if (!callback && typeof replacements === "function") {
 		callback = replacements;
 		replacements = undefined;
 	}
 
 	// If replacements are given, replace custom tempate tags
 	if (typeof replacements !== "undefined") {
-		for (var replace in replacements) {
-			template = template.replace("{{" + replace + "}}", replacements[replace]);
+		var replacement = template.match(/{{((?:(?!}}).)+)}}/g);
+
+		// Replace template tags
+		for (var item in replacement) {
+			// Get iteration's match
+			var replacementsKey = replacement[item];
+
+			// Remove {{ }} tags
+			var cleanReplacementKey = replacementsKey.substring(2, replacementsKey.length - 2);
+
+			// Apply replacements to template
+			if (cleanReplacementKey in replacements) {
+				template = template.replace(replacementsKey, replacements[cleanReplacementKey]);
+			}
 		}
 	}
 
