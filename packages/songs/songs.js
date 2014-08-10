@@ -38,6 +38,10 @@ $("#list-frame").mousedown(function (event) {
 	}
 });
 
+$("#list-frame").on("mousedown", ".list-row a, .list-row label", function (event) {
+	event.stopPropagation();
+});
+
 $("body").keydown(function (e) {
 	if (e.keyCode === 38) {
 		songListSelection("up");

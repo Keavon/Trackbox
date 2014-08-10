@@ -170,12 +170,44 @@
 
 
 /* Rating stars */
+.list-row:not(#list-header) > .column-rating > p > span > a {
+	padding:0 1px;
+	font-size:18px;
+	line-height:0;
+}
 .list-row:not(#list-header) > .column-rating > p > span > a:after {
 	content: "\2606";
 }
 .list-row:not(#list-header) > .column-rating > p > span > a:hover:after {
 	content: "\2605";
 }
+
+.list-row:not(#list-header) .rating-1 a:nth-child(1):after {
+	content: "\2605";
+}
+.list-row:not(#list-header) .rating-2 a:nth-child(1):after,
+.list-row:not(#list-header) .rating-2 a:nth-child(2):after {
+	content: "\2605";
+}
+.list-row:not(#list-header) .rating-3 a:nth-child(1):after,
+.list-row:not(#list-header) .rating-3 a:nth-child(2):after,
+.list-row:not(#list-header) .rating-3 a:nth-child(3):after {
+	content: "\2605";
+}
+.list-row:not(#list-header) .rating-4 a:nth-child(1):after,
+.list-row:not(#list-header) .rating-4 a:nth-child(2):after,
+.list-row:not(#list-header) .rating-4 a:nth-child(3):after,
+.list-row:not(#list-header) .rating-4 a:nth-child(4):after {
+	content: "\2605";
+}
+.list-row:not(#list-header) .rating-5 a:nth-child(1):after,
+.list-row:not(#list-header) .rating-5 a:nth-child(2):after,
+.list-row:not(#list-header) .rating-5 a:nth-child(3):after,
+.list-row:not(#list-header) .rating-5 a:nth-child(4):after,
+.list-row:not(#list-header) .rating-5 a:nth-child(5):after {
+	content: "\2605";
+}
+
 
 /* Play/skip once checkbox */
 input[type=checkbox].play-skip-once + label:before {
