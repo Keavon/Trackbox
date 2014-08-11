@@ -259,30 +259,69 @@ body {
 /**********
  Playback Bar
  **********/
+.row-item {
+	display:inline-block;
+	vertical-align:top;
+}
+.spacer-15px {
+	width:15px;
+}
 #playback {
 	display:flex;
-	display:-webkit-flex;
-	flex-direction:row;
-	-webkit-flex-direction:row;
+	flex-flow: row nowrap;
 	box-shadow:0 0 20px rgba(0, 0, 0, 0.2);
 	z-index:99;
 	padding:0 25px;    /* Make shadow end evenly by extending the */
 	margin-left:-25px; /* edges off-screen so curving isn't visible */
+	font-size:0;
+	position:relative;
+}
+#playback > div {
+	display:inline-block;
+}
+#playback-left {
+	flex: 1;
+	white-space:nowrap;
+	overflow:hidden;
+	position:relative;
+}
+#playback-left::after {
+	width:20px;
+	height:100%;
+	right:0;
+	position:absolute;
+	content:"";
+	background-image: linear-gradient(to right, rgba(245, 245, 245, 0), rgba(245, 245, 245, 1));
+}
+
+/* /Right side of playback bar */
+#playback-right {
+	flex: 1;
+}
+#playback-right > div {
+	float:right;
 }
 
 /* /Album art */
+#playback-art {
+	display:inline-block;
+}
 #playback-art img {
 	height:70px;
-	display:block;
+	vertical-align:top;
 }
 
 /* /Current track */
 #current-track {
+	height:70px;
+}
+#current-track > div {
 	font-size:0;
 	display:flex;
 	display:-webkit-flex;
 	flex-direction:column;
 	-webkit-flex-direction:column;
+	height:100%;
 }
 #current-track a:hover {
 	text-decoration:underline;
@@ -309,8 +348,6 @@ body {
 
 /* //Album and artist */
 #current-track-lower {
-	flex:0 0 auto;
-	-webkit-flex:0 0 auto;
 	margin-bottom:10px;
 }
 #current-track-album {
@@ -346,7 +383,7 @@ body {
 	position:absolute;
 	font-size:10px;
 	line-height:100%;
-	right:2px;
+	top:2px;
+	right:27px;
 	margin:0;
-	margin-top:1px;
 }
