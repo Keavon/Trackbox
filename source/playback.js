@@ -80,6 +80,12 @@ tb.getMetadata = function (metadata) {
 		return currentTrack.album;
 	} else if (metadata === "artist") {
 		return currentTrack.artists[0];
+	} else if (metadata === "artwork") {
+		if (currentTrack.artwork) {
+			return currentTrack.artwork;
+		} else {
+			return "covers/album_art.png";
+		}
 	}
 };
 

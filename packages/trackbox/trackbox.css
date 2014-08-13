@@ -222,8 +222,8 @@ body {
  **********/
 #timeline {
 	height:3px;
-	position:relative;
-	z-index:100;
+	width:100%;
+	display:block;
 }
 #timeline-bar {
 	height: 100%;
@@ -240,7 +240,8 @@ body {
 	position: absolute;
 	cursor: pointer;
 	overflow:hidden;
-	z-index:100;
+	z-index:1;
+	transition:bottom 0.25s, height 0.1s;
 }
 #timeline-knob {
 	position:absolute;
@@ -254,6 +255,7 @@ body {
 	border-radius:50%;
 	position:absolute;
 	left:-7.5px;
+	transition:width 0.1s, height 0.1s;
 }
 
 /**********
@@ -267,16 +269,37 @@ body {
 	width:15px;
 }
 #playback {
+	font-size:0;
+	box-shadow:0 0 20px rgba(0, 0, 0, 0.125);
+	z-index:1;
+	overflow:hidden;
+	height:73px;
+	transition:height 0.25s;
+}
+#playback.hidden {
+	height:0;
+	transition:height 0.25s;
+}
+#playback.hidden #timeline-bar-sensor {
+	bottom:-9px;
+	height:0;
+	transition:bottom 0.25s, height 0.1s;
+	pointer-events:none;
+}
+#playback.hidden #timeline-knob div {
+	transition:width 0.1s, height 0.1s;
+	width:0;
+	height:0;
+}
+#playback-bar {
+	flex:0 0 auto;
+	display:block;
+	clear:both;
 	display:flex;
 	flex-flow: row nowrap;
-	box-shadow:0 0 20px rgba(0, 0, 0, 0.2);
-	z-index:99;
-	padding:0 25px;    /* Make shadow end evenly by extending the */
-	margin-left:-25px; /* edges off-screen so curving isn't visible */
-	font-size:0;
 	position:relative;
 }
-#playback > div {
+#playback-bar > div {
 	display:inline-block;
 }
 #playback-left {
@@ -384,6 +407,6 @@ body {
 	font-size:10px;
 	line-height:100%;
 	top:2px;
-	right:27px;
+	right:2px;
 	margin:0;
 }

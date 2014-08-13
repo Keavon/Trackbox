@@ -1,5 +1,4 @@
-﻿//tb.loadTrack("http://download.blender.org/demo/movies/ToS/Tears-Of-Steel-OST/02%20The%20dome.mp3", false);
-var seeking = false;
+﻿var seeking = false;
 var pauseKeyDown = false;
 
 /* Mouse Down */
@@ -43,11 +42,13 @@ function scrubMouseMoveListener(evt) {
 	$("#timeline-bar").css("width", percentage + "%");
 }
 
-/* Get and Display Track Length */
+/* Get and Display Track Information */
 tb.trackLoaded(function () {
 	$("#current-track-title").html(tb.getMetadata("title"));
 	$("#current-track-album").html(tb.getMetadata("album"));
 	$("#current-track-artist").html(tb.getMetadata("artist"));
+	$("<img src='" + tb.getMetadata("artwork") + "' />").appendTo($("#playback-art").html(""));
+	$("#playback").removeClass("hidden");
 });
 
 tb.trackLoaded(function () {

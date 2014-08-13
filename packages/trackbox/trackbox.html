@@ -87,115 +87,115 @@
 		<!-- GENERATED: Page -->
 	</div>
 
-	<!-- Timeline -->
-	<div id="timeline" class="row palette-background-quaternary-bg"><div id="timeline-bar" class="palette-hint-primary-bg"></div></div>
-
-	<!-- Timeline Knob and Drag Sensor -->
-	<div id="timeline-bar-sensor">
-		<div id="timeline-knob"><div class="palette-hint-primary-bg"></div></div>
-	</div>
-
 	<!-- Playback bar -->
-	<div id="playback" class="row palette-background-secondary-bg">
-		<!-- /Left side of playback bar -->
-		<div id="playback-left">
-			<!-- //Album art -->
-			<a id="playback-art" class="row-item">
-				<img src="covers/tears_of_steel.png" />
-			</a>
+	<div id="playback" class="row palette-background-secondary-bg hidden">
+		<!-- Timeline -->
+		<div id="timeline" class="palette-background-quaternary-bg"><div id="timeline-bar" class="palette-hint-primary-bg"></div></div>
 
-			<!-- //Spacer: 15px -->
-			<div class="row-item spacer-15px"></div>
+		<!-- Timeline Knob and Drag Sensor -->
+		<div id="timeline-bar-sensor">
+			<div id="timeline-knob"><div class="palette-hint-primary-bg"></div></div>
+		</div>
 
-			<!-- //Current track -->
-			<div id="current-track" class="row-item">
+		<div id="playback-bar">
+			<!-- /Left side of playback bar -->
+			<div id="playback-left">
+				<!-- //Album art -->
+				<a id="playback-art" class="row-item"></a>
+
+				<!-- //Spacer: 15px -->
+				<div class="row-item spacer-15px"></div>
+
+				<!-- //Current track -->
+				<div id="current-track" class="row-item">
+					<div>
+						<!-- ///Title -->
+						<div id="current-track-upper">
+							<a id="current-track-title"></a>
+						</div>
+
+						<!-- ///Vertical spacer -->
+						<div id="current-track-middle"></div>
+
+						<!-- ///Album and artist-->
+						<div id="current-track-lower">
+							<a id="current-track-album"></a>
+							<a id="current-track-artist"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- /Middle of playback bar -->
+			<div id="playback-middle">
+				<!-- //Playback buttons -->
+				<div class="row-item" id="playback-buttons">
+					<!-- ///Previous track -->
+					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Previous Track%%">
+						<div>
+							<svg x="0px" y="0px" width="24px" height="18px" viewBox="0 0 700 500">
+								<polygon points="700,500 700,0 400,250" />
+								<polygon points="400,500 400,0 100,245" />
+								<rect width="100" height="450" y="25" />
+							</svg>
+						</div>
+					</a>
+
+					<!-- ///Pause/Play -->
+					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" id="playback-play-pause" title="%%Play%%">
+						<div id="play">
+							<svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512">
+								<polygon points="0,0 0,512 512,256" />
+							</svg>
+						</div>
+						<div id="pause" style="display:none;">
+							<svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512">
+								<rect x="32" fill="#7F7F7F" width="128" height="512" />
+								<rect x="352" fill="#7F7F7F" width="128" height="512" />
+							</svg>
+						</div>
+					</a>
+					<!-- ///Next track -->
+					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Next Track%%">
+						<div>
+							<svg x="0px" y="0px" width="24px" height="18px" viewBox="0 0 700 500">
+								<polygon points="0,0 0,500 300,250" />
+								<polygon points="300,0 300,500 600,250" />
+								<rect x="600" width="100" height="450" y="25" />
+							</svg>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<!-- /Right side of playback bar -->
+			<div id="playback-right">
 				<div>
-					<!-- ///Title -->
-					<div id="current-track-upper">
-						<a id="current-track-title"></a>
-					</div>
-
-					<!-- ///Vertical spacer -->
-					<div id="current-track-middle"></div>
-
-					<!-- ///Album and artist-->
-					<div id="current-track-lower">
-						<a id="current-track-album"></a>
-						<a id="current-track-artist"></a>
+					<!-- //Playback order buttons -->
+					<div class="row-item" id="playback-order-buttons">
+						<!-- //Shuffle -->
+						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Shuffle Off%%">
+							<div>
+								<svg x="0px" y="0px" width="20px" height="12px" viewBox="0 0 500 250">
+									<polyline points="0,30 430,30 430,0 500,55 430,110 430,80 0,80" />
+									<polyline points="0,170 430,170 430,140 500,195 430,250 430,220 0,220" />
+								</svg>
+							</div>
+						</a>
+						<!-- ///Repeat -->
+						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Repeat Off%%">
+							<div>
+								<svg x="0px" y="0px" width="20px" height="12px" viewBox="6 0 500 250">
+									<polygon points="436,30 436,0 506,55 436,110 436,80 56,80 56,200 476,200 476,250 6,250 6,30" />
+								</svg>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
+
+			<!-- /Track times -->
+			<p id="song-time"></p>
 		</div>
-
-		<!-- /Middle of playback bar -->
-		<div id="playback-middle">
-			<!-- //Playback buttons -->
-			<div class="row-item" id="playback-buttons">
-				<!-- ///Previous track -->
-				<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Previous Track%%">
-					<div>
-						<svg x="0px" y="0px" width="24px" height="18px" viewBox="0 0 700 500">
-							<polygon points="700,500 700,0 400,250" />
-							<polygon points="400,500 400,0 100,245" />
-							<rect width="100" height="450" y="25" />
-						</svg>
-					</div>
-				</a>
-
-				<!-- ///Pause/Play -->
-				<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" id="playback-play-pause" title="%%Play%%">
-					<div id="play">
-						<svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512">
-							<polygon points="0,0 0,512 512,256" />
-						</svg>
-					</div>
-					<div id="pause" style="display:none;">
-						<svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512">
-							<rect x="32" fill="#7F7F7F" width="128" height="512" />
-							<rect x="352" fill="#7F7F7F" width="128" height="512" />
-						</svg>
-					</div>
-				</a>
-				<!-- ///Next track -->
-				<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Next Track%%">
-					<div>
-						<svg x="0px" y="0px" width="24px" height="18px" viewBox="0 0 700 500">
-							<polygon points="0,0 0,500 300,250" />
-							<polygon points="300,0 300,500 600,250" />
-							<rect x="600" width="100" height="450" y="25" />
-						</svg>
-					</div>
-				</a>
-			</div>
-		</div>
-
-		<!-- /Right side of playback bar -->
-		<div id="playback-right">
-			<div>
-				<!-- //Playback order buttons -->
-				<div class="row-item" id="playback-order-buttons">
-					<!-- //Shuffle -->
-					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Shuffle Off%%">
-						<div>
-							<svg x="0px" y="0px" width="20px" height="12px" viewBox="0 0 500 250">
-								<polyline points="0,30 430,30 430,0 500,55 430,110 430,80 0,80" />
-								<polyline points="0,170 430,170 430,140 500,195 430,250 430,220 0,220" />
-							</svg>
-						</div>
-					</a>
-					<!-- ///Repeat -->
-					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Repeat Off%%">
-						<div>
-							<svg x="0px" y="0px" width="20px" height="12px" viewBox="6 0 500 250">
-								<polygon points="436,30 436,0 506,55 436,110 436,80 56,80 56,200 476,200 476,250 6,250 6,30" />
-							</svg>
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- /Track times -->
-		<p id="song-time">0:00 / 0:00</p>
 	</div>
 </div>
