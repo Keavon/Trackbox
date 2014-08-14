@@ -11,15 +11,24 @@ tb.loadTrack = function (song, autoPlay) {
 		});
 	} else if (typeof song === "string") {
 		music.src = song;
-		$(window).trigger("trackLoaded");
+		$(window).trigger("playbackStarted");
 		if (autoPlay === true) {
 			music.play();
 		}
+	} else if (!song) {
+		music.src = "";
+		$(window).trigger("playbackStopped");
 	}
 };
 
-tb.trackLoaded = function (callback) {
-	$(window).on("trackLoaded", function () {
+tb.playbackStarted = function (callback) {
+	$(window).on("playbackStarted", function () {
+		callback();
+	});
+};
+
+tb.playbackStopped = function (callback) {
+	$(window).on("playbackStopped", function () {
 		callback();
 	});
 };

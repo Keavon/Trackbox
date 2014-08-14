@@ -43,16 +43,23 @@ function scrubMouseMoveListener(evt) {
 }
 
 /* Get and Display Track Information */
-tb.trackLoaded(function () {
+tb.playbackStarted(function () {
 	$("#current-track-title").html(tb.getMetadata("title"));
 	$("#current-track-album").html(tb.getMetadata("album"));
 	$("#current-track-artist").html(tb.getMetadata("artist"));
 	$("<img src='" + tb.getMetadata("artwork") + "' />").appendTo($("#playback-art").html(""));
 	$("#playback").removeClass("hidden");
+	timelineUpdater();
 });
 
-tb.trackLoaded(function () {
-	timelineUpdater();
+tb.playbackStopped(function () {
+	$("#playback").addClass("hidden");
+});
+
+$(document).on("mousedown", "#playback-play-pause", function (event) {
+	if (event.which === 3) {
+		tb.loadTrack();
+	}
 });
 
 /* Update Slider Position */
