@@ -243,13 +243,13 @@ body {
 	z-index:1;
 	transition:bottom 0.25s, height 0.1s;
 }
-#timeline-knob {
+.slider-knob {
 	position:absolute;
 	width:0;
 	left:0;
 	cursor:pointer;
 }
-#timeline-knob div {
+.slider-knob div {
 	width:15px;
 	height:15px;
 	border-radius:50%;
@@ -397,8 +397,65 @@ body {
 	text-align: center;
 	vertical-align: middle;
 }
-#playback-buttons .bar-item div, #playback-order-buttons .bar-item div {
+#playback-buttons .bar-item > div, #playback-order-buttons .bar-item > div {
 	width: 40px;
+}
+
+/* ///Volume */
+#volume-control, #volume-control div {
+	vertical-align:middle;
+}
+#volume-control > div {
+	display:table-cell;
+}
+#volume-control:hover div.slider-bar, #volume-control:active div.slider-bar {
+	width:200px;
+	transition:width 0.25s;
+}
+#volume-control:hover .slider-knob > div {
+	transition:padding 0.25s;
+	padding:7.5px;
+}
+#volume-control .slider-knob > div {
+	transition:padding 0.25s;
+	padding:0;
+	width:0;
+	height:0;
+}
+#volume-control div.slider-bar {
+	width:0;
+	transition:width 0.25s;
+	position:relative;
+	overflow:hidden;
+	top:-7.5px;
+}
+#volume-control div.slider-bar > div:first-child {
+	position:absolute;
+	left:7.5px;
+	right:17.5px;
+	top:0;
+	bottom:0;
+}
+#volume-control div.slider-bar .knob-track {
+	width:100%;
+	right:10px;
+	position:relative;
+}
+#volume-control .knob-track {
+	width:100%;
+	position:absolute;
+}
+#volume-control .knob-track > div:last-child {
+	height:3px;
+}
+#volume-control .slider-knob {
+	top:50%;
+	margin-top:0;
+	transition:margin-top 0.25s;
+}
+#volume-control:hover .slider-knob {
+	transition:margin-top 0.25s;
+	margin-top:-7.5px;
 }
 
 /* /Playback times */
