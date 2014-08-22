@@ -3,5 +3,6 @@
 	"name" : "Artists",
 	"description" : "A page showing all of your artists.",
 	"pageIcon" : "artists.svg",
-	"page" : "artists.html"
+	"page" : "artists.html",
+	"url" : "artists"
 }

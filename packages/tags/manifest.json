@@ -3,5 +3,6 @@
 	"name" : "Tags",
 	"description" : "A page showing all of your tags.",
 	"pageIcon" : "tags.svg",
-	"page" : "tags.html"
+	"page" : "tags.html",
+	"url" : "tags"
 }

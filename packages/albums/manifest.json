@@ -3,5 +3,6 @@
 	"name" : "Albums",
 	"description" : "A page showing all of your albums.",
 	"pageIcon" : "albums.svg",
-	"page" : "albums.html"
+	"page" : "albums.html",
+	"url" : "albums"
 }
