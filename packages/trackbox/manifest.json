@@ -1,0 +1,7 @@
+{
+	"type" : "shell",
+	"name" : "Trackbox Shell",
+	"description" : "Default Trackbox shell.",
+	"shell" : "trackbox.html",
+	"pageButton" : "templates/page-button.html"
+}
