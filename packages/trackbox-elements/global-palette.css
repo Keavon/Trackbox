@@ -15,6 +15,10 @@
 .palette-background-quaternary-hover-bg:hover {
 	background-color:#e4e4e4;
 }
+.palette-background-quinary-bg,
+.palette-background-quinary-hover-bg:hover {
+	background-color:#ccc;
+}
 
 /* Hint */
 .palette-hint-primary-bg,

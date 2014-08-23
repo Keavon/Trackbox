@@ -22,7 +22,7 @@ function scrubMouseUpListener() {
 	document.removeEventListener("mousemove", scrubMouseDownListener);
 
 	// Get slider position
-	var timePercent = $("#timeline-knob")[0].style.left.substring(0, $("#timeline-knob")[0].style.left.length - 1) / 100;
+	var timePercent = $("#timeline-bar-sensor .slider-knob")[0].style.left.substring(0, $("#timeline-bar-sensor .slider-knob")[0].style.left.length - 1) / 100;
 
 	// Set track time
 	tb.trackTime(timePercent * tb.getMetadata("duration"));
@@ -38,7 +38,7 @@ function scrubMouseMoveListener(evt) {
 	if (percentage > 100) { percentage = 100; }
 
 	// Set slider position
-	$("#timeline-knob").css("left", percentage + "%");
+	$("#timeline-bar-sensor .slider-knob").css("left", percentage + "%");
 	$("#timeline-bar").css("width", percentage + "%");
 }
 
@@ -69,7 +69,7 @@ function timelineUpdater() {
 		if (percentage >= 100) {
 			percentage = 100;
 		}
-		$("#timeline-knob").css("left", percentage + "%");
+		$("#timeline-bar-sensor .slider-knob").css("left", percentage + "%");
 		$("#timeline-bar").css("width", percentage + "%");
 		$("#song-time").html(tb.formatTime(Math.floor(tb.trackTime())) + " / " + tb.formatTime(tb.getMetadata("duration")));
 	}
@@ -136,3 +136,37 @@ $(function () {
 		}
 	});
 });
+
+/* Volume Mouse Down */
+$("#volume-control")[0].addEventListener("mousedown", volumeMouseDownListener);
+function volumeMouseDownListener(evt) {
+	window.addEventListener("mouseup", volumeMouseUpListener);
+
+	// Bind and call the move listener
+	document.addEventListener("mousemove", volumeMouseDownListener);
+	volumeMouseMoveListener(evt);
+}
+
+/* Volume Mouse Up */
+function volumeMouseUpListener() {
+	window.removeEventListener("mouseup", volumeMouseUpListener);
+	document.removeEventListener("mousemove", volumeMouseDownListener);
+}
+
+/* Volume Mouse Movement */
+function volumeMouseMoveListener(evt) {
+	//cords.left - evt.clientX / 
+
+	// Get mouse movement
+	var percentage = ((evt.clientX - $("#volume-control .knob").offset().left) / $("#volume-control .knob").width() * 100);
+
+	// Constrain movement inside timeline
+	if (percentage < 0) { percentage = 0; }
+	if (percentage > 100) { percentage = 100; }
+
+	tb.volume(percentage);
+
+	// Set slider position
+	$("#volume-control .knob > div").css("left", percentage + "%");
+	$("#volume-control .track > div > div:first-child > div").css("width", percentage + "%");
+}

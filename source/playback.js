@@ -1,5 +1,6 @@
 ﻿var music = new Audio();
 var currentTrack;
+var volume;
 
 tb.loadTrack = function (song, autoPlay) {
 	autoPlay = autoPlay || false;
@@ -120,4 +121,12 @@ tb.formatTime = function (time) {
 		seconds = "0" + seconds;
 	}
 	return hours + minutes + seconds;
+};
+
+tb.volume = function (vol) {
+	if (vol || vol === 0) {
+		volume = vol;
+	} else {
+		return volume;
+	}
 };
