@@ -164,9 +164,15 @@ function volumeMouseMoveListener(evt) {
 	if (percentage < 0) { percentage = 0; }
 	if (percentage > 100) { percentage = 100; }
 
+	// Set playback volume
 	tb.volume(percentage);
 
 	// Set slider position
 	$("#volume-control .knob > div").css("left", percentage + "%");
 	$("#volume-control .track > div > div:first-child > div").css("width", percentage + "%");
+
+	// Hide speaker icon sound waves
+	if (volume < 66) { $("#volume-control svg path:nth-child(1)").hide(); } else { $("#volume-control svg path:nth-child(1)").show(); }
+	if (volume < 33) { $("#volume-control svg path:nth-child(2)").hide(); } else { $("#volume-control svg path:nth-child(2)").show(); }
+	if (volume === 0) { $("#volume-control svg path:nth-child(3)").hide(); } else { $("#volume-control svg path:nth-child(3)").show(); }
 }
