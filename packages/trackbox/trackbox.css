@@ -485,6 +485,16 @@ body {
 	right:7.5px;
 }
 
+/* ///Playback Order */
+#playback-order > div {
+	display:inline-block;
+	float:left;
+}
+#playback-order > div svg {
+	height:16px;
+	width:auto;
+}
+
 /* /Playback times */
 #song-time {
 	position:absolute;

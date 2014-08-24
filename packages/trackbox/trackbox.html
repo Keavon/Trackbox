@@ -88,7 +88,7 @@
 	</div>
 
 	<!-- Playback bar -->
-	<div id="playback" class="row palette-background-secondary-bg hidden">
+	<div id="playback" class="row palette-background-secondary-bg -hidden">
 		<!-- Timeline -->
 		<div id="timeline" class="palette-background-quaternary-bg"><div id="timeline-bar" class="palette-hint-primary-bg"></div></div>
 
@@ -143,15 +143,15 @@
 
 					<!-- ///Pause/Play -->
 					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" id="playback-play-pause" title="%%Play%%">
-						<div id="play">
+						<div>
 							<svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512">
-								<polygon points="0,0 0,512 512,256" />
-							</svg>
-						</div>
-						<div id="pause" style="display:none;">
-							<svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512">
-								<rect x="32" fill="#7F7F7F" width="128" height="512" />
-								<rect x="352" fill="#7F7F7F" width="128" height="512" />
+								<g id="play">
+									<polygon points="0,0 0,512 512,256" />
+								</g>
+								<g id="pause">
+									<rect x="32" fill="#7F7F7F" width="128" height="512" />
+									<rect x="352" fill="#7F7F7F" width="128" height="512" />
+								</g>
 							</svg>
 						</div>
 					</a>
@@ -193,20 +193,33 @@
 								</div>
 							</div>
 						</a>
-						<!-- ///Shuffle -->
-						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Shuffle Off%%">
+						<!-- ///Playback Order -->
+						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Ordered%%">
 							<div>
-								<svg x="0px" y="0px" width="20px" height="12px" viewBox="0 0 500 250">
-									<polyline points="0,30 430,30 430,0 500,55 430,110 430,80 0,80" />
-									<polyline points="0,170 430,170 430,140 500,195 430,250 430,220 0,220" />
+								<svg x="0px" y="0px" width="21.6px" height="12.6px" viewBox="0.2 4.7 21.6 12.6">
+									<path d="M16.983,10.777l3.253-2.554l-3.253-2.555v1.533c-1.132,0-11.866,0-15.22,0.001v2.041 c3.317,0,14.199,0,15.22,0V10.777z" />
+									<path d="M16.983,12.757c-1.132,0-11.866,0-15.22,0v2.041c3.317,0,14.199,0,15.22,0v1.533l3.253-2.553 l-3.253-2.555V12.757z" />
 								</svg>
 							</div>
 						</a>
-						<!-- ///Repeat -->
-						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Repeat Off%%">
+						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Shuffle%%">
 							<div>
-								<svg x="0px" y="0px" width="20px" height="12px" viewBox="6 0 500 250">
-									<polygon points="436,30 436,0 506,55 436,110 436,80 56,80 56,200 476,200 476,250 6,250 6,30" />
+								<svg x="0px" y="0px" width="21.6px" height="12.6px" viewBox="0.2 4.7 21.6 12.6">
+									<path d="M17.303,13.136c-3.361,0-4.787-0.945-6.114-2.136c1.327-1.192,2.752-2.137,6.114-2.137 v1.328l2.779-2.182l-2.779-2.183v1.328c-4.088,0-5.861,1.301-7.377,2.684c-1.543-1.365-3.56-2.684-8.008-2.684v1.708 c3.722,0,5.378,0.964,6.738,2.137c-1.36,1.174-3.016,2.137-6.738,2.137v1.709c4.449,0,6.466-1.319,8.009-2.685 c1.516,1.384,3.289,2.685,7.376,2.685v1.329l2.779-2.183l-2.779-2.183V13.136z" />
+								</svg>
+							</div>
+						</a>
+						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Repeat%%">
+							<div>
+								<svg x="0px" y="0px" width="21.6px" height="12.6px" viewBox="0.2 4.7 21.6 12.6">
+									<path d="M4.616,12.267c0-0.542,0-1.096,0-1.231s0-0.706,0-1.268s0.459-1.021,1.021-1.021s10.975,0,12.156,0v1.533 l3.253-2.554l-3.253-2.554v1.533c-1.317,0-13.637,0-14.198,0S2.574,7.164,2.574,7.726s0,2.035,0,3.273c0,1.24,0,2.714,0,3.275 s0.459,1.021,1.021,1.021s14.27,0,15.825,0v-2.043c-1.435,0-13.22,0-13.782,0S4.616,12.81,4.616,12.267z" />
+								</svg>
+							</div>
+						</a>
+						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Loop%%">
+							<div>
+								<svg x="0px" y="0px" width="21.6px" height="12.6px" viewBox="0.2 4.7 21.6 12.6">
+									<path d="M16.116,14.525L18.885,11h-1.662c0-3.436-2.787-6.221-6.223-6.221c-3.437,0-6.222,2.786-6.222,6.221 S7.563,17.221,11,17.221c1.85,0,3.508-0.813,4.646-2.096l-1.4-1.783c-0.729,1.007-1.912,1.667-3.246,1.667 c-2.21,0-4.008-1.801-4.008-4.009c0-2.21,1.798-4.008,4.008-4.008c2.209,0,4.008,1.798,4.008,4.008h-1.661L16.116,14.525z" />
 								</svg>
 							</div>
 						</a>

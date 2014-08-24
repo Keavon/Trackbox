@@ -101,16 +101,16 @@ $("#playback-play-pause").click(function () {
 /* Change button when song is played or paused */
 tb.onPlaybackStateChange(function (state) {
 	if (state === "play") {
-		$("#playback-play-pause > #play").hide();
-		$("#playback-play-pause > #pause").show();
+		$("#playback-play-pause #play").hide();
+		$("#playback-play-pause #pause").show();
 		$("#playback-play-pause").attr("title", tb.getTranslation("Pause"));
 	} else if (state === "pause") {
-		$("#playback-play-pause > #pause").hide();
-		$("#playback-play-pause > #play").show();
+		$("#playback-play-pause #pause").hide();
+		$("#playback-play-pause #play").show();
 		$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
 	} else if (state === "ended") {
-		$("#playback-play-pause > #pause").hide();
-		$("#playback-play-pause > #play").show();
+		$("#playback-play-pause #pause").hide();
+		$("#playback-play-pause #play").show();
 		$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
 	}
 });
