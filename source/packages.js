@@ -1,3 +1,15 @@
+tb.private.packages = [];
+
+//Array of paths to found package manifests.
+tb.private.locatedManifests = ["packages/albums/manifest.json", "packages/artists/manifest.json",
+															"packages/songs/manifest.json", "packages/tags/manifest.json", "packages/trackbox/manifest.json"];
+
+// Return a read only copy of installed packages.
+tb.packages = function() {
+	var toReturn = $.parseJSON(JSON.stringify(tb.private.packages));
+	return toReturn;
+};
+
 ﻿tb.listPackages = function () {
 	var packages = ["songs", "albums", "artists", "tags", "boxes"];
 	return packages;
@@ -42,7 +54,7 @@ tb.isPackageManifestValid = function (manifest) {
 		if (!('url' in manifest)) {
 			console.error("'url' key required.");
 			return false;
-		}		
+		}
 	} else if (manifest.type === "shell") {
 		if (!('shell' in manifest)) {
 			console.error("'shell' key required.");
@@ -54,4 +66,14 @@ tb.isPackageManifestValid = function (manifest) {
 	}
 
 	return true;
+};
+
+tb.loadPackages = function () {
+	for (var manifest in tb.private.locatedManifests) {
+		tb.getJSONFileContents(tb.private.locatedManifests[manifest], function (data) {
+			if (tb.isPackageManifestValid(data)) {
+				tb.private.packages.push(data);
+			}
+		});
+	}
 };
