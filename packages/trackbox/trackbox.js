@@ -155,7 +155,7 @@ function volumeMouseUpListener() {
 
 /* Volume Mouse Movement */
 function volumeMouseMoveListener(evt) {
-	//cords.left - evt.clientX / 
+	//cords.left - evt.clientX /
 
 	// Get mouse movement
 	var percentage = ((evt.clientX - $("#volume-control .knob").offset().left) / $("#volume-control .knob").width() * 100);
@@ -172,7 +172,32 @@ function volumeMouseMoveListener(evt) {
 	$("#volume-control .track > div > div:first-child > div").css("width", percentage + "%");
 
 	// Hide speaker icon sound waves
-	if (volume < 66) { $("#volume-control svg path:nth-child(1)").hide(); } else { $("#volume-control svg path:nth-child(1)").show(); }
-	if (volume < 33) { $("#volume-control svg path:nth-child(2)").hide(); } else { $("#volume-control svg path:nth-child(2)").show(); }
-	if (volume === 0) { $("#volume-control svg path:nth-child(3)").hide(); } else { $("#volume-control svg path:nth-child(3)").show(); }
+	if (tb.volume() * 100 < 66) { $("#volume-control svg path:nth-child(1)").hide(); } else { $("#volume-control svg path:nth-child(1)").show(); }
+	if (tb.volume() * 100 < 33) { $("#volume-control svg path:nth-child(2)").hide(); } else { $("#volume-control svg path:nth-child(2)").show(); }
+	if (tb.volume() * 100 === 0) { $("#volume-control svg path:nth-child(3)").hide(); } else { $("#volume-control svg path:nth-child(3)").show(); }
 }
+
+/* Playback Order Buttons */
+playbackOrderWrap(0);
+function playbackOrderWrap(index) {
+	$("#playback-order a").removeClass("playback-order-selected");
+	$("#playback-order a:eq(" + index + ")").addClass("playback-order-selected");
+
+	// Reset wrappers
+	$("div[class^='playback-order-before-'] > a, div[class*=' playback-order-before-'] > a").unwrap();
+	$("div[class^='playback-order-after-'] > a, div[class*=' playback-order-before-'] > a").unwrap();
+	$(".playback-order-current > a").unwrap();
+
+	// Add wrappers
+	if (index > 0) {
+		$("#playback-order > a:nth-child(-n+" + index + ")").wrapAll('<div class="playback-order-before-' + index + '"></div>');
+	}
+	$("#playback-order > a:eq(0)").wrapAll('<div class="playback-order-current"></div>');
+	if ($("#playback-order > a").length > 0) {
+		$("#playback-order > a").wrapAll('<div class="playback-order-after-' + $("#playback-order > a").length + '"></div>');
+	}
+}
+
+$("#playback-order a").click(function () {
+	playbackOrderWrap($("#playback-order a").index(this));
+});

@@ -389,7 +389,7 @@ body {
 }
 
 /* /Playback buttons */
-#playback-buttons .bar-item, #playback-order-buttons .bar-item {
+#playback-buttons .bar-item, #playback-right .bar-item, #playback-order .bar-item {
 	display: table-cell;
 	height: 40px;
 	line-height: 0;
@@ -397,7 +397,7 @@ body {
 	text-align: center;
 	vertical-align: middle;
 }
-#playback-buttons .bar-item > div, #playback-order-buttons .bar-item > div {
+#playback-buttons .bar-item > div, #playback-right .bar-item > div {
 	width: 40px;
 }
 
@@ -486,13 +486,50 @@ body {
 }
 
 /* ///Playback Order */
+#playback-order {
+	display: table-cell;
+}
 #playback-order > div {
 	display:inline-block;
 	float:left;
 }
-#playback-order > div svg {
-	height:16px;
-	width:auto;
+#playback-order:hover .playback-order-before-1, #playback-order:hover .playback-order-after-1 {
+	width:40px;
+}
+#playback-order:hover .playback-order-before-2, #playback-order:hover .playback-order-after-2 {
+	width:80px;
+}
+#playback-order:hover .playback-order-before-3, #playback-order:hover .playback-order-after-3 {
+	width:120px;
+}
+#playback-order:hover .playback-order-before-4, #playback-order:hover .playback-order-after-4 {
+	width:160px;
+}
+#playback-order:hover .playback-order-before-5, #playback-order:hover .playback-order-after-5 {
+	width:200px;
+}
+#playback-order:hover .playback-order-before-6, #playback-order:hover .playback-order-after-6 {
+	width:240px;
+}
+#playback-order:hover .playback-order-before-7, #playback-order:hover .playback-order-after-7 {
+	width:280px;
+}
+#playback-order:hover .playback-order-before-8, #playback-order:hover .playback-order-after-8 {
+	width:320px;
+}
+#playback-order:hover .playback-order-before-9, #playback-order:hover .playback-order-after-9 {
+	width:360px;
+}
+#playback-order:hover .playback-order-before-10, #playback-order:hover .playback-order-after-10 {
+	width:400px;
+}
+div[class^='playback-order-before-'], div[class*=' playback-order-before-'], div[class^='playback-order-after-'], div[class*=' playback-order-after-'] {
+	width:0;
+	transition:width 0.25s;
+	overflow:hidden;
+}
+#playback-order:hover .playback-order-selected svg * {
+	fill:#33b5e5;
 }
 
 /* /Playback times */

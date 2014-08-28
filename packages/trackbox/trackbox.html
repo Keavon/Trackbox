@@ -88,7 +88,7 @@
 	</div>
 
 	<!-- Playback bar -->
-	<div id="playback" class="row palette-background-secondary-bg -hidden">
+	<div id="playback" class="row palette-background-secondary-bg hidden">
 		<!-- Timeline -->
 		<div id="timeline" class="palette-background-quaternary-bg"><div id="timeline-bar" class="palette-hint-primary-bg"></div></div>
 
@@ -170,30 +170,30 @@
 
 			<!-- /Right side of playback bar -->
 			<div id="playback-right">
-				<div>
-					<!-- //Playback order buttons -->
-					<div class="row-item" id="playback-order-buttons">
-						<!-- ///Volume -->
-						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Volume%%" id="volume-control" ondragstart="return false;">
-							<div>
-								<svg x="0px" y="0px" width="22px" height="22px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-									<path fill="#666" d="M416.048,422.052l-22.657-22.597c38.219-38.32,59.266-89.229,59.266-143.347 c0-54.227-21.116-105.207-59.461-143.548l22.628-22.628c44.388,44.385,68.833,103.401,68.833,166.176 C484.654,318.757,460.289,377.689,416.048,422.052L416.048,422.052z" />
-									<path fill="#666" d="M364.122,370.171l-22.61-22.644c24.596-24.563,38.143-57.231,38.143-91.989 c0-34.586-13.436-67.142-37.827-91.671l22.688-22.564c30.396,30.565,47.139,71.135,47.139,114.235 C411.652,298.852,394.771,339.563,364.122,370.171L364.122,370.171z" />
-									<path fill="#666" d="M312.491,318.559l-22.597-22.66c10.806-10.772,16.756-25.105,16.756-40.358 c0-15.099-5.854-29.333-16.479-40.078l22.752-22.502c16.591,16.776,25.729,39,25.729,62.58 C338.65,279.355,329.359,301.736,312.491,318.559L312.491,318.559z" />
-									<polygon fill="#666" points="253.346,93.737 253.346,417.736 125.346,336.736 27.346,336.736 27.346,174.737 125.346,174.737" />
-								</svg>
-							</div>
-							<div>
-								<div class="knob"><div class="palette-hint-primary-bg"></div></div>
-								<div class="track palette-background-quinary-bg">
-									<div>
-										<div><div class="palette-hint-primary-bg"></div></div>
-										<div class="palette-hint-primary-bg"></div>
-									</div>
+				<!-- //Playback order buttons -->
+				<div class="row-item">
+					<!-- ///Volume -->
+					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Volume%%" id="volume-control" ondragstart="return false;">
+						<div>
+							<svg x="0px" y="0px" width="22px" height="22px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+							<path fill="#666" d="M416.048,422.052l-22.657-22.597c38.219-38.32,59.266-89.229,59.266-143.347 c0-54.227-21.116-105.207-59.461-143.548l22.628-22.628c44.388,44.385,68.833,103.401,68.833,166.176 C484.654,318.757,460.289,377.689,416.048,422.052L416.048,422.052z" />
+							<path fill="#666" d="M364.122,370.171l-22.61-22.644c24.596-24.563,38.143-57.231,38.143-91.989 c0-34.586-13.436-67.142-37.827-91.671l22.688-22.564c30.396,30.565,47.139,71.135,47.139,114.235 C411.652,298.852,394.771,339.563,364.122,370.171L364.122,370.171z" />
+							<path fill="#666" d="M312.491,318.559l-22.597-22.66c10.806-10.772,16.756-25.105,16.756-40.358 c0-15.099-5.854-29.333-16.479-40.078l22.752-22.502c16.591,16.776,25.729,39,25.729,62.58 C338.65,279.355,329.359,301.736,312.491,318.559L312.491,318.559z" />
+							<polygon fill="#666" points="253.346,93.737 253.346,417.736 125.346,336.736 27.346,336.736 27.346,174.737 125.346,174.737" />
+							</svg>
+						</div>
+						<div>
+							<div class="knob"><div class="palette-hint-primary-bg"></div></div>
+							<div class="track palette-background-quinary-bg">
+								<div>
+									<div><div class="palette-hint-primary-bg"></div></div>
+									<div class="palette-hint-primary-bg"></div>
 								</div>
 							</div>
-						</a>
-						<!-- ///Playback Order -->
+						</div>
+					</a>
+					<!-- ///Playback Order -->
+					<div id="playback-order" class="bar-item-container">
 						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Ordered%%">
 							<div>
 								<svg x="0px" y="0px" width="21.6px" height="12.6px" viewBox="0.2 4.7 21.6 12.6">
