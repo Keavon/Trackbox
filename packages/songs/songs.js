@@ -3,7 +3,7 @@ library.sort(tb.sortByPriority("+album", "+disk", "+track", "+title"));
 
 tb.getFileContents("packages/songs/templates/list-row.html", function (data) {
 	for (var song in library) {
-		library[song].title = library[song].title || "";
+		library[song].title = library[song].title || "<i>" + library[song].location.match(/[^/]*(?=\.[^.]+($|\?))/)[0] + "</i>" || "";
 		library[song].artists[0] = library[song].artists[0] || "";
 		library[song].album = library[song].album || "";
 		library[song].year = library[song].year || "";

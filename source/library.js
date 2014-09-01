@@ -135,7 +135,7 @@ tb.findById = function(id, callback) {
 		var searchPosition = 0;
 
 		if( id < 0) {
-			console.error("tb.findById: Id must always be greater than or equal to zero");
+			console.error("tb.findById: ID must always be greater than or equal to zero");
 			callback(null);
 			return;
 		}
@@ -163,7 +163,7 @@ tb.findById = function(id, callback) {
 				searchPosition++;
 			} else {
 				callback(null);
-				console.error("Issue in tb.findById: Caught a infinite loop edge case");
+				console.error("Issue in tb.findById: Caught an infinite loop edge case");
 				break;
 			}
 
