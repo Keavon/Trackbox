@@ -6,8 +6,7 @@ tb.private.locatedManifests = ["packages/albums/manifest.json", "packages/artist
 
 // Return a read only copy of installed packages.
 tb.packages = function() {
-	var toReturn = $.parseJSON(JSON.stringify(tb.private.packages));
-	return toReturn;
+	return tb.copyJSON(tb.private.packages);
 };
 
 ﻿tb.listPackages = function () {
@@ -15,6 +14,7 @@ tb.packages = function() {
 	return packages;
 };
 
+//TODO: Remove once package system is up.
 tb.packageStartup = function () {
 	var packages = tb.listPackages();
 	for (var packs in packages) {
@@ -69,11 +69,117 @@ tb.isPackageManifestValid = function (manifest) {
 };
 
 tb.loadPackages = function () {
-	for (var manifest in tb.private.locatedManifests) {
+	for(var manifest in tb.private.locatedManifests) {
 		tb.getJSONFileContents(tb.private.locatedManifests[manifest], function (data) {
 			if (tb.isPackageManifestValid(data)) {
+				data.location = tb.private.locatedManifests[manifest];
+				data.id = data.name;
 				tb.private.packages.push(data);
 			}
 		});
 	}
+};
+
+// Find a package and return its details.
+// Paramerters filters the returned objects, where each item in the JSON object is checked against every songs metadata.
+// quantityToReturn is the number of packages to return. Useful if you know the an attribute, like id, is unique, so you can stop after finding a match.
+// contains will return a package if part of the string matches, instead requiring two identical strings.
+tb.findPackage = function (parameters, contains, callback, quantityToReturn) {
+	var packages = tb.packages();
+	var matchedPackages = [];
+
+	setTimeout(function () {
+		function stringMatches(stringOne, stringTwo) {
+			if (contains) {
+				if (stringTwo.search(stringOne) >= 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+					if (stringOne === stringTwo) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+		}
+
+		for(var package in packages) {
+			var matched = true;
+
+			if (parameters.name && packages[package].name && matched !== false) {
+				if (!stringMatches(parameters.name, packages[package].name)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.id && packages[package].id && matched !== false) {
+				if (!stringMatches(parameters.id, packages[package].id)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.location && packages[package].location && matched !== false) {
+				if (!stringMatches(parameters.location, packages[package].location)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.description && matched !== false) {
+				if (packages[package].description === undefined || !stringMatches(parameters.description, packages[package].description)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.page && packages[package].page && matched !== false) {
+				if (packages[package].page === undefined || !stringMatches(parameters.page, packages[package].page)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.shell && packages[package].shell && matched !== false) {
+				if (packages[package].shell === undefined || !stringMatches(parameters.shell, packages[package].shell)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.pageIcon  && matched !== false) {
+				if (packages[package].pageIcon === undefined || !stringMatches(parameters.pageIcon, packages[package].pageIcon)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.pageName && packages[package].pageName && matched !== false) {
+				if (!stringMatches(parameters.pageName, packages[package].pageName)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.type && matched !== false) {
+				if (!stringMatches(parameters.type, packages[package].type)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.url && matched !== false) {
+				if (packages[package].url === undefined ||!stringMatches(parameters.url, packages[package].url)) {
+					matched = false;
+				}
+			}
+
+			if ( matched === true ) {
+				matchedPackages.push(tb.copyJSON(packages[package]));
+				if ( matchedPackages.length >= (quantityToReturn || Number.MAX_VALUE)) {
+					break;
+				}
+			}
+		}
+
+		if (matchedPackages.length > 0 ) {
+			callback(matchedPackages);
+		} else {
+			callback(null);
+		}
+	}, 0);
 };
