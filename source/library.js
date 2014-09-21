@@ -25,17 +25,16 @@ tb.private.library = [
 
 // Return a read only copy of the library.
 tb.library = function () {
-	var toReturn = $.parseJSON(JSON.stringify(tb.private.library));
-	return toReturn;
+	return tb.copyJSON(tb.private.library);
 };
 
 // Find tracks matching given parameters and returns an array with all matching songs
 // Parameters filter the returned objects, which each item in the JSON array checked against every song's metadata to see if it matches
 tb.findInLibrary = function (parameters, contains, callback) {
-	
+
 	setTimeout(function(){
 			var matchedSongs = [];
-	
+
 			function stringMatches(stringOne, stringTwo) {
 				if (contains) {
 					if (stringTwo.search(stringOne) >= 0) {
@@ -51,40 +50,40 @@ tb.findInLibrary = function (parameters, contains, callback) {
 					}
 				}
 			}
-	
+
 			for (var song in tb.private.library) {
 				var matched = true;
-	
+
 				if (parameters.album && matched !== false) {
 					if (!stringMatches(parameters.album, tb.private.library[song].album)) {
 						matched = false;
 					}
 				}
-	
+
 				if (parameters.track && matched !== false) {
 					if (!stringMatches(parameters.track, tb.private.library[song].track)) {
 						matched = false;
 					}
 				}
-	
+
 				if (parameters.disk && matched !== false) {
 					if (!stringMatches(parameters.disk, tb.private.library[song].disk)) {
 						matched = false;
 					}
 				}
-	
+
 				if (parameters.time && matched !== false) {
 					if (parameters.time !== tb.private.library[song].time) {
 						matched = false;
 					}
 				}
-	
+
 				if (parameters.location && matched !== false) {
 					if (!stringMatches(parameters.location, tb.private.library[song].location)) {
 						matched = false;
 					}
 				}
-	
+
 				if (parameters.year && matched !== false) {
 					if (!stringMatches(parameters.year, tb.private.library[song].year)) {
 						matched = false;
@@ -100,12 +99,12 @@ tb.findInLibrary = function (parameters, contains, callback) {
 						matched = false;
 					}
 				}
-	
+
 				if (parameters.artists && matched !== false) {
 					// Check if the selected artist in parameters matches one of the artists in selected song in the library.
 					for (var artist in parameters.artists) {
 						var songMatched = false;
-	
+
 						for (var libraryArtist in tb.private.library[song].artists) {
 							if (!stringMatches(parameters.artists[artist], tb.private.library[song].artists[libraryArtist])) {
 								songMatched = true;
@@ -114,19 +113,19 @@ tb.findInLibrary = function (parameters, contains, callback) {
 						if (songMatched !== true) {
 							matched = false;
 						}
-	
+
 						if (matched === false) {
 							break;
 						}
 					}
 				}
-	
+
 				if (matched === true) {
 					// If the song matched, send it to the calling function.
 					matchedSongs.push(tb.private.library[song]);
 				}
 			}
-		callback(matchedSongs);
+		callback(tb.copyJSON(matchedSongs));
 	}, 0);
 };
 
@@ -152,7 +151,7 @@ tb.findById = function(id, callback) {
 		while(true) {
 			var currentId = tb.private.library[searchPosition].id;
 			if(currentId === id) {
-				callback(tb.private.library[searchPosition]);
+				callback(tb.copyJSON(tb.private.library[searchPosition]));
 				break;
 			} else if((lastId > id && id > currentId) || (lastId < id && id < currentId)) {
 				callback(null);
