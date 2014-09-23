@@ -1,8 +1,8 @@
 tb.private.packages = [];
 
 //Array of paths to found package manifests.
-tb.private.locatedManifests = ["packages/albums/manifest.json", "packages/artists/manifest.json",
-															"packages/songs/manifest.json", "packages/tags/manifest.json", "packages/trackbox/manifest.json"];
+tb.private.locatedManifests = ["packages/albums", "packages/artists",
+															"packages/songs", "packages/tags", "packages/trackbox"];
 
 // Return a read only copy of installed packages.
 tb.packages = function() {
@@ -70,11 +70,15 @@ tb.isPackageManifestValid = function (manifest) {
 
 tb.loadPackages = function () {
 	for(var manifest in tb.private.locatedManifests) {
-		tb.getJSONFileContents(tb.private.locatedManifests[manifest], function (data) {
-			if (tb.isPackageManifestValid(data)) {
-				data.location = tb.private.locatedManifests[manifest];
-				data.id = data.name;
-				tb.private.packages.push(data);
+		tb.findPackage({"file" : tb.private.locatedManifests[manifest]}, false, function(data) {
+			if(data === null) {
+				tb.getJSONFileContents(tb.private.locatedManifests[manifest] + "/manifest.json", function(data) {
+					if (tb.isPackageManifestValid(data)) {
+						data.location = tb.private.locatedManifests[manifest];
+						data.id = data.name;
+						tb.private.packages.push(data);
+					}
+				});
 			}
 		});
 	}
