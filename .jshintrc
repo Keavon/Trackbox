@@ -65,6 +65,7 @@
 	"passfail"      : false,
 	"white"         : false,
 	"-W089"         : false,
+	"-W083"         : false,
 	"globals"       : {
 		"tb": false
 	}
