@@ -69,6 +69,9 @@ tb.isPackageManifestValid = function (manifest) {
 };
 
 tb.loadPackages = function () {
+	var completedPackages = 0;
+	var totalPackages = tb.private.locatedManifests.length;
+
 	for(var manifest in tb.private.locatedManifests) {
 		tb.findPackage({"file" : tb.private.locatedManifests[manifest]}, false, function(data) {
 			if(data === null) {
@@ -77,6 +80,12 @@ tb.loadPackages = function () {
 						data.location = tb.private.locatedManifests[manifest];
 						data.id = data.name;
 						tb.private.packages.push(data);
+						completedPackages++;
+
+						// If every package has been loaded trigger onPackagesLoaded event.
+						if(completedPackages >= totalPackages) {
+							tb.triggerOnPackagesLoaded();
+						}
 					}
 				});
 			}
