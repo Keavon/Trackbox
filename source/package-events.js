@@ -7,3 +7,13 @@ tb.onPackagesLoaded = function(callback) {
 		callback();
 	});
 };
+
+tb.triggerOnShellPackageLoaded = function() {
+	$.event.trigger({"type": "onShellPackageLoaded"});
+};
+
+tb.onShellPackageLoaded = function(callback) {
+	$(window).on("onShellPackageLoaded", function() {
+		callback();
+	});
+};

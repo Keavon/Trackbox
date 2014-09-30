@@ -68,28 +68,47 @@ tb.isPackageManifestValid = function (manifest) {
 	return true;
 };
 
+tb.loadShellPackage = function() {
+	tb.findPackage({"location" : (tb.preferences()).currentShellPath}, false, function(data) {
+		if(data === null) {
+			tb.getJSONFileContents((tb.preferences()).currentShellPath + "/manifest.json", function(data) {
+				data.location = (tb.preferences()).currentShellPath;
+				data.id = data.name;
+				tb.private.packages.push(data);
+				console.log("Loaded Shell Package");
+			});
+		} else {
+			console.log("Shell Package Already Loaded");
+		}
+		tb.triggerOnShellPackageLoaded();
+	});
+};
+
 tb.loadPackages = function () {
 	var completedPackages = 0;
 	var totalPackages = tb.private.locatedManifests.length;
 
 	for(var manifest in tb.private.locatedManifests) {
-		tb.findPackage({"file" : tb.private.locatedManifests[manifest]}, false, function(data) {
-			if(data === null) {
-				tb.getJSONFileContents(tb.private.locatedManifests[manifest] + "/manifest.json", function(data) {
-					if (tb.isPackageManifestValid(data)) {
-						data.location = tb.private.locatedManifests[manifest];
-						data.id = data.name;
-						tb.private.packages.push(data);
-						completedPackages++;
+		(function() {
+			var index = arguments[0];
+			tb.findPackage({"location" : tb.private.locatedManifests[arguments[index]]}, false, function(data) {
+				if(data === null) {
+					tb.getJSONFileContents(tb.private.locatedManifests[index] + "/manifest.json", function(data) {
+						if (tb.isPackageManifestValid(data)) {
+							data.location = tb.private.locatedManifests[index];
+							data.id = data.name;
+							tb.private.packages.push(data);
+							completedPackages++;
 
-						// If every package has been loaded trigger onPackagesLoaded event.
-						if(completedPackages >= totalPackages) {
-							tb.triggerOnPackagesLoaded();
+							// If every package has been loaded trigger onPackagesLoaded event.
+							if(completedPackages >= totalPackages) {
+								tb.triggerOnPackagesLoaded();
+							}
 						}
-					}
-				});
-			}
-		});
+					});
+				}
+			});
+		}(manifest));
 	}
 };
 
