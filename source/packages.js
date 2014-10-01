@@ -1,4 +1,5 @@
 tb.private.packages = [];
+tb.private.erroredPacakges = [];
 
 //Array of paths to found package manifests.
 tb.private.locatedManifests = ["packages/albums", "packages/artists",
@@ -55,6 +56,16 @@ tb.isPackageManifestValid = function (manifest) {
 			console.error("'url' key required.");
 			return false;
 		}
+
+		if (!('standardUrl' in manifest)) {
+			console.error("'standardUrl' key required.");
+			return false;
+		}
+
+		if (!(manifest.standardUrl instanceof Array)) {
+			console.error("'standardUrl' key is required to be a array ( i.e. ['url'])");
+			return false;
+		}
 	} else if (manifest.type === "shell") {
 		if (!('shell' in manifest)) {
 			console.error("'shell' key required.");
@@ -95,11 +106,13 @@ tb.loadPackages = function () {
 							data.location = tb.private.locatedManifests[index];
 							data.id = data.name;
 							tb.private.packages.push(data);
+						} else {
+							tb.private.erroredPacakges.push(tb.private.locatedManifests[index]);
+						}
 
-							// If every package has been loaded trigger onPackagesLoaded event.
-							if(tb.private.packages.length >= tb.private.locatedManifests.length) {
-								tb.triggerOnPackagesLoaded();
-							}
+						// If every package has been loaded trigger onPackagesLoaded event.
+						if(tb.private.packages.length >= tb.private.locatedManifests.length) {
+							tb.triggerOnPackagesLoaded();
 						}
 					});
 				}
@@ -196,7 +209,30 @@ tb.findPackage = function (parameters, contains, callback, quantityToReturn) {
 				}
 			}
 
-			if ( matched === true ) {
+			if (parameters.standardUrl && matched !== false) {
+				if (packages[package].standardUrl === undefined) {
+					matched = false;
+				} else {
+					for (var i in parameters.standardUrl) {
+						var urlMatched = false;
+
+						for (var r in packages[package].standardUrl) {
+							if (!stringMatches(parameters.standardUrl[i], packages[package].standardUrl[r])) {
+								urlMatched = true;
+							}
+						}
+						if (urlMatched !== true) {
+							matched = false;
+						}
+
+						if (matched === false) {
+							break;
+						}
+					}
+				}
+			}
+
+			if (matched === true ) {
 				matchedPackages.push(tb.copyJSON(packages[package]));
 				if ( matchedPackages.length >= (quantityToReturn || Number.MAX_VALUE)) {
 					break;

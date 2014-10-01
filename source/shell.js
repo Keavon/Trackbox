@@ -2,9 +2,8 @@
 // Loads a shell of a given location into the document body
 tb.loadShell = function (shellLocation) {
 	tb.findPackage({"location" : shellLocation}, false, function(data) {
+
 		// Fill document body with shell and call router
-		console.log(data[0]);
-		console.log(shellLocation + "/" + data[0].shell);
 		tb.renderTemplate(shellLocation + "/" + data[0].shell, function (shell) {
 			$("body").html(shell);
 			tb.packageStartup();
