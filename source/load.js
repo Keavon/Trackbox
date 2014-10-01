@@ -1,6 +1,6 @@
 // Bind hash change and start application
 window.onhashchange = tb.router;
-tb.loadShell("Trackbox");
+
 
 tb.loadPreferences();
 
@@ -10,5 +10,6 @@ tb.onPreferencesLoaded(function() {
 });
 
 tb.onShellPackageLoaded(function() {
+	tb.loadShell((tb.preferences()).currentShellPath);
 	tb.loadPackages();
 });
