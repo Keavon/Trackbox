@@ -3,8 +3,12 @@ window.onhashchange = tb.router;
 tb.loadShell("Trackbox");
 
 tb.loadPreferences();
-tb.loadPackages();
+
 
 tb.onPreferencesLoaded(function() {
 	tb.loadShellPackage();
+});
+
+tb.onShellPackageLoaded(function() {
+	tb.loadPackages();
 });

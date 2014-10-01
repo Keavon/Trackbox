@@ -75,33 +75,29 @@ tb.loadShellPackage = function() {
 				data.location = (tb.preferences()).currentShellPath;
 				data.id = data.name;
 				tb.private.packages.push(data);
-				console.log("Loaded Shell Package");
+				tb.triggerOnShellPackageLoaded();
 			});
 		} else {
-			console.log("Shell Package Already Loaded");
+			tb.triggerOnShellPackageLoaded();
 		}
-		tb.triggerOnShellPackageLoaded();
 	});
 };
 
 tb.loadPackages = function () {
-	var completedPackages = 0;
-	var totalPackages = tb.private.locatedManifests.length;
-
 	for(var manifest in tb.private.locatedManifests) {
 		(function() {
 			var index = arguments[0];
-			tb.findPackage({"location" : tb.private.locatedManifests[arguments[index]]}, false, function(data) {
+
+			tb.findPackage({"location" : tb.private.locatedManifests[index]}, false, function(data) {
 				if(data === null) {
 					tb.getJSONFileContents(tb.private.locatedManifests[index] + "/manifest.json", function(data) {
 						if (tb.isPackageManifestValid(data)) {
 							data.location = tb.private.locatedManifests[index];
 							data.id = data.name;
 							tb.private.packages.push(data);
-							completedPackages++;
 
 							// If every package has been loaded trigger onPackagesLoaded event.
-							if(completedPackages >= totalPackages) {
+							if(tb.private.packages.length >= tb.private.locatedManifests.length) {
 								tb.triggerOnPackagesLoaded();
 							}
 						}
