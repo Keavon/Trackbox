@@ -41,6 +41,11 @@ tb.isPackageManifestValid = function (manifest) {
 		return false;
 	}
 
+	if (!('repo' in manifest)) {
+		console.error("'repo' key required.");
+		return false;
+	}
+
 	if (manifest.type === "page") {
 		if (!('pageName' in manifest)) {
 			console.error("'pageName' key required.");
@@ -84,7 +89,6 @@ tb.loadShellPackage = function() {
 		if(data === null) {
 			tb.getJSONFileContents((tb.preferences()).currentShellPath + "/manifest.json", function(data) {
 				data.location = (tb.preferences()).currentShellPath;
-				data.id = data.name;
 				tb.private.packages.push(data);
 				tb.triggerOnShellPackageLoaded();
 			});
@@ -104,7 +108,6 @@ tb.loadPackages = function () {
 					tb.getJSONFileContents(tb.private.locatedManifests[index] + "/manifest.json", function(data) {
 						if (tb.isPackageManifestValid(data)) {
 							data.location = tb.private.locatedManifests[index];
-							data.id = data.name;
 							tb.private.packages.push(data);
 						} else {
 							tb.private.erroredPacakges.push(tb.private.locatedManifests[index]);
@@ -155,8 +158,8 @@ tb.findPackage = function (parameters, contains, callback, quantityToReturn) {
 				}
 			}
 
-			if (parameters.id && packages[package].id && matched !== false) {
-				if (!stringMatches(parameters.id, packages[package].id)) {
+			if (parameters.repo && packages[package].repo && matched !== false) {
+				if (!stringMatches(parameters.repo, packages[package].repo)) {
 					matched = false;
 				}
 			}

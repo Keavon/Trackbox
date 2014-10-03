@@ -1,6 +1,7 @@
 {
 	"type" : "page",
 	"name" : "Trackbox Artists View",
+	"repo" : "trackbox/trackbox-aritsts",
 	"pageName" : "Artists",
 	"description" : "A page showing all of your artists.",
 	"pageIcon" : "artists.svg",
