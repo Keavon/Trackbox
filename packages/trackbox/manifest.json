@@ -1,7 +1,7 @@
 {
 	"type" : "shell",
 	"name" : "Trackbox Shell",
-	"repo" : "trackbox/trackbox.html",
+	"repo" : "trackbox/trackbox",
 	"description" : "Default Trackbox shell.",
 	"shell" : "trackbox.html",
 	"pageButton" : "templates/page-button.html"

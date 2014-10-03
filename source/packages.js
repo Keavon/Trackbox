@@ -124,6 +124,16 @@ tb.loadPackages = function () {
 	}
 };
 
+tb.packageLocation = function(repo, callback) {
+	tb.findPackage({"repo" : repo}, false, function(data){
+		if(data !== null) {
+			callback(data[0].location);
+		} else {
+			console.error("Location for package '" + repo + "' not found.")
+		}
+	}, 0);
+}
+
 // Find a package and return its details.
 // Paramerters filters the returned objects, where each item in the JSON object is checked against every songs metadata.
 // quantityToReturn is the number of packages to return. Useful if you know the an attribute, like id, is unique, so you can stop after finding a match.
