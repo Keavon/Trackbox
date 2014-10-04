@@ -201,3 +201,23 @@ function playbackOrderWrap(index) {
 $("#playback-order a").click(function () {
 	playbackOrderWrap($("#playback-order a").index(this));
 });
+
+/* Add buttons */
+tb.onPackagesLoaded(function () {
+	tb.findPackages({ "type": "page" }, false, function (pages) {
+		tb.getFileContents("packages/trackbox/templates/page-button.html", function(template) {
+			Object.keys(pages).forEach(function (page) {
+				tb.getFileContents(pages[page].location + "/" + pages[page].pageIcon, function (icon) {
+					tb.renderTextTemplate(template, { "URL": pages[page].standardUrl[0], "REPO": pages[page].repo, "NAME": pages[page].name, "ICON": icon }, function (renderedTemplate) {
+						$("#page-tabs").append(renderedTemplate);
+					});
+				});
+			});
+		});
+	});
+});
+
+// Call when loaded
+if (tb.isPackagesLoaded) {
+	tb.triggerOnPackagesLoaded();
+}

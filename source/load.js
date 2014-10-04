@@ -1,9 +1,7 @@
 // Bind hash change and start application
 window.onhashchange = tb.router;
 
-
 tb.loadPreferences();
-
 
 tb.onPreferencesLoaded(function() {
 	tb.loadShellPackage();

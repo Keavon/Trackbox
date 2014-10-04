@@ -1,7 +1,7 @@
 {
 	"type" : "page",
 	"name" : "Trackbox Tags View",
-	"repo" : "trakbox/trackbox-tags",
+	"repo" : "trackbox/trackbox-tags",
 	"pageName" : "Tags",
 	"description" : "A page showing all of your tags.",
 	"pageIcon" : "tags.svg",

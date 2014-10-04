@@ -2,15 +2,14 @@ tb.private.packages = [];
 tb.private.erroredPacakges = [];
 
 //Array of paths to found package manifests.
-tb.private.locatedManifests = ["packages/albums", "packages/artists",
-															"packages/songs", "packages/tags", "packages/trackbox"];
+tb.private.locatedManifests = ["packages/songs", "packages/albums", "packages/artists", "packages/tags", "packages/boxes", "packages/trackbox"];
 
 // Return a read only copy of installed packages.
-tb.packages = function() {
+tb.packages = function () {
 	return tb.copyJSON(tb.private.packages);
 };
 
-﻿tb.listPackages = function () {
+tb.listPackages = function () {
 	var packages = ["songs", "albums", "artists", "tags", "boxes"];
 	return packages;
 };
@@ -84,10 +83,10 @@ tb.isPackageManifestValid = function (manifest) {
 	return true;
 };
 
-tb.loadShellPackage = function() {
-	tb.findPackage({"location" : (tb.preferences()).currentShellPath}, false, function(data) {
-		if(data === null) {
-			tb.getJSONFileContents((tb.preferences()).currentShellPath + "/manifest.json", function(data) {
+tb.loadShellPackage = function () {
+	tb.findPackages({ "location": (tb.preferences()).currentShellPath }, false, function (data) {
+		if (data === null) {
+			tb.getJSONFileContents((tb.preferences()).currentShellPath + "/manifest.json", function (data) {
 				data.location = (tb.preferences()).currentShellPath;
 				tb.private.packages.push(data);
 				tb.triggerOnShellPackageLoaded();
@@ -99,13 +98,13 @@ tb.loadShellPackage = function() {
 };
 
 tb.loadPackages = function () {
-	for(var manifest in tb.private.locatedManifests) {
-		(function() {
+	for (var manifest in tb.private.locatedManifests) {
+		(function () {
 			var index = arguments[0];
 
-			tb.findPackage({"location" : tb.private.locatedManifests[index]}, false, function(data) {
-				if(data === null) {
-					tb.getJSONFileContents(tb.private.locatedManifests[index] + "/manifest.json", function(data) {
+			tb.findPackages({ "location": tb.private.locatedManifests[index] }, false, function (data) {
+				if (data === null) {
+					tb.getJSONFileContents(tb.private.locatedManifests[index] + "/manifest.json", function (data) {
 						if (tb.isPackageManifestValid(data)) {
 							data.location = tb.private.locatedManifests[index];
 							tb.private.packages.push(data);
@@ -114,7 +113,7 @@ tb.loadPackages = function () {
 						}
 
 						// If every package has been loaded trigger onPackagesLoaded event.
-						if(tb.private.packages.length >= tb.private.locatedManifests.length) {
+						if (tb.private.packages.length >= tb.private.locatedManifests.length) {
 							tb.triggerOnPackagesLoaded();
 						}
 					});
@@ -124,21 +123,21 @@ tb.loadPackages = function () {
 	}
 };
 
-tb.packageLocation = function(repo, callback) {
-	tb.findPackage({"repo" : repo}, false, function(data){
-		if(data !== null) {
+tb.packageLocation = function (repo, callback) {
+	tb.findPackages({ "repo": repo }, false, function (data) {
+		if (data !== null) {
 			callback(data[0].location);
 		} else {
-			console.error("Location for package '" + repo + "' not found.")
+			console.error("Location for package '" + repo + "' not found.");
 		}
 	}, 0);
-}
+};
 
 // Find a package and return its details.
-// Paramerters filters the returned objects, where each item in the JSON object is checked against every songs metadata.
-// quantityToReturn is the number of packages to return. Useful if you know the an attribute, like id, is unique, so you can stop after finding a match.
-// contains will return a package if part of the string matches, instead requiring two identical strings.
-tb.findPackage = function (parameters, contains, callback, quantityToReturn) {
+// `paramerters` filters the returned objects, where each item in the JSON object is checked against every package.
+// `contains` will return a package if part of the string matches, instead requiring two identical strings.
+// `quantityToReturn` (optional) is the number of packages to return. Useful if you know an attribute, such as `id`, is unique, so you can stop after finding a match.
+tb.findPackages = function (parameters, contains, callback, quantityToReturn) {
 	var packages = tb.packages();
 	var matchedPackages = [];
 
@@ -151,15 +150,15 @@ tb.findPackage = function (parameters, contains, callback, quantityToReturn) {
 					return false;
 				}
 			} else {
-					if (stringOne === stringTwo) {
-						return true;
-					} else {
-						return false;
-					}
+				if (stringOne === stringTwo) {
+					return true;
+				} else {
+					return false;
 				}
+			}
 		}
 
-		for(var package in packages) {
+		for (var package in packages) {
 			var matched = true;
 
 			if (parameters.name && packages[package].name && matched !== false) {
@@ -198,7 +197,7 @@ tb.findPackage = function (parameters, contains, callback, quantityToReturn) {
 				}
 			}
 
-			if (parameters.pageIcon  && matched !== false) {
+			if (parameters.pageIcon && matched !== false) {
 				if (packages[package].pageIcon === undefined || !stringMatches(parameters.pageIcon, packages[package].pageIcon)) {
 					matched = false;
 				}
@@ -217,7 +216,7 @@ tb.findPackage = function (parameters, contains, callback, quantityToReturn) {
 			}
 
 			if (parameters.url && matched !== false) {
-				if (packages[package].url === undefined ||!stringMatches(parameters.url, packages[package].url)) {
+				if (packages[package].url === undefined || !stringMatches(parameters.url, packages[package].url)) {
 					matched = false;
 				}
 			}
@@ -245,15 +244,15 @@ tb.findPackage = function (parameters, contains, callback, quantityToReturn) {
 				}
 			}
 
-			if (matched === true ) {
+			if (matched === true) {
 				matchedPackages.push(tb.copyJSON(packages[package]));
-				if ( matchedPackages.length >= (quantityToReturn || Number.MAX_VALUE)) {
+				if (matchedPackages.length >= (quantityToReturn || Number.MAX_VALUE)) {
 					break;
 				}
 			}
 		}
 
-		if (matchedPackages.length > 0 ) {
+		if (matchedPackages.length > 0) {
 			callback(matchedPackages);
 		} else {
 			callback(null);
