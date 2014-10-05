@@ -1,3 +1,4 @@
 {
-	"currentShellPath" : "packages/trackbox"
+	"currentShellPath": "packages/trackbox",
+	"defaultPage":  "albums"
 }

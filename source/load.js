@@ -1,13 +1,18 @@
-// Bind hash change and start application
-window.onhashchange = tb.router;
-
+// Load user preferences
 tb.loadPreferences();
 
-tb.onPreferencesLoaded(function() {
+// Load shell
+tb.onPreferencesLoaded(function () {
 	tb.loadShellPackage();
 });
 
-tb.onShellPackageLoaded(function() {
-	tb.loadShell((tb.preferences()).currentShellPath);
+// Load packages
+tb.onShellPackageLoaded(function () {
+	tb.loadShell(tb.preferences().currentShellPath);
 	tb.loadPackages();
+});
+
+// Bind hash change and open current page
+tb.onPackagesLoaded(function () {
+	window.onhashchange = tb.router;
 });

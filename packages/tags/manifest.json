@@ -7,5 +7,5 @@
 	"pageIcon" : "tags.svg",
 	"page" : "tags.html",
 	"url" : "trackbox-tags",
-	"standardUrl" : ["tags"]
+	"standardUrl" : ["tags", "test"]
 }

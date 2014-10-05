@@ -203,9 +203,10 @@ $("#playback-order a").click(function () {
 });
 
 /* Add buttons */
-tb.onPackagesLoaded(function () {
+function addPageTabs() {
 	tb.findPackages({ "type": "page" }, false, function (pages) {
-		tb.getFileContents("packages/trackbox/templates/page-button.html", function(template) {
+		tb.getFileContents("packages/trackbox/templates/page-button.html", function (template) {
+			$("#page-tabs").html("");
 			Object.keys(pages).forEach(function (page) {
 				tb.getFileContents(pages[page].location + "/" + pages[page].pageIcon, function (icon) {
 					tb.renderTextTemplate(template, { "URL": pages[page].standardUrl[0], "REPO": pages[page].repo, "NAME": pages[page].name, "ICON": icon }, function (renderedTemplate) {
@@ -215,9 +216,13 @@ tb.onPackagesLoaded(function () {
 			});
 		});
 	});
-});
+}
 
 // Call when loaded
 if (tb.isPackagesLoaded) {
-	tb.triggerOnPackagesLoaded();
+	addPageTabs();
+} else {
+	tb.onPackagesLoaded(function () {
+		addPageTabs();
+	});
 }

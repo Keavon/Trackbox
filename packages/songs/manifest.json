@@ -7,5 +7,5 @@
 	"pageIcon" : "songs.svg",
 	"page" : "songs.html",
 	"url" : "trackbox-songs",
-	"standardUrl" : ["songs"]
+	"standardUrl" : ["songs", "test"]
 }

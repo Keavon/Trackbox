@@ -84,10 +84,10 @@ tb.isPackageManifestValid = function (manifest) {
 };
 
 tb.loadShellPackage = function () {
-	tb.findPackages({ "location": (tb.preferences()).currentShellPath }, false, function (data) {
+	tb.findPackages({ "location": tb.preferences().currentShellPath }, false, function (data) {
 		if (data === null) {
-			tb.getJSONFileContents((tb.preferences()).currentShellPath + "/manifest.json", function (data) {
-				data.location = (tb.preferences()).currentShellPath;
+			tb.getJSONFileContents(tb.preferences().currentShellPath + "/manifest.json", function (data) {
+				data.location = tb.preferences().currentShellPath;
 				tb.private.packages.push(data);
 				tb.triggerOnShellPackageLoaded();
 			});
@@ -137,6 +137,7 @@ tb.packageLocation = function (repo, callback) {
 // `paramerters` filters the returned objects, where each item in the JSON object is checked against every package.
 // `contains` will return a package if part of the string matches, instead requiring two identical strings.
 // `quantityToReturn` (optional) is the number of packages to return. Useful if you know an attribute, such as `id`, is unique, so you can stop after finding a match.
+// Example: tb.findPackages({ "type": "page" }, false, function (pages) { alert(pages[page].name[0] });
 tb.findPackages = function (parameters, contains, callback, quantityToReturn) {
 	var packages = tb.packages();
 	var matchedPackages = [];
