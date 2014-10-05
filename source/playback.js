@@ -1,22 +1,22 @@
-﻿var music = new Audio();
-var currentTrack;
+﻿tb.private.audioPlayer = new Audio();
+tb.private.currentTrack;
 
 tb.loadTrack = function (song, autoPlay) {
 	autoPlay = autoPlay || false;
-	music.pause();
+	tb.private.audioPlayer.pause();
 	if (typeof song === "number") {
 		tb.findById(song, function (track) {
-			currentTrack = track;
-			tb.loadTrack(currentTrack.location, autoPlay);
+			tb.private.currentTrack = track;
+			tb.loadTrack(tb.private.currentTrack.location, autoPlay);
 		});
 	} else if (typeof song === "string") {
-		music.src = song;
+		tb.private.audioPlayer.src = song;
 		$(window).trigger("playbackStarted");
 		if (autoPlay === true) {
-			music.play();
+			tb.private.audioPlayer.play();
 		}
 	} else if (!song) {
-		music.src = "";
+		tb.private.audioPlayer.src = "";
 		$(window).trigger("playbackStopped");
 	}
 };
@@ -35,63 +35,63 @@ tb.playbackStopped = function (callback) {
 
 tb.playbackState = function (action) {
 	if (typeof action === "undefined") {
-		if (music.paused) {
+		if (tb.private.audioPlayer.paused) {
 			return "paused";
 		} else {
 			return "playing";
 		}
 	} else {
 		if (action === "play") {
-			music.play();
+			tb.private.audioPlayer.play();
 		} else if (action === "pause") {
-			music.pause();
+			tb.private.audioPlayer.pause();
 		} else if (action === "toggle") {
-			if (music.paused) {
-				music.play();
+			if (tb.private.audioPlayer.paused) {
+				tb.private.audioPlayer.play();
 			} else {
-				music.pause();
+				tb.private.audioPlayer.pause();
 			}
 		}
 	}
 };
 
 tb.onPlaybackStateChange = function (callback) {
-	$(music).on("pause", function () {
+	$(tb.private.audioPlayer).on("pause", function () {
 		callback("pause");
 	});
-	$(music).on("play", function () {
+	$(tb.private.audioPlayer).on("play", function () {
 		callback("play");
 	});
-	$(music).on("ended", function () {
+	$(tb.private.audioPlayer).on("ended", function () {
 		callback("ended");
 	});
 };
 
 tb.trackTime = function (time) {
 	if (typeof time !== "undefined") {
-		music.currentTime = time;
+		tb.private.audioPlayer.currentTime = time;
 	} else {
-		return music.currentTime;
+		return tb.private.audioPlayer.currentTime;
 	}
 };
 
 tb.getExactTrackTime = function () {
-	return music.duration;
+	return tb.private.audioPlayer.duration;
 };
 
 tb.getMetadata = function (metadata) {
 	if (metadata === "duration") {
 		// Use getExactTrackTime() for accurate time of currently playing track
-		return currentTrack.time;
+		return tb.private.currentTrack.time;
 	} else if (metadata === "title") {
-		return currentTrack.title;
+		return tb.private.currentTrack.title;
 	} else if (metadata === "album") {
-		return currentTrack.album;
+		return tb.private.currentTrack.album;
 	} else if (metadata === "artist") {
-		return currentTrack.artists[0];
+		return tb.private.currentTrack.artists[0];
 	} else if (metadata === "artwork") {
-		if (currentTrack.artwork) {
-			return currentTrack.artwork;
+		if (tb.private.currentTrack.artwork) {
+			return tb.private.currentTrack.artwork;
 		} else {
 			return "covers/album_art.png";
 		}
@@ -124,8 +124,8 @@ tb.formatTime = function (time) {
 
 tb.volume = function (vol) {
 	if (vol || vol === 0) {
-		music.volume = vol / 100;
+		tb.private.audioPlayer.volume = vol / 100;
 	} else {
-		return music.volume;
+		return tb.private.audioPlayer.volume;
 	}
 };
