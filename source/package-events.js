@@ -6,7 +6,7 @@ tb.isPackagesLoaded = function () {
 
 tb.triggerOnPackagesLoaded = function () {
 	tb.private.packagesLoaded = true;
-	$.event.trigger({ "type": "onPackagesLoaded" });
+	$.event.trigger("onPackagesLoaded");
 };
 
 tb.onPackagesLoaded = function (callback) {
@@ -16,7 +16,7 @@ tb.onPackagesLoaded = function (callback) {
 };
 
 tb.triggerOnShellPackageLoaded = function () {
-	$.event.trigger({ "type": "onShellPackageLoaded" });
+	$.event.trigger("onShellPackageLoaded");
 };
 
 tb.onShellPackageLoaded = function (callback) {

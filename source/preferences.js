@@ -13,7 +13,7 @@ tb.preferences = function () {
 };
 
 tb.triggerOnPreferencesLoaded = function () {
-	$.event.trigger({ "type": "onPreferencesLoaded" });
+	$.event.trigger("onPreferencesLoaded");
 };
 
 tb.onPreferencesLoaded = function (callback) {

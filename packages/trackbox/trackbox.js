@@ -209,8 +209,11 @@ function addPageTabs() {
 			$("#page-tabs").html("");
 			Object.keys(pages).forEach(function (page) {
 				tb.getFileContents(pages[page].location + "/" + pages[page].pageIcon, function (icon) {
-					tb.renderTextTemplate(template, { "URL": pages[page].standardUrl[0], "REPO": pages[page].repo, "NAME": pages[page].name, "ICON": icon }, function (renderedTemplate) {
+					tb.renderTextTemplate(template, { "URL": pages[page].standardUrl[0], "REPO": pages[page].repo.replace("/", ":"), "NAME": pages[page].name, "ICON": icon }, function (renderedTemplate) {
 						$("#page-tabs").append(renderedTemplate);
+						if (tb.getCurrentPageUrl() === pages[page].url || pages[page].standardUrl.indexOf(tb.getCurrentPageUrl()) !== -1) {
+							selectPageTab(pages[page].repo);
+						}
 					});
 				});
 			});
@@ -218,11 +221,22 @@ function addPageTabs() {
 	});
 }
 
-// Call when loaded
+/* Call for page tabs to be added */
 if (tb.isPackagesLoaded) {
 	addPageTabs();
 } else {
 	tb.onPackagesLoaded(function () {
 		addPageTabs();
 	});
+}
+
+/* Select tab */
+tb.onPageLoadInitiated(function (repo) {
+	selectPageTab(repo);
+});
+
+function selectPageTab(repo) {
+	repo = repo.replace("/", "\\:");
+	$("#page-tabs > a").removeClass("page-selector-active palette-hint-primary-border palette-background-primary-bg");
+	$("#" + repo).addClass("page-selector-active palette-hint-primary-border palette-background-primary-bg");
 }
