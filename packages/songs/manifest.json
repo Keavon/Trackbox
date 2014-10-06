@@ -1,11 +1,14 @@
 {
-	"type" : "page",
-	"name" : "Trackbox Songs View",
-	"repo" : "trackbox/trackbox-songs",
-	"pageName" : "Songs",
-	"description" : "A page showing all of your songs.",
-	"pageIcon" : "songs.svg",
-	"page" : "songs.html",
-	"url" : "trackbox-songs",
-	"standardUrl" : ["songs", "test"]
+	"type": "page",
+	"name": "Trackbox Songs View",
+	"repo": "trackbox/trackbox-songs",
+	"pageName": "Songs",
+	"description": "A page showing all of your songs.",
+	"pageIcon": "songs.svg",
+	"page": "songs.html",
+	"css": [ "songs.css" ],
+	"javascript": [ "songs.js" ],
+	"url": "trackbox-songs",
+	"standardUrl": [ "songs" ],
+	"preferredUrl": "songs"
 }

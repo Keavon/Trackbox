@@ -1,7 +1,7 @@
 tb.private.packages = [];
 tb.private.erroredPacakges = [];
 
-//Array of paths to found package manifests.
+//Array of paths to found pkg manifests.
 tb.private.locatedManifests = ["packages/songs", "packages/albums", "packages/artists", "packages/tags", "packages/boxes", "packages/trackbox"];
 
 // Return a read only copy of installed packages.
@@ -14,7 +14,7 @@ tb.listPackages = function () {
 	return packages;
 };
 
-//TODO: Remove once package system is up.
+//TODO: Remove once pkg system is up.
 tb.packageStartup = function () {
 	var packages = tb.listPackages();
 	for (var packs in packages) {
@@ -28,7 +28,7 @@ tb.packageStartup = function () {
 	}
 };
 
-// Check a package manifest to make sure it is valid
+// Check a pkg manifest to make sure it is valid
 tb.isPackageManifestValid = function (manifest) {
 	if (typeof manifest !== 'object') {
 		console.error("Manifest must be a valid JSON object.");
@@ -42,6 +42,11 @@ tb.isPackageManifestValid = function (manifest) {
 
 	if (!('repo' in manifest)) {
 		console.error("'repo' key required.");
+		return false;
+	}
+
+	if (!('type' in manifest)) {
+		console.error("'type' key required.");
 		return false;
 	}
 
@@ -61,13 +66,13 @@ tb.isPackageManifestValid = function (manifest) {
 			return false;
 		}
 
-		if (!('standardUrl' in manifest)) {
-			console.error("'standardUrl' key required.");
+		if (!('preferredUrl' in manifest)) {
+			console.error("'preferredUrl' key required.");
 			return false;
 		}
 
-		if (!(manifest.standardUrl instanceof Array)) {
-			console.error("'standardUrl' key is required to be a array ( i.e. ['url'])");
+		if (('preferredUrl' in manifest) && !(manifest.css instanceof Array)) {
+			console.error("'css' key is required to be an array, i.e. ['file.css']");
 			return false;
 		}
 	} else if (manifest.type === "shell") {
@@ -75,8 +80,13 @@ tb.isPackageManifestValid = function (manifest) {
 			console.error("'shell' key required.");
 			return false;
 		}
+
+		if (('preferredUrl' in manifest) && !(manifest.css instanceof Array)) {
+			console.error("'css' key is required to be an array, i.e. ['file.css']");
+			return false;
+		}
 	} else {
-		console.error("You must set a valid package type (page, shell) in the manifest file.");
+		console.error("pkg type invalid in the manifest file (does not match 'page', 'shell', etc.)");
 		return false;
 	}
 
@@ -112,7 +122,7 @@ tb.loadPackages = function () {
 							tb.private.erroredPacakges.push(tb.private.locatedManifests[index]);
 						}
 
-						// If every package has been loaded trigger onPackagesLoaded event.
+						// If every pkg has been loaded trigger onPackagesLoaded event.
 						if (tb.private.packages.length >= tb.private.locatedManifests.length) {
 							tb.triggerOnPackagesLoaded();
 						}
@@ -128,14 +138,14 @@ tb.packageLocation = function (repo, callback) {
 		if (data !== null) {
 			callback(data[0].location);
 		} else {
-			console.error("Location for package '" + repo + "' not found.");
+			console.error("Location for pkg '" + repo + "' not found.");
 		}
 	}, 0);
 };
 
-// Find a package and return its details.
-// `paramerters` filters the returned objects, where each item in the JSON object is checked against every package.
-// `contains` will return a package if part of the string matches, instead requiring two identical strings.
+// Find a pkg and return its details.
+// `paramerters` filters the returned objects, where each item in the JSON object is checked against every pkg.
+// `contains` will return a pkg if part of the string matches, instead requiring two identical strings.
 // `quantityToReturn` (optional) is the number of packages to return. Useful if you know an attribute, such as `id`, is unique, so you can stop after finding a match.
 // Example: tb.findPackages({ "type": "page" }, false, function (pages) { alert(pages[page].name[0] });
 tb.findPackages = function (parameters, contains, callback, quantityToReturn) {
@@ -159,78 +169,84 @@ tb.findPackages = function (parameters, contains, callback, quantityToReturn) {
 			}
 		}
 
-		for (var package in packages) {
+		for (var pkg in packages) {
 			var matched = true;
 
-			if (parameters.name && packages[package].name && matched !== false) {
-				if (!stringMatches(parameters.name, packages[package].name)) {
+			if (parameters.name && packages[pkg].name && matched !== false) {
+				if (!stringMatches(parameters.name, packages[pkg].name)) {
 					matched = false;
 				}
 			}
 
-			if (parameters.repo && packages[package].repo && matched !== false) {
-				if (!stringMatches(parameters.repo, packages[package].repo)) {
+			if (parameters.repo && packages[pkg].repo && matched !== false) {
+				if (!stringMatches(parameters.repo, packages[pkg].repo)) {
 					matched = false;
 				}
 			}
 
-			if (parameters.location && packages[package].location && matched !== false) {
-				if (!stringMatches(parameters.location, packages[package].location)) {
+			if (parameters.location && packages[pkg].location && matched !== false) {
+				if (!stringMatches(parameters.location, packages[pkg].location)) {
 					matched = false;
 				}
 			}
 
 			if (parameters.description && matched !== false) {
-				if (packages[package].description === undefined || !stringMatches(parameters.description, packages[package].description)) {
+				if (packages[pkg].description === undefined || !stringMatches(parameters.description, packages[pkg].description)) {
 					matched = false;
 				}
 			}
 
-			if (parameters.page && packages[package].page && matched !== false) {
-				if (packages[package].page === undefined || !stringMatches(parameters.page, packages[package].page)) {
+			if (parameters.page && packages[pkg].page && matched !== false) {
+				if (packages[pkg].page === undefined || !stringMatches(parameters.page, packages[pkg].page)) {
 					matched = false;
 				}
 			}
 
-			if (parameters.shell && packages[package].shell && matched !== false) {
-				if (packages[package].shell === undefined || !stringMatches(parameters.shell, packages[package].shell)) {
+			if (parameters.shell && packages[pkg].shell && matched !== false) {
+				if (packages[pkg].shell === undefined || !stringMatches(parameters.shell, packages[pkg].shell)) {
 					matched = false;
 				}
 			}
 
 			if (parameters.pageIcon && matched !== false) {
-				if (packages[package].pageIcon === undefined || !stringMatches(parameters.pageIcon, packages[package].pageIcon)) {
+				if (packages[pkg].pageIcon === undefined || !stringMatches(parameters.pageIcon, packages[pkg].pageIcon)) {
 					matched = false;
 				}
 			}
 
-			if (parameters.pageName && packages[package].pageName && matched !== false) {
-				if (!stringMatches(parameters.pageName, packages[package].pageName)) {
+			if (parameters.pageName && packages[pkg].pageName && matched !== false) {
+				if (!stringMatches(parameters.pageName, packages[pkg].pageName)) {
 					matched = false;
 				}
 			}
 
 			if (parameters.type && matched !== false) {
-				if (!stringMatches(parameters.type, packages[package].type)) {
+				if (!stringMatches(parameters.type, packages[pkg].type)) {
 					matched = false;
 				}
 			}
 
 			if (parameters.url && matched !== false) {
-				if (packages[package].url === undefined || !stringMatches(parameters.url, packages[package].url)) {
+				if (packages[pkg].url === undefined || !stringMatches(parameters.url, packages[pkg].url)) {
+					matched = false;
+				}
+			}
+
+			if (parameters.preferredUrl && matched !== false) {
+				if (packages[pkg].preferredUrl === undefined || !stringMatches(parameters.preferredUrl, packages[pkg].preferredUrl)) {
 					matched = false;
 				}
 			}
 
 			if (parameters.standardUrl && matched !== false) {
-				if (packages[package].standardUrl === undefined) {
+				if (packages[pkg].standardUrl === undefined) {
 					matched = false;
 				} else {
 					for (var i in parameters.standardUrl) {
 						var urlMatched = false;
 
-						for (var r in packages[package].standardUrl) {
-							if (!stringMatches(parameters.standardUrl[i], packages[package].standardUrl[r])) {
+						for (var r in packages[pkg].standardUrl) {
+							if (!stringMatches(parameters.standardUrl[i], packages[pkg].standardUrl[r])) {
 								urlMatched = true;
 							}
 						}
@@ -245,8 +261,31 @@ tb.findPackages = function (parameters, contains, callback, quantityToReturn) {
 				}
 			}
 
+			if (parameters.css && matched !== false) {
+				if (packages[pkg].css === undefined) {
+					matched = false;
+				} else {
+					for (var parameterKey in parameters.css) {
+						var cssMatched = false;
+
+						for (var packageKey in packages[pkg].css) {
+							if (!stringMatches(parameters.css[parameterKey], packages[pkg].css[packageKey])) {
+								cssMatched = true;
+							}
+						}
+						if (cssMatched !== true) {
+							matched = false;
+						}
+
+						if (matched === false) {
+							break;
+						}
+					}
+				}
+			}
+
 			if (matched === true) {
-				matchedPackages.push(tb.copyJSON(packages[package]));
+				matchedPackages.push(tb.copyJSON(packages[pkg]));
 				if (matchedPackages.length >= (quantityToReturn || Number.MAX_VALUE)) {
 					break;
 				}

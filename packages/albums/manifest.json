@@ -1,11 +1,13 @@
 {
-	"type" : "page",
-	"name" : "Trackbox Albums View",
-	"repo" : "trackbox/trackbox-albums",
-	"pageName" : "Albums",
-	"description" : "A page showing all of your albums.",
-	"pageIcon" : "albums.svg",
-	"page" : "albums.html",
-	"url" : "trackbox-albums",
-	"standardUrl" : ["albums"]
+	"type": "page",
+	"name": "Trackbox Albums View",
+	"repo": "trackbox/trackbox-albums",
+	"pageName": "Albums",
+	"description": "A page showing all of your albums.",
+	"pageIcon": "albums.svg",
+	"page": "albums.html",
+	"css": [ "albums.css" ],
+	"url": "trackbox-albums",
+	"standardUrl": [ "albums" ],
+	"preferredUrl": "albums"
 }

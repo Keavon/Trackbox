@@ -1,8 +1,9 @@
 {
-	"type" : "shell",
-	"name" : "Trackbox Shell",
-	"repo" : "trackbox/trackbox",
-	"description" : "Default Trackbox shell.",
-	"shell" : "trackbox.html",
-	"pageButton" : "templates/page-button.html"
+	"type": "shell",
+	"name": "Trackbox Shell",
+	"repo": "trackbox/trackbox",
+	"description": "Default Trackbox shell.",
+	"shell": "trackbox.html",
+	"css": [ "trackbox.css", "fonts/fonts.css" ],
+	"javascript": [ "trackbox.js" ]
 }

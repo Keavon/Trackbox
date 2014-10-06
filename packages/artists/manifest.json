@@ -1,11 +1,13 @@
 {
-	"type" : "page",
-	"name" : "Trackbox Artists View",
-	"repo" : "trackbox/trackbox-aritsts",
-	"pageName" : "Artists",
-	"description" : "A page showing all of your artists.",
-	"pageIcon" : "artists.svg",
-	"page" : "artists.html",
-	"url" : "trackbox-aritsts",
-	"standardUrl" : ["artists"]
+	"type": "page",
+	"name": "Trackbox Artists View",
+	"repo": "trackbox/trackbox-aritsts",
+	"pageName": "Artists",
+	"description": "A page showing all of your artists.",
+	"pageIcon": "artists.svg",
+	"page": "artists.html",
+	"css": [ "artists.css" ],
+	"url": "trackbox-aritsts",
+	"standardUrl": [ "artists" ],
+	"preferredUrl": "artists"
 }

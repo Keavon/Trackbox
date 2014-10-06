@@ -1,11 +1,13 @@
 {
-	"type" : "page",
-	"name" : "Trackbox Tags View",
-	"repo" : "trackbox/trackbox-tags",
-	"pageName" : "Tags",
-	"description" : "A page showing all of your tags.",
-	"pageIcon" : "tags.svg",
-	"page" : "tags.html",
-	"url" : "trackbox-tags",
-	"standardUrl" : ["tags", "test"]
+	"type": "page",
+	"name": "Trackbox Tags View",
+	"repo": "trackbox/trackbox-tags",
+	"pageName": "Tags",
+	"description": "A page showing all of your tags.",
+	"pageIcon": "tags.svg",
+	"page": "tags.html",
+	"css": [ "tags.css" ],
+	"url": "trackbox-tags",
+	"standardUrl": [ "tags" ],
+	"preferredUrl": "tags"
 }

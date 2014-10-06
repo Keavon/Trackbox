@@ -1,18 +1,39 @@
 tb.loadPage = function (repo) {
-	$.event.trigger("onPageLoadInitiated", [repo]);
-	tb.findPackages({ "repo": repo }, false, function (data) {
-		tb.renderTemplate(data[0].location + "/" + data[0].page, function (page) {
-			page = '<div id="includes"></div>' + page;
+	tb.triggerOnPageLoadInitiated(repo);
+	$("#page").html("");
+	tb.findPackages({ "repo": repo }, false, function (pages) {
+		$("#page-dependency-container").remove();
+		$("body").prepend('<div id="page-dependency-container"></div>');
+
+		if (pages[0].css) {
+			Object.keys(pages[0].css).forEach(function (css) {
+				$("#page-dependency-container").append('<link href="' + pages[0].location + "/" + pages[0].css[css] + '" rel="stylesheet" />');
+			});
+		}
+		if (pages[0].javascript) {
+			Object.keys(pages[0].javascript).forEach(function (js) {
+				$("#page-dependency-container").append('<script src="' + pages[0].location + "/" + pages[0].javascript[js] + '"></' + 'script>');
+			});
+		}
+		tb.renderTemplate(pages[0].location + "/" + pages[0].page, function (page) {
 			$("#page").html(page);
-			$.event.trigger("onPageLoadCompleted", [repo]);
+			tb.triggerOnPageLoadCompleted(repo);
 		});
 	});
+};
+
+tb.triggerOnPageLoadInitiated = function (repo) {
+	$.event.trigger("onPageLoadInitiated", [repo]);
 };
 
 tb.onPageLoadInitiated = function (callback) {
 	$(window).on("onPageLoadInitiated", function (event, repo) {
 		callback(repo);
 	});
+};
+
+tb.triggerOnPageLoadCompleted = function (repo) {
+	$.event.trigger("onPageLoadCompleted", [repo]);
 };
 
 tb.onPageLoadCompleted = function (callback) {

@@ -1,11 +1,13 @@
 {
-	"type" : "page",
-	"name" : "Trackbox Boxes View",
-	"repo" : "trackbox/trackbox-boxes",
-	"pageName" : "Boxes",
-	"description" : "A page showing all of your boxes.",
-	"pageIcon" : "boxes.svg",
-	"page" : "boxes.html",
-	"url" : "trackbox-boxes",
-	"standardUrl" : ["boxes"]
+	"type": "page",
+	"name": "Trackbox Boxes View",
+	"repo": "trackbox/trackbox-boxes",
+	"pageName": "Boxes",
+	"description": "A page showing all of your boxes.",
+	"pageIcon": "boxes.svg",
+	"page": "boxes.html",
+	"css": [ "boxes.css" ],
+	"url": "trackbox-boxes",
+	"standardUrl": [ "boxes" ],
+	"preferredUrl": "boxes"
 }
