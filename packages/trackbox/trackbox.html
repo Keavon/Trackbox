@@ -1,17 +1,17 @@
-<div id="wrapper" class="no-window-border palette-solid-secondary-color">
+<div id="wrapper" class="no-window-border">
 	<!-- Title Bar -->
-	<div id="title-bar" class="row palette-background-secondary-bg">
+	<div id="title-bar" class="row">
 		<!-- /Logo and title -->
 		<div id="logo-and-title">
 			<a id="app-logo"><div></div></a>
-			<h1 id="app-title" class="palette-solid-secondary-color">%%Trackbox%%</h1>
+			<h1 id="app-title">%%Trackbox%%</h1>
 		</div>
 
 		<!-- /Search bar -->
 		<div id="search-bar">
-			<div class="palette-solid-tertiary-border palette-background-primary-bg">
-				<input class="palette-solid-primary-color" type="text" placeholder="%%Search%%" required />
-				<a title="%%Clear Text (ESC)%%" class="palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg">
+			<div>
+				<input type="text" placeholder="%%Search%%" required />
+				<a title="%%Clear Text (ESC)%%" class="button">
 					<svg x="0px" y="0px" width="16px" height="16px" viewBox="0 0 512 512">
 						<polygon points="470.96,108.92 403.078,41.038 256.001,188.115 108.924,41.038 41.042,108.92 188.119,255.997 41.043,403.073 108.925,470.955 256.001,323.879 403.077,470.955 470.959,403.073 323.883,255.997" />
 					</svg>
@@ -28,17 +28,17 @@
 		<div id="title-bar-right">
 			<!-- //Window buttons -->
 			<div id="window-buttons">
-				<a class="palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Minimize%%">
+				<a title="%%Minimize%%" class="button">
 					<svg x="0px" y="0px" width="10px" height="10px" viewBox="0 0 512 512">
 						<rect x="45.875" y="307.199" width="409.6" height="153.602" />
 					</svg>
 				</a>
-				<a class="palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Maximize%%">
+				<a title="%%Maximize%%" class="button">
 					<svg x="0px" y="0px" width="10px" height="10px" viewBox="0 0 512 512" enable-background="new 0 0 512 512">
 						<path d="M-0.005,0.003v512h512v-512H-0.005z M460.8,460.8H51.2V153.6h409.6V460.8L460.8,460.8z" />
 					</svg>
 				</a>
-				<a class="palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Close%%">
+				<a title="%%Close%%" class="button">
 					<svg x="0px" y="0px" width="10px" height="10px" viewBox="0 0 512 512" enable-background="new 0 0 512 512">
 						<polygon points="470.96,108.92 403.078,41.038 256.001,188.115 108.924,41.038 41.042,108.92 188.119,255.997 41.043,403.073 108.925,470.955 256.001,323.879 403.077,470.955 470.959,403.073 323.883,255.997" />
 					</svg>
@@ -47,7 +47,7 @@
 
 			<!-- //View type buttons -->
 			<div id="view-selector">
-				<a class="palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%List View%%">
+				<a class="button" title="%%List View%%">
 					<svg x="0px" y="0px" width="18px" height="18px" viewBox="0 0 18 18">
 						<rect height="3" width="18" />
 						<rect height="3" width="18" y="5" />
@@ -55,7 +55,7 @@
 						<rect height="3" width="18" y="15" />
 					</svg>
 				</a>
-				<a class="palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Section View%%">
+				<a class="button" title="%%Section View%%">
 					<svg x="0px" y="0px" width="18px" height="18px" viewBox="0 0 18 18">
 						<rect height="8" width="8" />
 						<rect height="3" width="9" x="9" />
@@ -65,7 +65,7 @@
 						<rect height="3" width="9" y="15" x="9" />
 					</svg>
 				</a>
-				<a class="palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg palette-background-quaternary-bg" title="%%Card View%%">
+				<a class="button button-active" title="%%Card View%%">
 					<svg x="0px" y="0px" width="18px" height="18px" viewBox="0 0 18 18">
 						<rect height="8" width="8" />
 						<rect height="8" width="8" x="10" />
@@ -78,18 +78,18 @@
 	</div>
 
 	<!-- Page -->
-	<div id="page" class="row palette-background-primary-bg">
+	<div id="page" class="row">
 		<!-- GENERATED: Page -->
 	</div>
 
 	<!-- Playback bar -->
-	<div id="playback" class="row palette-background-secondary-bg hidden">
+	<div id="playback" class="row hidden">
 		<!-- Timeline -->
-		<div id="timeline" class="palette-background-quaternary-bg"><div id="timeline-bar" class="palette-hint-primary-bg"></div></div>
+		<div id="timeline"><div id="timeline-bar"></div></div>
 
 		<!-- Timeline Knob and Drag Sensor -->
 		<div id="timeline-bar-sensor">
-			<div class="slider-knob"><div class="palette-hint-primary-bg"></div></div>
+			<div class="slider-knob"><div></div></div>
 		</div>
 
 		<div id="playback-bar">
@@ -126,7 +126,7 @@
 				<!-- //Playback buttons -->
 				<div class="row-item" id="playback-buttons">
 					<!-- ///Previous track -->
-					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Previous Track%%">
+					<a class="bar-item button" title="%%Previous Track%%">
 						<div>
 							<svg x="0px" y="0px" width="24px" height="18px" viewBox="0 0 700 500">
 								<polygon points="700,500 700,0 400,250" />
@@ -137,21 +137,21 @@
 					</a>
 
 					<!-- ///Pause/Play -->
-					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" id="playback-play-pause" title="%%Play%%">
+					<a class="bar-item button" id="playback-play-pause" title="%%Play%%">
 						<div>
 							<svg x="0px" y="0px" width="30px" height="30px" viewBox="0 0 512 512">
 								<g id="play">
 									<polygon points="0,0 0,512 512,256" />
 								</g>
 								<g id="pause">
-									<rect x="32" fill="#7F7F7F" width="128" height="512" />
-									<rect x="352" fill="#7F7F7F" width="128" height="512" />
+									<rect x="32" width="128" height="512" />
+									<rect x="352" width="128" height="512" />
 								</g>
 							</svg>
 						</div>
 					</a>
 					<!-- ///Next track -->
-					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Next Track%%">
+					<a class="bar-item button" title="%%Next Track%%">
 						<div>
 							<svg x="0px" y="0px" width="24px" height="18px" viewBox="0 0 700 500">
 								<polygon points="0,0 0,500 300,250" />
@@ -168,7 +168,7 @@
 				<!-- //Playback order buttons -->
 				<div class="row-item">
 					<!-- ///Volume -->
-					<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Volume%%" id="volume-control" ondragstart="return false;">
+					<a class="bar-item button" title="%%Volume%%" id="volume-control" ondragstart="return false;">
 						<div>
 							<svg x="0px" y="0px" width="22px" height="22px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 							<path fill="#666" d="M416.048,422.052l-22.657-22.597c38.219-38.32,59.266-89.229,59.266-143.347 c0-54.227-21.116-105.207-59.461-143.548l22.628-22.628c44.388,44.385,68.833,103.401,68.833,166.176 C484.654,318.757,460.289,377.689,416.048,422.052L416.048,422.052z" />
@@ -178,18 +178,18 @@
 							</svg>
 						</div>
 						<div>
-							<div class="knob"><div class="palette-hint-primary-bg"></div></div>
-							<div class="track palette-background-quinary-bg">
+							<div class="knob"><div></div></div>
+							<div class="track">
 								<div>
-									<div><div class="palette-hint-primary-bg"></div></div>
-									<div class="palette-hint-primary-bg"></div>
+									<div><div></div></div>
+									<div></div>
 								</div>
 							</div>
 						</div>
 					</a>
 					<!-- ///Playback Order -->
 					<div id="playback-order" class="bar-item-container">
-						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Ordered%%">
+						<a class="bar-item button" title="%%Ordered%%">
 							<div>
 								<svg x="0px" y="0px" width="21.6px" height="12.6px" viewBox="0.2 4.7 21.6 12.6">
 									<path d="M16.983,10.777l3.253-2.554l-3.253-2.555v1.533c-1.132,0-11.866,0-15.22,0.001v2.041 c3.317,0,14.199,0,15.22,0V10.777z" />
@@ -197,21 +197,21 @@
 								</svg>
 							</div>
 						</a>
-						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Shuffle%%">
+						<a class="bar-item button" title="%%Shuffle%%">
 							<div>
 								<svg x="0px" y="0px" width="21.6px" height="12.6px" viewBox="0.2 4.7 21.6 12.6">
 									<path d="M17.303,13.136c-3.361,0-4.787-0.945-6.114-2.136c1.327-1.192,2.752-2.137,6.114-2.137 v1.328l2.779-2.182l-2.779-2.183v1.328c-4.088,0-5.861,1.301-7.377,2.684c-1.543-1.365-3.56-2.684-8.008-2.684v1.708 c3.722,0,5.378,0.964,6.738,2.137c-1.36,1.174-3.016,2.137-6.738,2.137v1.709c4.449,0,6.466-1.319,8.009-2.685 c1.516,1.384,3.289,2.685,7.376,2.685v1.329l2.779-2.183l-2.779-2.183V13.136z" />
 								</svg>
 							</div>
 						</a>
-						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Repeat%%">
+						<a class="bar-item button" title="%%Repeat%%">
 							<div>
 								<svg x="0px" y="0px" width="21.6px" height="12.6px" viewBox="0.2 4.7 21.6 12.6">
 									<path d="M4.616,12.267c0-0.542,0-1.096,0-1.231s0-0.706,0-1.268s0.459-1.021,1.021-1.021s10.975,0,12.156,0v1.533 l3.253-2.554l-3.253-2.554v1.533c-1.317,0-13.637,0-14.198,0S2.574,7.164,2.574,7.726s0,2.035,0,3.273c0,1.24,0,2.714,0,3.275 s0.459,1.021,1.021,1.021s14.27,0,15.825,0v-2.043c-1.435,0-13.22,0-13.782,0S4.616,12.81,4.616,12.267z" />
 								</svg>
 							</div>
 						</a>
-						<a class="bar-item palette-solid-secondary-fill palette-solid-primary-hover-fill palette-background-quaternary-hover-bg" title="%%Loop%%">
+						<a class="bar-item button" title="%%Loop%%">
 							<div>
 								<svg x="0px" y="0px" width="21.6px" height="12.6px" viewBox="0.2 4.7 21.6 12.6">
 									<path d="M16.116,14.525L18.885,11h-1.662c0-3.436-2.787-6.221-6.223-6.221c-3.437,0-6.222,2.786-6.222,6.221 S7.563,17.221,11,17.221c1.85,0,3.508-0.813,4.646-2.096l-1.4-1.783c-0.729,1.007-1.912,1.667-3.246,1.667 c-2.21,0-4.008-1.801-4.008-4.009c0-2.21,1.798-4.008,4.008-4.008c2.209,0,4.008,1.798,4.008,4.008h-1.661L16.116,14.525z" />

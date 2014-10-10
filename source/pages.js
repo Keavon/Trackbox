@@ -7,7 +7,9 @@ tb.loadPage = function (repo) {
 
 		if (pages[0].css) {
 			Object.keys(pages[0].css).forEach(function (css) {
-				$("#page-dependency-container").append('<link href="' + pages[0].location + "/" + pages[0].css[css] + '" rel="stylesheet" />');
+				tb.renderPalette(pages[0].location, pages[0].css[css], function (renderedPalette) {
+					$("#page-dependency-container").append('<style type="text/css">' + renderedPalette + '</script>');
+				});
 			});
 		}
 		if (pages[0].javascript) {

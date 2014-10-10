@@ -181,8 +181,8 @@
 	/* Playback Order Buttons */
 	playbackOrderWrap(0);
 	function playbackOrderWrap(index) {
-		$("#playback-order a").removeClass("playback-order-selected");
-		$("#playback-order a:eq(" + index + ")").addClass("playback-order-selected");
+		$("#playback-order a").removeClass("playback-order-active");
+		$("#playback-order a:eq(" + index + ")").addClass("playback-order-active");
 
 		// Reset wrappers
 		$("div[class^='playback-order-before-'] > a, div[class*=' playback-order-before-'] > a").unwrap();
@@ -242,7 +242,7 @@
 
 	function selectPageTab(repo) {
 		repo = repo.replace("/", "\\:");
-		$("#page-tabs > a").removeClass("page-selector-active palette-hint-primary-border palette-background-primary-bg");
-		$("#" + repo).addClass("page-selector-active palette-hint-primary-border palette-background-primary-bg");
+		$("#page-tabs > a").removeClass("page-selector-active");
+		$("#" + repo).addClass("page-selector-active");
 	}
 });

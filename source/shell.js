@@ -4,7 +4,9 @@ tb.loadShell = function (shellLocation) {
 		$("body").html('<div id="shell-dependency-container"></div>');
 		if (shell[0].css) {
 			Object.keys(shell[0].css).forEach(function (css) {
-				$("#shell-dependency-container").append('<link href="' + shell[0].location + "/" + shell[0].css[css] + '" rel="stylesheet" />');
+				tb.renderPalette(shell[0].location, shell[0].css[css], function (renderedPalette) {
+					$("#shell-dependency-container").append('<style type="text/css">' + renderedPalette + '</script>');
+				});
 			});
 		}
 		if (shell[0].javascript) {

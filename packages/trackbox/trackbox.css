@@ -36,6 +36,18 @@ a, div {
 	user-select: none;
 }
 
+.button, button {
+	fill:||solid2||;
+}
+.button:hover {
+	fill:||solid1||;
+	background-color:||background4||;
+}
+
+.button-active {
+	background-color:||background4||;
+}
+
 /**********
  Document
  **********/
@@ -61,6 +73,7 @@ body {
 	flex-direction: column;
 	-webkit-flex-direction: column;
 	overflow-x:hidden;
+	color:||solid2||;
 }
 
 /**********
@@ -72,6 +85,7 @@ body {
 	flex-direction: row;
 	-webkit-flex-direction: row;
 	height:63px;
+	background-color:||background2||;
 }
 
 /* /Logo and title */
@@ -106,6 +120,7 @@ body {
 	line-height: 0;
 	vertical-align: middle;
 	cursor: default;
+	color:||solid2||;
 }
 
 /* /Search bar */
@@ -118,11 +133,13 @@ body {
 #search-bar div {
 	border-width:1px;
 	border-style:solid;
+	border-color:||solid3||;
 	float:left;
 	width:100%;
 	max-width:600px;
 	min-width:50px;
 	position:relative;
+	background-color:||background1||;
 }
 #search-bar div input {
 	border:none;
@@ -135,14 +152,15 @@ body {
 	outline:none;
 	box-shadow:none;
 	background:transparent;
+	color:||solid1||;
 }
-#search-bar div a {
+#search-bar a {
 	position:absolute;
 	right:0;
 	padding:7px;
 	padding-top:8px;
 }
-#search-bar div a svg {
+#search-bar a svg {
 	display:block;
 }
 #search-bar div input:invalid {
@@ -160,7 +178,13 @@ body {
 	border-top-width:1px;
 	border-top-style:solid;
 	padding:16px 15px;
+	border-color:||hint1||;
+	background-color:||background1||;
 }
+.page-selector-active:hover {
+	background-color:||background1||;
+}
+
 
 /* /Right buttons container */
 #title-bar-right {
@@ -215,6 +239,7 @@ body {
 	-webkit-flex: auto;
 	height: 100%;
 	overflow-y: auto;
+	background-color:||background1||;
 }
 
 /**********
@@ -224,10 +249,12 @@ body {
 	height:3px;
 	width:100%;
 	display:block;
+	background-color:||background4||;
 }
 #timeline-bar {
 	height: 100%;
 	width: 0;
+	background-color:||hint1||;
 }
 
 /**********
@@ -256,6 +283,7 @@ body {
 	position:absolute;
 	left:-7.5px;
 	transition:width 0.1s, height 0.1s;
+	background-color:||hint1||;
 }
 
 /**********
@@ -275,6 +303,7 @@ body {
 	overflow:hidden;
 	height:73px;
 	transition:height 0.25s;
+	background-color:||background2||;
 }
 #playback.hidden {
 	height:0;
@@ -389,7 +418,7 @@ body {
 }
 
 /* /Playback buttons */
-#playback-buttons .bar-item, #playback-right .bar-item, #playback-order .bar-item {
+#playback-buttons .bar-item, #playback-right .bar-item {
 	display: table-cell;
 	height: 40px;
 	line-height: 0;
@@ -437,6 +466,7 @@ body {
 	padding:0;
 	margin-left:0;
 	transition:padding 0.2s 0.05s, margin-left 0.2s 0.05s;
+	background-color:||hint1||;
 }
 #volume-control:hover .knob > div, #volume-control:active .knob > div {
 	padding:7.5px;
@@ -454,6 +484,7 @@ body {
 	right:10px;
 	width:auto;
 	overflow:hidden;
+	background-color:||hint1||;
 }
 #volume-control .track > div {
 	position:absolute;
@@ -483,6 +514,7 @@ body {
 	height:100%;
 	left:7.5px;
 	right:7.5px;
+	background-color:||hint1||;
 }
 
 /* ///Playback Order */
@@ -528,8 +560,8 @@ div[class^='playback-order-before-'], div[class*=' playback-order-before-'], div
 	transition:width 0.25s;
 	overflow:hidden;
 }
-#playback-order:hover .playback-order-selected svg * {
-	fill:#33b5e5;
+#playback-order:hover .playback-order-active svg * {
+	fill:#000000;
 }
 
 /* /Playback times */
