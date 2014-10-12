@@ -39,7 +39,7 @@ tb.triggerOnPageLoadCompleted = function (repo) {
 };
 
 tb.onPageLoadCompleted = function (callback) {
-	$(window).on("onPageLoadCompleted", function (event, repo) {
+	$(window).one("onPageLoadCompleted", function (event, repo) {
 		callback(repo);
 	});
 };
