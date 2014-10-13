@@ -4,7 +4,10 @@ tb.getFileContents = function (path, callback) {
 		"url": path,
 		"cache": false,
 		"dataType": "text"
-	}).done(callback);
+	}).done(callback)
+	.fail(function () {
+		console.error("Error reading file at \'" + path + "\'.");
+	});
 };
 
 // Loads a json file via AJAX
