@@ -80,55 +80,55 @@ section h1 {
 			float: right;
 		}
 
-.function {
+.method {
 	margin: 20px 0;
 	border: 1px solid #243743;
 	border-radius: 3px;
 }
 
-.function-blueprint {
+.method-blueprint {
 	font-weight: 400;
 	padding: 10px;
 	background-color: #243743;
 	color: #fff;
 }
 
-	.function-blueprint p {
+	.method-blueprint p {
 		color: #fff;
 	}
 
-	.function-blueprint .parameter {
+	.method-blueprint .parameter {
 		font-style: italic;
 	}
 
-	.function-blueprint .optional {
+	.method-blueprint .optional {
 		color: #ccc;
 	}
 
-.function-properties {
+.method-properties {
 	display: table;
 	width: 100%;
 	padding: 5px 0;
 }
 
-	.function-properties span {
+	.method-properties span {
 		line-height: 1.25;
 		margin: 0 10px;
 		display: inline-block;
 	}
 
-		.function-properties span:last-child {
+		.method-properties span:last-child {
 			float: right;
 		}
 
-	.function-properties.optional span:first-child:after {
+	.method-properties.optional span:first-child:after {
 		content: " (optional)";
 		cursor: default;
 		font-style: italic;
 		color: #999;
 	}
 
-	.function-properties:nth-child(odd) {
+	.method-properties:nth-child(odd) {
 		background-color: rgba(0, 0, 0, 0.02);
 	}
 

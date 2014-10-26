@@ -1,7 +1,7 @@
 ---
-functionName: onPlaybackStarted
-functionInfo:  Calls back when the current track starts or resumes playback
-functionParameters:
+methodName: onPlaybackStarted
+methodInfo:  Calls back when the current track starts or resumes playback
+methodParameters:
   - parameter:
     name: "callback"
     info: "Calls back without arguments"
@@ -9,7 +9,7 @@ functionParameters:
       - function
 ---
 
-The `tb.onPlaybackStarted()` function calls the passed function when playback starts or resumes from pause.
+The `tb.onPlaybackStarted()` method calls the passed function when playback starts or resumes from pause.
 
 {% highlight javascript %}
 // Alerts "I just started playing!" when playback starts or resumes
