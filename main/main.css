@@ -1,0 +1,132 @@
+/* Banner */
+#banner {
+	background-color:#243743;
+	background-size: cover;
+	background-position: center;
+	color: #fff;
+	text-align: center;
+}
+
+	#banner > div {
+		padding: 150px 0;
+	}
+
+	#banner h1 {
+		color: #fff;
+		font-weight: 400;
+		margin-bottom: 20px;
+		font-size:40px;
+		font-family: "Montserrat","Open Sans",sans-serif;
+	}
+
+/* Section: Interface */
+#interface img {
+	display: block;
+	margin: auto;
+	box-shadow: 0 0 10px #aaa;
+	max-width: 980px;
+	max-height: 700px;
+	width: 100%;
+	height: auto;
+}
+
+/* Section: Email form */
+#email form {
+	text-align: center;
+}
+
+#email input {
+	font-size: 24px;
+	font-family: 'Open Sans';
+	width: 100%;
+	max-width: 450px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#email form p:last-of-type {
+	text-align: center;
+}
+
+#success + p, #failure + p {
+	display: none;
+	text-align: center;
+	color: #f00;
+	-moz-animation: flash 2s linear;
+	-webkit-animation: flash 2s linear;
+	-o-animation: flash 2s linear;
+	animation: flash 2s linear;
+}
+
+@-moz-keyframes flash {
+	1% {
+		color: #f00;
+	}
+
+	50% {
+		color: #fff;
+	}
+
+	100% {
+		color: #f00;
+	}
+}
+
+@-webkit-keyframes flash {
+	1% {
+		color: #f00;
+	}
+
+	50% {
+		color: #fff;
+	}
+
+	100% {
+		color: #f00;
+	}
+}
+
+@-o-keyframes flash {
+	1% {
+		color: #f00;
+	}
+
+	50% {
+		color: #fff;
+	}
+
+	100% {
+		color: #f00;
+	}
+}
+
+@keyframes flash {
+	1% {
+		color: #f00;
+	}
+
+	50% {
+		color: #fff;
+	}
+
+	100% {
+		color: #f00;
+	}
+}
+
+#failure:target + p {
+	display: block;
+}
+
+#failure:target ~ p:last-of-type {
+	display: none;
+}
+
+#success:target + p {
+	display: block;
+}
+
+#success:target ~ input {
+	display: none;
+}
