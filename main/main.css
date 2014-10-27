@@ -43,6 +43,10 @@
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	padding: 5px;
+	box-shadow: none;
 }
 
 #email form p:last-of-type {
