@@ -130,6 +130,10 @@ footer {
 			margin-bottom: 10px;
 			display: block;
 		}
+		
+		footer p.footer-head {
+			font-family: "Montserrat", "Open Sans", sans-serif;
+		}
 
 	footer p {
 		color: #ddd;
