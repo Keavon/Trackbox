@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Developers
+title: Trackbox Developer Documentation
 permalink: /developers/
 ---
 
