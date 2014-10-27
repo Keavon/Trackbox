@@ -1,4 +1,4 @@
-﻿// Loads a file via AJAX
+﻿// Calls back with the textual contents of a file at a given path
 tb.getFileContents = function (path, callback) {
 	$.ajax({
 		"url": path,
@@ -10,7 +10,7 @@ tb.getFileContents = function (path, callback) {
 	});
 };
 
-// Loads a json file via AJAX
+// Loads a JSON file via AJAX
 tb.getJSONFileContents = function (path, callback) {
 	$.ajax({
 		"url": path,
