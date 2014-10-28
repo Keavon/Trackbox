@@ -16,7 +16,7 @@ tb.renderTextTemplate = function (template, replacements, callback) {
 		replacements = undefined;
 	}
 
-	// If replacements are given, replace custom tempate tags
+	// If replacements are given, replace custom template tags
 	if (typeof replacements !== "undefined") {
 		var replacement = template.match(/{{((?:(?!}}).)+)}}/g);
 
