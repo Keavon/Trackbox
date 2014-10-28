@@ -18,7 +18,6 @@ tb.loadShell = function (shellLocation) {
 		// Fill document body with shell and call router
 		tb.renderTemplate(shellLocation + "/" + shell[0].shell, function (shell) {
 			$("body").append(shell);
-			tb.packageStartup();
 			tb.onPackagesLoaded(function () {
 				tb.router();
 			});

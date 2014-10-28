@@ -14,20 +14,6 @@ tb.listPackages = function () {
 	return packages;
 };
 
-//TODO: Remove once pkg system is up.
-tb.packageStartup = function () {
-	var packages = tb.listPackages();
-	for (var packs in packages) {
-		var packPath = "packages/" + packages[packs] + "/startup.js";
-
-		tb.getFileContents(packPath, function (script) {
-			script = '<script type="text/javascript">' + script;
-			script += '</' + 'script>';
-			$("head").append(script);
-		});
-	}
-};
-
 // Check a pkg manifest to make sure it is valid
 tb.isPackageManifestValid = function (manifest) {
 	if (typeof manifest !== 'object') {
