@@ -1,6 +1,8 @@
 collections:
   methods-playback:
     section: Playback
+  methods-files:
+    section: Files
 
 # Build settings
 markdown: kramdown
