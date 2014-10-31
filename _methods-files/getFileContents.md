@@ -1,6 +1,6 @@
 ---
 methodName: getFileContents
-methodInfo: Fetches the textual contents of a file
+methodInfo: Reads an external file and calls back with the contents of its text
 methodParameters:
   - parameter:
     name: "filePath"
