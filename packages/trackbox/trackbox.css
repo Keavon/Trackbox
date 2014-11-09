@@ -60,7 +60,7 @@ body {
 	margin: 0;
 	display: -webkit-flex;
 	display: flex;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	user-select: none;
 }
@@ -140,7 +140,7 @@ body {
 }
 #search-bar div input {
 	border:none;
-	font-family:'Open Sans';
+	font-family:'Roboto';
 	font-size:16px;
 	margin:3px 6px;
 	width:calc(100% - 36px);

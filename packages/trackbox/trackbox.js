@@ -1,4 +1,4 @@
-﻿tb.onShellLoaded(function () {
+tb.onShellLoaded(function () {
 	var seeking = false;
 	var pauseKeyDown = false;
 
