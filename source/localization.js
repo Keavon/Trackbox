@@ -1,5 +1,5 @@
 ﻿tb.getTranslation = function (key, language) {
-	// Set language to default if language paramater is omitted
+	// Set language to default if language parameter is omitted
 	language = language || tb.defaultLanguage;
 
 	// Get translation from specified language and key

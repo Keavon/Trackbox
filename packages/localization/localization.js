@@ -1,30 +1,6 @@
 tb.defaultLanguage = "en";
 tb.localizations = {
-	"en": {
-		"Trackbox": "Trackbox",
-		"Songs": "Songs!",
-		"Albums": "Albums",
-		"Artists": "Artists",
-		"Tags": "Tags",
-		"Boxes": "Boxes",
-		"Close": "Close",
-		"Maximize": "Maximize",
-		"Minimize": "Minimize",
-		"Search": "Search",
-		"Clear Text (ESC)": "Clear Text (ESC)",
-		"List View": "List View",
-		"Section View": "Section View",
-		"Card View": "Card View",
-		"Previous Track": "Previous Track",
-		"Next Track": "Next Track",
-		"Play": "Play",
-		"Pause": "Pause",
-		"Repeat Off": "Repeat Off",
-		"Repeat All": "Repeat All",
-		"Repeat Track": "Repeat Track",
-		"Shuffle On": "Shuffle On",
-		"Shuffle Off": "Shuffle Off"
-	},
+	"en": {},
 	"da": {
 		"Trackbox": "Trackbox",
 		"Songs": "Sange",
@@ -75,12 +51,13 @@ tb.localizations = {
 		"Boxes": "Boxit"
 	},
 	"ja": {
-		"Trackbox": "トラクーバカス",
+		"Trackbox": "トラックボックス",
 		"Songs": "歌",
 		"Albums": "アルバム",
 		"Artists": "アーティスト",
 		"Tags": "荷札",
-		"Boxes": "ボックス"
+		"Boxes": "ボックス",
+		"Search": "検索"
 	},
 	"sv": {
 		"Trackbox": "Trackbox",
