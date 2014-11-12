@@ -6,7 +6,7 @@ tb.private.locatedManifests = ["packages/songs", "packages/albums", "packages/ar
 
 // Return a read only copy of installed packages.
 tb.packages = function () {
-	return tb.copyJSON(tb.private.packages);
+	return tb.cloneObject(tb.private.packages);
 };
 
 tb.listPackages = function () {
@@ -271,7 +271,7 @@ tb.findPackages = function (parameters, contains, callback, quantityToReturn) {
 			}
 
 			if (matched === true) {
-				matchedPackages.push(tb.copyJSON(packages[pkg]));
+				matchedPackages.push(tb.cloneObject(packages[pkg]));
 				if (matchedPackages.length >= (quantityToReturn || Number.MAX_VALUE)) {
 					break;
 				}

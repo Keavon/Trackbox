@@ -23,15 +23,14 @@ tb.private.library = [
 	{ "title": "Trailer Music", "location": "https://archive.org/download/Sintel_Original_Film_Score-9838/Jan_Morgenstern_-_09_-_Trailer_Music.mp3", "artwork": "packages/albums/placeholders/sintel.jpg", "artists": ["Jan Morgenstern"], "album": "Sintel", "year": 2010, "track": 9, "disk": 1, "time": 44, "id": 19 }
 ];
 
-// Return a read only copy of the library.
-tb.library = function () {
-	return tb.copyJSON(tb.private.library);
+// Return a read-only copy of the library
+tb.getLibrary = function () {
+	return tb.cloneObject(tb.private.library);
 };
 
-// Find tracks matching given parameters and returns an array with all matching songs
+// Finds tracks matching given parameters and returns an array with all matching songs
 // Parameters filter the returned objects, which each item in the JSON array checked against every song's metadata to see if it matches
 tb.findInLibrary = function (parameters, contains, callback) {
-
 	setTimeout(function(){
 			var matchedSongs = [];
 
@@ -125,7 +124,7 @@ tb.findInLibrary = function (parameters, contains, callback) {
 					matchedSongs.push(tb.private.library[song]);
 				}
 			}
-		callback(tb.copyJSON(matchedSongs));
+		callback(tb.cloneObject(matchedSongs));
 	}, 0);
 };
 
@@ -151,7 +150,7 @@ tb.findById = function(id, callback) {
 		while(true) {
 			var currentId = tb.private.library[searchPosition].id;
 			if(currentId === id) {
-				callback(tb.copyJSON(tb.private.library[searchPosition]));
+				callback(tb.cloneObject(tb.private.library[searchPosition]));
 				break;
 			} else if((lastId > id && id > currentId) || (lastId < id && id < currentId)) {
 				callback(null);
@@ -176,18 +175,29 @@ tb.findById = function(id, callback) {
 	}, 0);
 };
 
-tb.sortByPriority = function (opt) {
-	if (!(opt instanceof Array)) {
-		opt = Array.prototype.slice.call(arguments);
+// Returns a function with logic to sort an array in ascending or descending order based on given properties
+// http://stackoverflow.com/a/25030191/775283
+tb.sortByProperties = function (sortProperties) {
+	// Place all arguments in an array
+	if (!(sortProperties instanceof Array)) {
+		sortProperties = Array.prototype.slice.call(arguments);
 	}
 	return function (a, b) {
-		for (var i = 0; i < opt.length; ++i) {
-			var order = opt[i].substr(0, 1);
-			var key = opt[i].substr(1);
+		// Go through every sort property
+		for (var i = 0; i < sortProperties.length; ++i) {
+			// Remove the - or + prefix from the key
+			var key = sortProperties[i].substr(1);
+
+			// Store the first character to determine the + or - prefix
+			var order = sortProperties[i].substr(0, 1);
+
+			// If the first character was not + or - then default to + and add the first character back to the key
 			if (order !== '-' && order !== '+') {
-				key = opt[i];
+				key = sortProperties[i];
 				order = '+';
 			}
+
+			// Sort logic
 			if (a[key] !== b[key]) {
 				if (a[key] === undefined) { return 1; }
 				if (b[key] === undefined) { return -1; }

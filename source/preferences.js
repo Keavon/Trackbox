@@ -9,7 +9,7 @@ tb.loadPreferences = function (forceReload) {
 };
 
 tb.preferences = function () {
-	return tb.copyJSON(tb.private.preferences);
+	return tb.cloneObject(tb.private.preferences);
 };
 
 tb.triggerOnPreferencesLoaded = function () {

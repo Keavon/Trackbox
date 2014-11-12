@@ -1,4 +1,4 @@
-﻿// Calls back with the textual contents of a file at a given path
+// Calls back with the textual contents of a file at a given path
 tb.getFileContents = function (path, callback) {
 	$.ajax({
 		"url": path,
@@ -6,7 +6,7 @@ tb.getFileContents = function (path, callback) {
 		"dataType": "text"
 	}).done(callback)
 	.fail(function () {
-		console.error("Error reading file at \'" + path + "\'.");
+		console.error("Error reading file at '" + path + "'.");
 	});
 };
 
@@ -18,6 +18,6 @@ tb.getJSONFileContents = function (path, callback) {
 		"dataType": "json"
 	}).done(callback)
 	.fail(function () {
-		console.error("Error parsing JSON file at \'" + path + "\'.");
+		console.error("Error reading or parsing JSON file at '" + path + "'.");
 	});
 };

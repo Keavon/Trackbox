@@ -1,6 +1,6 @@
-﻿tb.onPageLoadCompleted(function () {
-	var library = tb.library();
-	library.sort(tb.sortByPriority("+album", "+disk", "+track", "+title"));
+tb.onPageLoadCompleted(function () {
+	var library = tb.getLibrary();
+	library.sort(tb.sortByProperties("+album", "+disk", "+track", "+title"));
 
 	tb.getFileContents("packages/songs/templates/list-row.html", function (data) {
 		for (var song in library) {
