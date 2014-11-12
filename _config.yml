@@ -5,6 +5,8 @@ collections:
     section: Files
   methods-javascript-helpers:
     section: "JavaScript Helpers"
+  methods-library:
+    section: "Library"
 
 # Build settings
 markdown: kramdown

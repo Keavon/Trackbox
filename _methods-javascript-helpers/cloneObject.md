@@ -11,8 +11,6 @@ methodParameters:
 
 `tb.cloneObject()` is a helper method that can be used to clone an `Object`, `Array`, or `Date`. These may only contain an assortment of `Object`, `Array`, `Date`, `String`, `Number`, and `Boolean` types. This method is used when it is necessary to make a copy of an `Object`, `Array`, or `Date` so that the copy can be changed without affecting the original.
 
-<br />
-
 The problem:
 {% highlight javascript %}
 var normalYear = { "isLeapYear": false, "daysInYear": 365 };

@@ -52,31 +52,31 @@ section h1 {
 		margin: 10px 0;
 	}
 
-	#listings a {
+	#listings > div > a {
 		display: table;
 		width: 100%;
 		padding: 10px 0;
 	}
 
-	#listings div:nth-child(odd) a {
+	#listings > div:nth-child(odd) > a {
 		background-color: rgba(0, 0, 0, 0.02);
 	}
 
-	#listings a:hover {
+	#listings > div > a:hover {
 		background-color: rgba(0, 0, 0, 0.01);
 	}
 
-	#listings a span {
+	#listings > div > a span {
 		line-height: 1.25;
 		display: inline-block;
 		margin: 0 10px;
 	}
 
-		#listings a span:first-child {
+		#listings > div > a span:first-child {
 			font-weight: 400;
 		}
 
-		#listings a span:last-child {
+		#listings > div > a span:last-child {
 			float: right;
 		}
 
@@ -132,6 +132,15 @@ section h1 {
 		background-color: rgba(0, 0, 0, 0.02);
 	}
 
+.page > p {
+	margin: 20px 0;
+}
+
+.page a {
+	color:#000;
+	text-decoration:underline;
+}
+
 code {
 	padding: 0 5px;
 	border-radius: 3px;
@@ -153,4 +162,5 @@ pre {
 	pre > code {
 		background: none;
 		white-space: pre-wrap;
+		padding: 0;
 	}
