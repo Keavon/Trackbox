@@ -3,6 +3,8 @@ collections:
     section: Playback
   methods-files:
     section: Files
+  methods-javascript-helpers:
+    section: "JavaScript Helpers"
 
 # Build settings
 markdown: kramdown
