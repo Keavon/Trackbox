@@ -1,4 +1,5 @@
-﻿tb.getTranslation = function (key, language) {
+// Get a translation of a string of text in a given language
+tb.getTranslation = function (key, language) {
 	// Set language to default if language parameter is omitted
 	language = language || tb.defaultLanguage;
 

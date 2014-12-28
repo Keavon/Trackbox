@@ -1,21 +1,39 @@
-﻿tb.private.audioPlayer = new Audio();
+// Create the audio player object
+tb.private.audioPlayer = new Audio();
+
+// Define the current track
 tb.private.currentTrack;
 
+// Load a track given the song and an optional value of true to autoplay it
 tb.loadTrack = function (song, autoPlay) {
+	// Set autoPlay to false if argument is omitted
 	autoPlay = autoPlay || false;
+
+	// Pause the track
 	tb.private.audioPlayer.pause();
+
+	// Track ID
 	if (typeof song === "number") {
+		// Find the song by its ID
 		tb.findById(song, function (track) {
+			// Set the location from the ID
 			tb.private.currentTrack = track;
+			// Call the function again with the path to the track
 			tb.loadTrack(tb.private.currentTrack.location, autoPlay);
 		});
 	} else if (typeof song === "string") {
+		// Set the source of the song
 		tb.private.audioPlayer.src = song;
+
+		// Trigger playback started
 		$(window).trigger("playbackStarted");
+
+		// Start playing if autoplay is true
 		if (autoPlay === true) {
 			tb.private.audioPlayer.play();
 		}
 	} else if (!song) {
+		// No song, unload track and stop playback
 		tb.private.audioPlayer.src = "";
 		$(window).trigger("playbackStopped");
 	}
