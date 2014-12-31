@@ -37,3 +37,8 @@ tb.cloneObject = function (originalObject) {
 
 	throw new Error("Unable to clone object! Its type isn't supported.");
 };
+
+// Sanatize a string: Remove all non-word special symbols from a string.
+tb.sanatizeString = function (stringToSanatize) {
+	return stringToSanatize.replace(/[^\w]/gi, '');
+};
