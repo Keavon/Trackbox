@@ -1,8 +1,8 @@
 // Load JSON preferences file with an option to force a reload
 tb.loadPreferences = function (forceReload) {
 	if (!tb.private.preferences || forceReload) {
-		tb.getJSONFileContents("users/default/preferences.json", function (data) {
-			tb.private.preferences = data;
+		tb.getJSONFileContents("users/default/preferences.json", function (preferences) {
+			tb.private.preferences = preferences;
 			tb.triggerOnPreferencesLoaded();
 		});
 	}

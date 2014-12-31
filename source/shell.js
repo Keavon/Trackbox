@@ -1,7 +1,7 @@
 // Loads a shell of a given location into the document body
 tb.loadShell = function (shellLocation) {
 	// Find the shell with the given location
-	tb.findPackages({ "location": shellLocation }, false, function (shell) {
+	tb.getPackages({ "location": shellLocation }, false, function (shell) {
 		// Clear the HTML body and give it the shell dependency container
 		$("body").html('<div id="shell-dependency-container"></div>');
 		// Check if the shell has any CSS to load

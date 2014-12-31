@@ -9,7 +9,7 @@ tb.loadPage = function (repo) {
 	tb.triggerOnPageLoadInitiated(repo);
 
 	// Find the package from its given repo name
-	tb.findPackages({ "repo": repo }, false, function (pages) {
+	tb.getPackages({ "repo": repo }, false, function (pages) {
 		// Load the CSS dependencies for the new page
 		if (pages[0].css) {
 			Object.keys(pages[0].css).forEach(function (css) {

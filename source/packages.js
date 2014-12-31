@@ -5,15 +5,9 @@ tb.private.erroredPacakges = [];
 // Array of paths to found package manifests (currently hardcoded, will later be supplied by backend)
 tb.private.locatedManifests = ["packages/songs", "packages/albums", "packages/artists", "packages/tags", "packages/boxes", "packages/trackbox"];
 
-// Returns a read-only copy of installed packages
-tb.packages = function () {
+// Returns a read-only copy of the list of installed packages
+tb.getPackageList = function () {
 	return tb.cloneObject(tb.private.packages);
-};
-
-// Returns an array of all package names
-tb.listPackages = function () {
-	var packages = ["songs", "albums", "artists", "tags", "boxes"];
-	return packages;
 };
 
 // Checks a given package manifest ensure its validity
@@ -45,7 +39,6 @@ tb.isPackageManifestValid = function (manifest) {
 
 	// Special cases for the page package type
 	if (manifest.type === "page") {
-
 		// Check if manifest contains page name
 		if (!('pageName' in manifest)) {
 			console.error("'pageName' key required.");
@@ -75,7 +68,6 @@ tb.isPackageManifestValid = function (manifest) {
 			console.error("'css' key must be an array, i.e. [ 'file.css' ]");
 			return false;
 		}
-
 	} else if (manifest.type === "shell") {
 		// Special cases for the shell package type
 
@@ -102,7 +94,7 @@ tb.isPackageManifestValid = function (manifest) {
 // Loads the current shell
 tb.loadShellPackage = function () {
 	// Locate the shell package from the already loaded packages
-	tb.findPackages({ "location": tb.preferences().currentShellPath }, false, function (data) {
+	tb.getPackages({ "location": tb.preferences().currentShellPath }, false, function (data) {
 		// If it's not already in the list of loaded packages, load it now and mark it as loaded then trigger package loaded
 		if (data === null) {
 			// Get the manifest
@@ -128,7 +120,7 @@ tb.loadPackages = function () {
 		(function () {
 			var index = arguments[0];
 			// Locate the package being loaded
-			tb.findPackages({ "location": tb.private.locatedManifests[index] }, false, function (data) {
+			tb.getPackages({ "location": tb.private.locatedManifests[index] }, false, function (data) {
 				// If it's not already in the list of loaded packages, load it now and mark it as loaded
 				if (data === null) {
 					// Get the manifest
@@ -156,9 +148,9 @@ tb.loadPackages = function () {
 };
 
 // Calls back with the file location of a package given its repo name
-tb.packageLocation = function (repo, callback) {
+tb.getPackageLocation = function (repo, callback) {
 	// Find the package given its repo name
-	tb.findPackages({ "repo": repo }, false, function (data) {
+	tb.getPackages({ "repo": repo }, false, function (data) {
 		if (data !== null) {
 			// Call back with the location
 			callback(data[0].location);
@@ -173,15 +165,14 @@ tb.packageLocation = function (repo, callback) {
 // `paramerters` filters the returned objects, where each item in the JSON object is checked against every pkg.
 // `contains` will return a pkg if part of the string matches, instead requiring two identical strings.
 // `quantityToReturn` (optional) is the number of packages to return. Useful if you know an attribute, such as `id`, is unique, so you can stop after finding a match.
-// Example: tb.findPackages({ "type": "page" }, false, function (pages) { alert(pages[page].name[0] });
-tb.findPackages = function (parameters, contains, callback, quantityToReturn) {
-	var packages = tb.packages();
+// Example: tb.getPackages({ "type": "page" }, false, function (pages) { alert(pages[page].name[0] });
+tb.getPackages = function (parameters, contains, callback, quantityToReturn) {
+	var packages = tb.getPackageList();
 	var matchedPackages = [];
 
 	// Execute asynchronously
 	setTimeout(function () {
-
-		// If `contains` is true, evaluates whether string 1 contains string 2, else if it equals string 2
+		// If `contains` is true, evaluate whether string 1 contains string 2, else if it equals string 2
 		function stringMatches(string1, string2) {
 			if (contains) {
 				// Return true if string 1 exists in string 2, else false

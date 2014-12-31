@@ -3,7 +3,7 @@ tb.router = function () {
 	// Occurs when the URL hash changes
 	if (window.location.hash) {
 		// Find all pages
-		tb.findPackages({ "type": "page" }, false, function (pages) {
+		tb.getPackages({ "type": "page" }, false, function (pages) {
 			// Check if each page's URL equals the hash name
 			Object.keys(pages).forEach(function (page) {
 				if (pages[page].url === window.location.hash.substring(1)) {

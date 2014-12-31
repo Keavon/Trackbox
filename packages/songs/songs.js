@@ -27,11 +27,11 @@ tb.onPageLoadCompleted(function () {
 
 	$("#list-frame").dblclick(function (event) {
 		if (typeof $(event.target).parents(".list-row").attr("id") === "undefined" && event.target.id.substring(0, 5) === "song-") {
-			tb.loadTrack(parseInt(event.target.id.substring(5)), true);
+			tb.setTrack(parseInt(event.target.id.substring(5)), true);
 		} else if (typeof $(event.target).parents(".list-row").attr("id") === "undefined") {
 			return;
 		} else if ($(event.target).parents(".list-row").attr("id").substring(0, 5) === "song-") {
-			tb.loadTrack(parseInt($(event.target).parents(".list-row").attr("id").substring(5)), true);
+			tb.setTrack(parseInt($(event.target).parents(".list-row").attr("id").substring(5)), true);
 		}
 	});
 
@@ -55,7 +55,7 @@ tb.onPageLoadCompleted(function () {
 		} else if (e.keyCode === 40) {
 			songListSelection("down");
 		} else if (e.keyCode === 13) {
-			tb.loadTrack(parseInt(songListSelection().substring(5)), true);
+			tb.setTrack(parseInt(songListSelection().substring(5)), true);
 		}
 	});
 

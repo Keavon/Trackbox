@@ -26,7 +26,7 @@ tb.onShellLoaded(function () {
 		var timePercent = $("#timeline-bar-sensor .slider-knob")[0].style.left.substring(0, $("#timeline-bar-sensor .slider-knob")[0].style.left.length - 1) / 100;
 
 		// Set track time
-		tb.trackTime(timePercent * tb.getMetadata("duration"));
+		tb.setTrackTime(timePercent * tb.getMetadata("duration"));
 	}
 
 	/* Mouse Movement */
@@ -59,20 +59,20 @@ tb.onShellLoaded(function () {
 
 	$(document).on("mousedown", "#playback-play-pause", function (event) {
 		if (event.which === 3) {
-			tb.loadTrack();
+			tb.setTrack();
 		}
 	});
 
 	/* Update Slider Position */
 	function timelineUpdater() {
 		if (!seeking) {
-			var percentage = tb.trackTime() / tb.getExactTrackTime() * 100;
+			var percentage = tb.getTrackTime() / tb.getTrackLength() * 100;
 			if (percentage >= 100) {
 				percentage = 100;
 			}
 			$("#timeline-bar-sensor .slider-knob").css("left", percentage + "%");
 			$("#timeline-bar").css("width", percentage + "%");
-			$("#song-time").html(tb.formatTime(Math.floor(tb.trackTime())) + " / " + tb.formatTime(tb.getMetadata("duration")));
+			$("#song-time").html(tb.formatTime(Math.floor(tb.getTrackTime())) + " / " + tb.formatTime(tb.getMetadata("duration")));
 		}
 		requestAnimationFrame(timelineUpdater);
 	}
@@ -206,8 +206,8 @@ tb.onShellLoaded(function () {
 	/* Add buttons */
 	function addPageTabs() {
 		tb.onPackagesLoaded(function () {
-			tb.findPackages({ "type": "page" }, false, function (pages) {
-				tb.packageLocation("trackbox/trackbox", function (location) {
+			tb.getPackages({ "type": "page" }, false, function (pages) {
+				tb.getPackageLocation("trackbox/trackbox", function (location) {
 					tb.getFileContents(location + "/templates/page-button.html", function (template) {
 						$("#page-tabs").html("");
 						Object.keys(pages).forEach(function (page) {

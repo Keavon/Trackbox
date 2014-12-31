@@ -5,7 +5,7 @@ tb.private.audioPlayer = new Audio();
 tb.private.currentTrack;
 
 // Load a track given the song and an optional value of true to autoplay it
-tb.loadTrack = function (song, autoPlay) {
+tb.setTrack = function (song, autoPlay) {
 	// Set autoPlay to false if argument is omitted
 	autoPlay = autoPlay || false;
 
@@ -19,7 +19,7 @@ tb.loadTrack = function (song, autoPlay) {
 			// Set the location from the ID
 			tb.private.currentTrack = track;
 			// Call the function again with the path to the track
-			tb.loadTrack(tb.private.currentTrack.location, autoPlay);
+			tb.setTrack(tb.private.currentTrack.location, autoPlay);
 		});
 	} else if (typeof song === "string") {
 		// Set the source of the song
@@ -85,21 +85,20 @@ tb.onPlaybackStateChange = function (callback) {
 	});
 };
 
-tb.trackTime = function (time) {
-	if (typeof time !== "undefined") {
-		tb.private.audioPlayer.currentTime = time;
-	} else {
-		return tb.private.audioPlayer.currentTime;
-	}
+tb.getTrackTime = function () {
+	return tb.private.audioPlayer.currentTime;
 };
 
-tb.getExactTrackTime = function () {
+tb.setTrackTime = function (time) {
+	tb.private.audioPlayer.currentTime = time;
+};
+
+tb.getTrackLength = function () {
 	return tb.private.audioPlayer.duration;
 };
 
 tb.getMetadata = function (metadata) {
 	if (metadata === "duration") {
-		// Use getExactTrackTime() for accurate time of currently playing track
 		return tb.private.currentTrack.time;
 	} else if (metadata === "title") {
 		return tb.private.currentTrack.title;
