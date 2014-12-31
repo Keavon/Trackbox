@@ -1,58 +1,32 @@
-﻿tb.renderTemplate = function (templatePath, replacements, callback) {
-	if (!callback && typeof replacements === "function") {
-		callback = replacements;
-	}
-
-	tb.getFileContents(templatePath, function (template) {
-		tb.renderTextTemplate(template, replacements, function (data) {
-			callback(data);
-		});
+// Renders the {{template tags}} with given replacements for a given file
+tb.templateFile = function (path, replacements, callback) {
+	// Read the file
+	tb.getFileContents(path, function (template) {
+		// Render the template and call back with the result
+		callback(tb.template(template, replacements));
 	});
 };
 
-tb.renderTextTemplate = function (template, replacements, callback) {
-	if (!callback && typeof replacements === "function") {
-		callback = replacements;
-		replacements = undefined;
-	}
+// Renders the {{template tags}} with given replacements for a given string
+tb.template = function (template, replacements) {
+	// Match the {{ }} tags
+	var replacement = template.match(/{{((?:(?!}}).)+)}}/g);
 
-	// If replacements are given, replace custom template tags
-	if (typeof replacements !== "undefined") {
-		var replacement = template.match(/{{((?:(?!}}).)+)}}/g);
+	// Replace template tags
+	for (var item in replacement) {
+		// Get this iteration's match
+		var replacementsKey = replacement[item];
 
-		// Replace template tags
-		for (var item in replacement) {
-			// Get iteration's match
-			var replacementsKey = replacement[item];
+		// Remove {{ }} tags
+		var replacementKeyWithoutTags = replacementsKey.substring(2, replacementsKey.length - 2);
 
-			// Remove {{ }} tags
-			var cleanReplacementKey = replacementsKey.substring(2, replacementsKey.length - 2);
-
-			// Apply replacements to template
-			if (cleanReplacementKey in replacements) {
-				template = template.replace(replacementsKey, replacements[cleanReplacementKey]);
-			}
+		// Checks if a key is in the given replacements
+		if (replacementKeyWithoutTags in replacements) {
+			// Replace this match with its corresponding replacement
+			template = template.replace(replacementsKey, replacements[replacementKeyWithoutTags]);
 		}
 	}
 
-	// Match localization template tags
-	var matches = template.match(/%%((?:(?!%%).)+)%%/g);
-
-	// Replace localization template tags with translations
-	for (var match in matches) {
-		// Get iteration's match
-		var key = matches[match];
-
-		// Remove %% tags
-		var cleanKey = key.substring(2, key.length - 2);
-
-		// Get translation
-		var translation = tb.getTranslation(cleanKey);
-
-		// Apply translation to template
-		template = template.replace(key, translation);
-	}
-
-	// Return value
-	callback(template);
+	// Return the rendered template
+	return template;
 };

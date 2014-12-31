@@ -13,7 +13,7 @@ tb.loadPage = function (repo) {
 		// Load the CSS dependencies for the new page
 		if (pages[0].css) {
 			Object.keys(pages[0].css).forEach(function (css) {
-				tb.renderPalette(pages[0].location, pages[0].css[css], function (renderedPalette) {
+				tb.paletteFile(pages[0].location, pages[0].css[css], function (renderedPalette) {
 					$("#page-dependency-container").append('<style type="text/css">' + renderedPalette + '</style>');
 				});
 			});
@@ -26,7 +26,7 @@ tb.loadPage = function (repo) {
 			});
 		}
 		// Render the page's template
-		tb.renderTemplate(pages[0].location + "/" + pages[0].page, function (page) {
+		tb.renderFile(pages[0].location + "/" + pages[0].page, function (page) {
 			// Add the page to the DOM
 			$("#page").html(page);
 			// Trigger the completion of the page loading

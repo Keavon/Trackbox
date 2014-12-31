@@ -212,12 +212,15 @@ tb.onShellLoaded(function () {
 						$("#page-tabs").html("");
 						Object.keys(pages).forEach(function (page) {
 							tb.getFileContents(pages[page].location + "/" + pages[page].pageIcon, function (icon) {
-								tb.renderTextTemplate(template, { "URL": pages[page].preferredUrl, "REPO": pages[page].repo.replace("/", ":"), "NAME": pages[page].name, "ICON": icon }, function (renderedTemplate) {
-									$("#page-tabs").append(renderedTemplate);
-									if (tb.getCurrentPageUrl() === pages[page].url || pages[page].standardUrl.indexOf(tb.getCurrentPageUrl()) !== -1) {
-										selectPageTab(pages[page].repo);
-									}
+								var renderedTemplate = tb.render(template, {
+									"URL": pages[page].preferredUrl,
+									"REPO": pages[page].repo.replace("/", ":"),
+									"NAME": pages[page].name, "ICON": icon
 								});
+								$("#page-tabs").append(renderedTemplate);
+								if (tb.getCurrentPageUrl() === pages[page].url || pages[page].standardUrl.indexOf(tb.getCurrentPageUrl()) !== -1) {
+									selectPageTab(pages[page].repo);
+								}
 							});
 						});
 					});

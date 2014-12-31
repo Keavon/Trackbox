@@ -12,10 +12,16 @@ tb.onPageLoadCompleted(function () {
 			library[song].disk = library[song].disk || "";
 			library[song].time = library[song].time || "";
 
-			tb.renderTextTemplate(data, { "ID": "song-" + library[song].id, "TITLE": library[song].title, "NUMBER": library[song].track, "ALBUM": library[song].album, "ARTIST": library[song].artists[0], "TIME": tb.formatTime(library[song].time) }, function (template) {
-				$("#list-frame").append(template);
-			});
-
+			var template = tb.render(data,
+				{
+					"ID": "song-" + library[song].id,
+					"TITLE": library[song].title,
+					"NUMBER": library[song].track,
+					"ALBUM": library[song].album,
+					"ARTIST": library[song].artists[0],
+					"TIME": tb.formatTime(library[song].time)
+				});
+			$("#list-frame").append(template);
 		}
 	});
 

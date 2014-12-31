@@ -13,20 +13,22 @@ var palettes = {
 };
 
 // Renders palette templates given the package path and the file name to be rendered
-tb.renderPalette = function (packagePath, paletteFile, callback) {
+tb.paletteFile = function (packagePath, paletteFile, callback) {
+	// Get the file
 	tb.getFileContents(packagePath + "/" + paletteFile, function (palette) {
-		tb.renderTextPalette(packagePath, palette, function (rendered) {
-			callback(rendered);
+		// Render the palette
+		tb.palette(packagePath, palette, function (result) {
+			callback(result);
 		});
 	});
 };
 
 // Renders palette templates given the package path and the textual content to be rendered
-tb.renderTextPalette = function (packagePath, palette, callback) {
-	// Replace //PACKAGE// with the path to the package
+tb.palette = function (packagePath, palette, callback) {
+	// Replace //PACKAGE// with the path to the package and a trailing slash
 	palette = palette.replace(/\/\/PACKAGE\/\//g, packagePath + "/");
 
-	// Matches ||  || tags
+	// Match the || || tags
 	var replacement = palette.match(/\|\|((?:(?!\|\|).)+)\|\|/g);
 
 	// Replace template tags
@@ -34,7 +36,7 @@ tb.renderTextPalette = function (packagePath, palette, callback) {
 		// Get iteration's match
 		var replacementsKey = replacement[item];
 
-		// Remove ||  || tags
+		// Remove || || tags
 		var cleanReplacementKey = replacementsKey.substring(2, replacementsKey.length - 2);
 
 		// Checks if a key is in the palettes and replaces it
@@ -43,6 +45,6 @@ tb.renderTextPalette = function (packagePath, palette, callback) {
 		}
 	}
 
-	// Call back with the rendered pallet text
+	// Call back with the rendered palette text
 	callback(palette);
 };
