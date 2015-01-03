@@ -169,16 +169,16 @@ tb.onShellLoaded(function () {
 		if (percentage > 100) { percentage = 100; }
 
 		// Set playback volume
-		tb.volume(percentage);
+		tb.setVolume(percentage / 100);
 
 		// Set slider position
 		$("#volume-control .knob > div").css("left", percentage + "%");
 		$("#volume-control .track > div > div:first-child > div").css("width", percentage + "%");
 
 		// Hide speaker icon sound waves
-		if (tb.volume() * 100 < 66) { $("#volume-control svg path:nth-child(1)").hide(); } else { $("#volume-control svg path:nth-child(1)").show(); }
-		if (tb.volume() * 100 < 33) { $("#volume-control svg path:nth-child(2)").hide(); } else { $("#volume-control svg path:nth-child(2)").show(); }
-		if (tb.volume() * 100 === 0) { $("#volume-control svg path:nth-child(3)").hide(); } else { $("#volume-control svg path:nth-child(3)").show(); }
+		if (tb.getVolume() * 100 < 66) { $("#volume-control svg path:nth-child(1)").hide(); } else { $("#volume-control svg path:nth-child(1)").show(); }
+		if (tb.getVolume() * 100 < 33) { $("#volume-control svg path:nth-child(2)").hide(); } else { $("#volume-control svg path:nth-child(2)").show(); }
+		if (tb.getVolume() * 100 === 0) { $("#volume-control svg path:nth-child(3)").hide(); } else { $("#volume-control svg path:nth-child(3)").show(); }
 	}
 
 	// Playback Order buttons
