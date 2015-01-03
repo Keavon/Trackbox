@@ -93,23 +93,25 @@ tb.isPackageManifestValid = function (manifest) {
 
 // Loads the current shell
 tb.loadShellPackage = function () {
-	// Locate the shell package from the already loaded packages
-	tb.getPackages({ "location": tb.preferences().currentShellPath }, false, function (data) {
-		// If it's not already in the list of loaded packages, load it now and mark it as loaded then trigger package loaded
-		if (data === null) {
-			// Get the manifest
-			tb.getJSONFileContents(tb.preferences().currentShellPath + "/manifest.json", function (data) {
-				// Add the package location to the manifest data in memory
-				data.location = tb.preferences().currentShellPath;
-				// Add this package to the list of loaded packages
-				tb.private.packages.push(data);
+	tb.getPreferences(function (preferences) {
+		// Locate the shell package from the already loaded packages
+		tb.getPackages({ "location": preferences.currentShellPath }, false, function (data) {
+			// If it's not already in the list of loaded packages, load it now and mark it as loaded then trigger package loaded
+			if (data === null) {
+				// Get the manifest
+				tb.getJSONFileContents(preferences.currentShellPath + "/manifest.json", function (data) {
+					// Add the package location to the manifest data in memory
+					data.location = preferences.currentShellPath;
+					// Add this package to the list of loaded packages
+					tb.private.packages.push(data);
+					// Trigger package loaded
+					tb.triggerOnShellPackageLoaded();
+				});
+			} else {
 				// Trigger package loaded
 				tb.triggerOnShellPackageLoaded();
-			});
-		} else {
-			// Trigger package loaded
-			tb.triggerOnShellPackageLoaded();
-		}
+			}
+		});
 	});
 };
 

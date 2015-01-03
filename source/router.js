@@ -21,8 +21,10 @@ tb.router = function () {
 			});
 		});
 	} else {
-		// If none fit, change hash to the default page
-		window.location.hash = "#" + tb.preferences().defaultPage;
+		tb.getPreferences(function (preferences) {
+			// If none fit, change hash to the default page
+			window.location.hash = "#" + preferences.defaultPage;
+		});
 	}
 };
 

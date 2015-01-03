@@ -1,21 +1,21 @@
-// 1) Load user preferences
-tb.loadPreferences();
-
-// 2) Load shell
+// 1) Load shell
 tb.onPreferencesLoaded(function () {
 	tb.loadShellPackage();
 });
 
-// 3) Load packages
+// 2) Load packages
 tb.onShellPackageLoaded(function () {
-	// Load the default shell
-	tb.loadShell(tb.preferences().currentShellPath);
+	// Get the user preferences
+	tb.getPreferences(function (preferences) {
+		// Load the default shell
+		tb.loadShell(preferences.currentShellPath);
 
-	// Load the remaining packages
-	tb.loadPackages();
+		// Load the remaining packages
+		tb.loadPackages();
+	});
 });
 
-// 4) Bind hash change and open the current page
+// 3) Bind hash change and open the current page
 tb.onPackagesLoaded(function () {
 	window.onhashchange = tb.router;
 });
