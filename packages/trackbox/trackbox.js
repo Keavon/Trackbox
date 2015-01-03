@@ -105,18 +105,18 @@ tb.onShellLoaded(function () {
 		tb.togglePlayPause();
 	});
 
-	// Change Play/Pause button to Play
+	// Change Play/Pause button to Pause when the music is playing
 	tb.onPlay(function () {
-		$("#playback-play-pause #pause").hide();
-		$("#playback-play-pause #play").show();
-		$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
-	});
-
-	// Change Play/Pause button to Pause
-	tb.onPause(function () {
 		$("#playback-play-pause #play").hide();
 		$("#playback-play-pause #pause").show();
 		$("#playback-play-pause").attr("title", tb.getTranslation("Pause"));
+	});
+
+	// Change Play/Pause button to Play when the music is paused
+	tb.onPause(function () {
+		$("#playback-play-pause #pause").hide();
+		$("#playback-play-pause #play").show();
+		$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
 	});
 
 	// REST OF INTERFACE //
