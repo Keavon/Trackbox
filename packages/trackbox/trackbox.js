@@ -1,11 +1,11 @@
 tb.onShellLoaded(function () {
-	var seeking = false;
 	var pauseKeyDown = false;
+	var updateScrubber = true;
 
-	/* Mouse Down */
+	// Scrubber Mouse Down
 	$("#timeline-bar-sensor")[0].addEventListener("mousedown", scrubMouseDownListener);
 	function scrubMouseDownListener(evt) {
-		seeking = true;
+		updateScrubber = false;
 		window.addEventListener("mouseup", scrubMouseUpListener);
 
 		// Disable text selection while dragging
@@ -16,9 +16,9 @@ tb.onShellLoaded(function () {
 		scrubMouseMoveListener(evt);
 	}
 
-	/* Mouse Up */
+	// Scrubber mouse up
 	function scrubMouseUpListener() {
-		seeking = false;
+		updateScrubber = true;
 		window.removeEventListener("mouseup", scrubMouseUpListener);
 		document.removeEventListener("mousemove", scrubMouseDownListener);
 
@@ -26,10 +26,10 @@ tb.onShellLoaded(function () {
 		var timePercent = $("#timeline-bar-sensor .slider-knob")[0].style.left.substring(0, $("#timeline-bar-sensor .slider-knob")[0].style.left.length - 1) / 100;
 
 		// Set track time
-		tb.setTrackTime(timePercent * tb.getMetadata("duration"));
+		tb.setCurrentTime(timePercent * tb.getLength());
 	}
 
-	/* Mouse Movement */
+	// Scrubber mouse movement
 	function scrubMouseMoveListener(evt) {
 		// Get mouse movement
 		var percentage = (evt.clientX / document.body.clientWidth) * 100;
@@ -43,47 +43,53 @@ tb.onShellLoaded(function () {
 		$("#timeline-bar").css("width", percentage + "%");
 	}
 
-	/* Get and Display Track Information */
-	tb.playbackStarted(function () {
-		$("#current-track-title").html(tb.getMetadata("title"));
-		$("#current-track-album").html(tb.getMetadata("album"));
-		$("#current-track-artist").html(tb.getMetadata("artist"));
-		$("<img src='" + tb.getMetadata("artwork") + "' />").appendTo($("#playback-art").html(""));
+	// Get and display track information
+	tb.onTrackLoad(function () {
+		updateScrubber = true;
+		var metadata = tb.getCurrentTrack();
+		$("#current-track-title").html(metadata.title);
+		$("#current-track-album").html(metadata.album);
+		$("#current-track-artist").html(metadata.artist);
+		$("<img src='" + metadata.artwork + "' />").appendTo($("#playback-art").html(""));
 		$("#playback").removeClass("hidden");
 		timelineUpdater();
 	});
 
-	tb.playbackStopped(function () {
+	// Hide the playback bar when the track is unloaded
+	tb.onTrackUnload(function () {
 		$("#playback").addClass("hidden");
 	});
 
 	$(document).on("mousedown", "#playback-play-pause", function (event) {
+		// Right click on the playback button to close the track
 		if (event.which === 3) {
-			tb.setTrack();
+			updateScrubber = false;
+			tb.setCurrentTrack();
 		}
 	});
 
-	/* Update Slider Position */
-	function timelineUpdater() {
-		if (!seeking) {
-			var percentage = tb.getTrackTime() / tb.getTrackLength() * 100;
+	// Update slider position
+	function timelineUpdater(stop) {
+		if (updateScrubber) {
+			var percentage = tb.getCurrentTime() / tb.getLength() * 100;
 			if (percentage >= 100) {
 				percentage = 100;
 			}
 			$("#timeline-bar-sensor .slider-knob").css("left", percentage + "%");
 			$("#timeline-bar").css("width", percentage + "%");
-			$("#song-time").html(tb.formatTime(Math.floor(tb.getTrackTime())) + " / " + tb.formatTime(tb.getMetadata("duration")));
+			$("#song-time").html(tb.formatTime(Math.floor(tb.getCurrentTime())) + " / " + tb.formatTime(Math.round(tb.getLength())));
 		}
+
 		requestAnimationFrame(timelineUpdater);
 	}
-	/* Spacebar Pause */
+	// Spacebar pause
 	$("body").keydown(function (e) {
 		var target = e.target || e.srcElement;
 		if (target.tagName !== "textarea" && target.type !== "text") {
 			if (e.keyCode === 32) {
 				if (!pauseKeyDown) {
 					pauseKeyDown = true;
-					tb.playbackState("toggle");
+					tb.togglePlayPause();
 				}
 				return false;
 			}
@@ -94,29 +100,28 @@ tb.onShellLoaded(function () {
 		}
 	});
 
-	/* Play/Pause Button Click */
+	// Play/Pause button click
 	$("#playback-play-pause").click(function () {
-		tb.playbackState("toggle");
+		tb.togglePlayPause();
 	});
 
-	/* Change button when song is played or paused */
-	tb.onPlaybackStateChange(function (state) {
-		if (state === "play") {
-			$("#playback-play-pause #play").hide();
-			$("#playback-play-pause #pause").show();
-			$("#playback-play-pause").attr("title", tb.getTranslation("Pause"));
-		} else if (state === "pause") {
-			$("#playback-play-pause #pause").hide();
-			$("#playback-play-pause #play").show();
-			$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
-		} else if (state === "ended") {
-			$("#playback-play-pause #pause").hide();
-			$("#playback-play-pause #play").show();
-			$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
-		}
+	// Change Play/Pause button to Play
+	tb.onPlay(function () {
+		$("#playback-play-pause #pause").hide();
+		$("#playback-play-pause #play").show();
+		$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
 	});
 
-	/* Clear search bar */
+	// Change Play/Pause button to Pause
+	tb.onPause(function () {
+		$("#playback-play-pause #play").hide();
+		$("#playback-play-pause #pause").show();
+		$("#playback-play-pause").attr("title", tb.getTranslation("Pause"));
+	});
+
+	// REST OF INTERFACE //
+
+	// Clear search bar
 	$("#search-bar > div > a").click(function () {
 		$("#search-bar > div > input").val("");
 	});
@@ -127,7 +132,7 @@ tb.onShellLoaded(function () {
 		}
 	});
 
-	/* Disable selection with Ctrl + A */
+	// Disable selection with Ctrl + A
 	$(function () {
 		$(document).keydown(function (objEvent) {
 			if (objEvent.ctrlKey) {
@@ -138,26 +143,24 @@ tb.onShellLoaded(function () {
 		});
 	});
 
-	/* Volume Mouse Down */
+	// Volume slider mouse down
 	$("#volume-control")[0].addEventListener("mousedown", volumeMouseDownListener);
-	function volumeMouseDownListener(evt) {
+	function volumeMouseDownListener(event) {
 		window.addEventListener("mouseup", volumeMouseUpListener);
 
 		// Bind and call the move listener
 		document.addEventListener("mousemove", volumeMouseDownListener);
-		volumeMouseMoveListener(evt);
+		volumeMouseMoveListener(event);
 	}
 
-	/* Volume Mouse Up */
+	// Volume slider mouse up
 	function volumeMouseUpListener() {
 		window.removeEventListener("mouseup", volumeMouseUpListener);
 		document.removeEventListener("mousemove", volumeMouseDownListener);
 	}
 
-	/* Volume Mouse Movement */
+	// Volume slider mouse movement
 	function volumeMouseMoveListener(evt) {
-		//cords.left - evt.clientX /
-
 		// Get mouse movement
 		var percentage = ((evt.clientX - $("#volume-control .knob").offset().left) / $("#volume-control .knob").width() * 100);
 
@@ -178,7 +181,7 @@ tb.onShellLoaded(function () {
 		if (tb.volume() * 100 === 0) { $("#volume-control svg path:nth-child(3)").hide(); } else { $("#volume-control svg path:nth-child(3)").show(); }
 	}
 
-	/* Playback Order Buttons */
+	// Playback Order buttons
 	playbackOrderWrap(0);
 	function playbackOrderWrap(index) {
 		$("#playback-order a").removeClass("playback-order-active");
@@ -199,11 +202,12 @@ tb.onShellLoaded(function () {
 		}
 	}
 
+	// Click on a Playback Order button
 	$("#playback-order a").click(function () {
 		playbackOrderWrap($("#playback-order a").index(this));
 	});
 
-	/* Add buttons */
+	// Add page tabs
 	function addPageTabs() {
 		tb.onPackagesLoaded(function () {
 			tb.getPackages({ "type": "page" }, false, function (pages) {
@@ -229,7 +233,7 @@ tb.onShellLoaded(function () {
 		});
 	}
 
-	/* Call for page tabs to be added */
+	// Call for page tabs to be added
 	if (tb.isPackagesLoaded) {
 		addPageTabs();
 	} else {
@@ -238,11 +242,12 @@ tb.onShellLoaded(function () {
 		});
 	}
 
-	/* Select tab */
+	// Call to select current page tab
 	tb.onPageLoadInitiated(function (repo) {
 		selectPageTab(repo);
 	});
 
+	// Mark active page tab as selected
 	function selectPageTab(repo) {
 		repo = repo.replace("/", "\\:");
 		$("#page-tabs > a").removeClass("page-selector-active");

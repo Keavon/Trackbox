@@ -15,10 +15,17 @@
 	z-index:1;
 	height:auto;
 	flex:none;
+	width:100%;
+	display:flex;
+}
+
+table > tbody {
+	display:inline-block;
+	width:100%;
 }
 
 /* Dividers */
-#list-header > div {
+#list-header > td {
 	border-left: solid 1px #eee;
 	line-height: 1;
 	padding-top: 8px;
@@ -27,16 +34,20 @@
 	padding-left: 4px;
 	padding-right: 5px;
 }
-#list-header > div:first-child {
+#list-header > td:first-child {
 	border-left: none;
 }
 
 /* Scrollbar space compensation */
-#list-header > div:last-child {
+#list-header > td:last-child {
 	margin-right: 17px;
 }
 
 /* List sort arrow */
+.sort-down p, .sort-up p {
+	position:relative;
+}
+
 .sort-down > p > a:after, .sort-up > p > a:after {
 	content: "";
 	border-color: transparent transparent #666 transparent;
@@ -45,7 +56,7 @@
 	width:0;
 	height:0;
 	position: absolute;
-	margin-left:3px;
+	margin-left:5px;
 	pointer-events:none;
 	cursor:default;
 }
@@ -63,19 +74,24 @@
 	height:100%;
 	overflow-y:auto;
 	flex:auto;
+	width:100%;
+	display:flex;
 }
 
 /* Row */
-.list-row {
+tr {
 	height: auto;
 	width: 100%;
 	background-color: #fff;
 	line-height: 2;
 	margin: 0;
 	font-size: 0;
+	display:inline-block;
+	border:none;
 }
-.list-row-selected {
+.selected {
 	background-color: rgba(0, 0, 0, 0.05);
+	transition: background-color 0.025s ease 0s;
 }
 .column-queue p, .column-queue a {
 	width:100%;
@@ -85,27 +101,28 @@
 .list-row-playing .column-queue a:not(:hover):after {
 	content:"\25BA";
 }
-.list-row > div {
+td {
 	display: inline-block;
 	padding-left: 5px;
 	padding-right: 5px;
+	border:none;
 }
-.list-row > div > p {
+td > p {
 	margin: 0;
 	font-size: 14px;
 	cursor: default;
 }
-.list-row > div > p > a:hover {
+td > p > a:hover {
 	text-decoration: underline;
 }
 
 /* Last column floats to right */
-.list-row > div:last-child {
+tr > td:last-child {
 	float: right;
 }
 
 /* Column width */
-#list-header div.column-queue, div.column-queue {
+#list-header td.column-queue, td.column-queue {
 	padding-left:0;
 	padding-right:0;
 	width:25px;
@@ -170,43 +187,43 @@
 
 
 /* Rating stars */
-.list-row:not(#list-header) > .column-rating > p > span > a {
+#list-frame .column-rating > p > span > a {
 	padding:0 1px;
 	font-size:18px;
 	line-height:0;
 }
-.list-row:not(#list-header) > .column-rating > p > span > a:after {
+#list-frame .column-rating > p > span > a:after {
 	content: "\2606";
 }
-.list-row:not(#list-header) > .column-rating > p > span:hover > a:after {
+#list-frame .column-rating > p > span:hover > a:after {
 	content: "\2605";
 }
-.list-row:not(#list-header) > .column-rating > p > span:hover > a:hover ~ a:after {
+#list-frame .column-rating > p > span:hover > a:hover ~ a:after {
 	content: "\2606";
 }
-.list-row:not(#list-header) .rating-1 a:nth-child(1):after {
+#list-frame .rating-1 a:nth-child(1):after {
 	content: "\2605";
 }
-.list-row:not(#list-header) .rating-2 a:nth-child(1):after,
-.list-row:not(#list-header) .rating-2 a:nth-child(2):after {
+#list-frame .rating-2 a:nth-child(1):after,
+#list-frame .rating-2 a:nth-child(2):after {
 	content: "\2605";
 }
-.list-row:not(#list-header) .rating-3 a:nth-child(1):after,
-.list-row:not(#list-header) .rating-3 a:nth-child(2):after,
-.list-row:not(#list-header) .rating-3 a:nth-child(3):after {
+#list-frame .rating-3 a:nth-child(1):after,
+#list-frame .rating-3 a:nth-child(2):after,
+#list-frame .rating-3 a:nth-child(3):after {
 	content: "\2605";
 }
-.list-row:not(#list-header) .rating-4 a:nth-child(1):after,
-.list-row:not(#list-header) .rating-4 a:nth-child(2):after,
-.list-row:not(#list-header) .rating-4 a:nth-child(3):after,
-.list-row:not(#list-header) .rating-4 a:nth-child(4):after {
+#list-frame .rating-4 a:nth-child(1):after,
+#list-frame .rating-4 a:nth-child(2):after,
+#list-frame .rating-4 a:nth-child(3):after,
+#list-frame .rating-4 a:nth-child(4):after {
 	content: "\2605";
 }
-.list-row:not(#list-header) .rating-5 a:nth-child(1):after,
-.list-row:not(#list-header) .rating-5 a:nth-child(2):after,
-.list-row:not(#list-header) .rating-5 a:nth-child(3):after,
-.list-row:not(#list-header) .rating-5 a:nth-child(4):after,
-.list-row:not(#list-header) .rating-5 a:nth-child(5):after {
+#list-frame .rating-5 a:nth-child(1):after,
+#list-frame .rating-5 a:nth-child(2):after,
+#list-frame .rating-5 a:nth-child(3):after,
+#list-frame .rating-5 a:nth-child(4):after,
+#list-frame .rating-5 a:nth-child(5):after {
 	content: "\2605";
 }
 

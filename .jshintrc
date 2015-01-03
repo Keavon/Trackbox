@@ -67,6 +67,8 @@
 	"-W089"         : false,
 	"-W083"         : false,
 	"globals"       : {
-		"tb": false
+		"tb": false,
+		"PouchDB": false,
+		"emit":  false
 	}
 }
