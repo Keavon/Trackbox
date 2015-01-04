@@ -49,7 +49,7 @@ tb.onShellLoaded(function () {
 		var metadata = tb.getCurrentTrack();
 		$("#current-track-title").html(metadata.title);
 		$("#current-track-album").html(metadata.album);
-		$("#current-track-artist").html(metadata.artist);
+		$("#current-track-artist").html(metadata.artists[0]);
 		$("<img src='" + metadata.artwork + "' />").appendTo($("#playback-art").html(""));
 		$("#playback").removeClass("hidden");
 		timelineUpdater();
