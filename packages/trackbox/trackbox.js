@@ -60,8 +60,8 @@ tb.onShellLoaded(function () {
 		$("#playback").addClass("hidden");
 	});
 
+	// Right click on the playback button to close the track
 	$(document).on("mousedown", "#playback-play-pause", function (event) {
-		// Right click on the playback button to close the track
 		if (event.which === 3) {
 			updateScrubber = false;
 			tb.setCurrentTrack();

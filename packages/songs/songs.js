@@ -76,13 +76,39 @@ tb.onPageLoadCompleted(function () {
 			}
 		});
 
-		// Selects a track given its ID
+		// Selects a track given its ID and scrolls to it if it is above or below the view
 		function selectRow(id) {
+			// Select target row
+			var targetRow = $("#list-frame tr[data-track-id=" + id + "]");
+			var targetFrame = $("#list-frame");
+
 			// Unselects the currently selected row
 			$(".selected").removeClass("selected");
 
 			// Selects the row with the given ID
-			$("#list-frame tr[data-track-id=" + id + "]").addClass("selected");
+			targetRow.addClass("selected");
+
+			// Find the pixels above the selected row to the top of the table of rows
+			var distanceAboveElement = targetRow.offset().top - targetRow.parent().offset().top - targetRow.parent().scrollTop();
+			// Find the pixels of hidden content above the current scroll position
+			var scrollDistanceAbove = targetFrame.scrollTop();
+
+			// Check if the selection is above the view
+			if (distanceAboveElement < scrollDistanceAbove) {
+				// Set the scroll position as the current scroll minus the difference
+				targetFrame.scrollTop(targetFrame.scrollTop() - (scrollDistanceAbove - distanceAboveElement));
+			} else {
+				// Find the pixels below the selected row to the bottom of the table of rows
+				var distanceBelowElement = targetFrame[0].scrollHeight - distanceAboveElement - targetRow.height();
+				// Find the pixels of hidden content below the current scroll position
+				var scrollDistanceBelow = targetFrame[0].scrollHeight - targetFrame.scrollTop() - targetFrame.height();
+
+				// Check if the selection is below the view
+				if (distanceBelowElement < scrollDistanceBelow) {
+					// Set the scroll position as the current scroll plus the difference
+					targetFrame.scrollTop(targetFrame.scrollTop() + (scrollDistanceBelow - distanceBelowElement));
+				}
+			}
 		}
 	});
 });

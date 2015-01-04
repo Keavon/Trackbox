@@ -27,7 +27,7 @@ a, div {
 	transition:background-color 0.1s;
 }
 
-* {
+div, img, svg, p, a, h1, h2, h3, h4, h5, h6, span, label, table, tbody, tr, td {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -150,6 +150,7 @@ body {
 	box-shadow:none;
 	background:transparent;
 	color:||solid1||;
+	-moz-user-select: 
 }
 #search-bar a {
 	position:absolute;

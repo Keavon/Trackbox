@@ -51,7 +51,7 @@ tb.addPreferences = function () {
 		"_id": "default",
 		"currentShellPath": "packages/trackbox",
 		"defaultPage": "albums",
-		"defaultLanguage": "de"
+		"defaultLanguage": "en"
 	});
 };
 
