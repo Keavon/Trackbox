@@ -69,7 +69,7 @@ tb.onShellLoaded(function () {
 	});
 
 	// Update slider position
-	function timelineUpdater(stop) {
+	function timelineUpdater() {
 		if (updateScrubber) {
 			var percentage = tb.getCurrentTime() / tb.getLength() * 100;
 			if (percentage >= 100) {
@@ -219,7 +219,8 @@ tb.onShellLoaded(function () {
 								var renderedTemplate = tb.render(template, {
 									"URL": pages[page].preferredUrl,
 									"REPO": pages[page].repo.replace("/", ":"),
-									"NAME": pages[page].name, "ICON": icon
+									"NAME": tb.getTranslation(pages[page].pageName),
+									"ICON": icon
 								});
 								$("#page-tabs").append(renderedTemplate);
 								if (tb.getCurrentPageUrl() === pages[page].url || pages[page].standardUrl.indexOf(tb.getCurrentPageUrl()) !== -1) {

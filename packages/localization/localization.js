@@ -1,8 +1,6 @@
-tb.defaultLanguage = "en";
 tb.localizations = {
 	"en": {},
 	"da": {
-		"Trackbox": "Trackbox",
 		"Songs": "Sange",
 		"Albums": "Albums",
 		"Artists": "Kunstnere",
@@ -10,7 +8,6 @@ tb.localizations = {
 		"Boxes": "Kasser"
 	},
 	"de": {
-		"Trackbox": "Trackbox",
 		"Songs": "Lieder",
 		"Albums": "Alben",
 		"Artists": "Künstler",
@@ -28,14 +25,12 @@ tb.localizations = {
 		"Next Track": "Nächster Titel",
 		"Play": "Play",
 		"Pause": "Pause",
-		"Repeat Off": "Nichts wiederholen",
-		"Repeat All": "Alles wiederholen",
-		"Repeat Track": "Titel wiederholen",
-		"Shuffle On": "Shuffle An",
-		"Shuffle Off": "Shuffle Aus"
+		"Ordered": "Bestellt",
+		"Shuffle": "Shuffle",
+		"Repeat": "Wiederholen",
+		"Loop": "Schlingen"
 	},
 	"es": {
-		"Trackbox": "Trackbox",
 		"Songs": "Canciones",
 		"Albums": "Álbumes",
 		"Artists": "Artistas",
@@ -43,7 +38,6 @@ tb.localizations = {
 		"Boxes": "Cajas"
 	},
 	"fi": {
-		"Trackbox": "Trackbox",
 		"Songs": "Laulut",
 		"Albums": "Albumit",
 		"Artists": "Artistit",
@@ -60,7 +54,6 @@ tb.localizations = {
 		"Search": "検索"
 	},
 	"sv": {
-		"Trackbox": "Trackbox",
 		"Songs": "Låtar",
 		"Albums": "Album",
 		"Artists": "Artister",

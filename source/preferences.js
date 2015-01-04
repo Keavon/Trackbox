@@ -50,7 +50,8 @@ tb.addPreferences = function () {
 	tb.private.preferencesDb.put({
 		"_id": "default",
 		"currentShellPath": "packages/trackbox",
-		"defaultPage": "albums"
+		"defaultPage": "albums",
+		"defaultLanguage": "de"
 	});
 };
 

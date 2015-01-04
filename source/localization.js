@@ -40,14 +40,20 @@ tb.localize = function (template, language) {
 // Returns the translation of a string of text in a given language
 tb.getTranslation = function (key, language) {
 	// Set language to default if language parameter is omitted
-	language = language || tb.defaultLanguage;
+	if (!language) {
+		if (typeof tb.private.defaultLanguage !== "undefined") {
+			language = tb.private.defaultLanguage;
+		} else {
+			console.error("The translation '" + key + "' cannot be retrieved yet because the language is not specified and the default language has not yet had a chance to be read from the user preferences.");
+		}
+	}
 
 	// Get translation from specified language and key
 	var translation = tb.localizations[language][key];
 
 	// Check if the fetched translation exists
 	if (typeof translation === "undefined") {
-		// If it wasn't English, get the English version
+		// If the requested language wasn't English and there was no matching key, get the English version
 		if (language !== "en") {
 			translation = tb.localizations.en[key];
 		}
@@ -61,3 +67,18 @@ tb.getTranslation = function (key, language) {
 	// Return the translation
 	return translation;
 };
+
+// Set the default language to a global variable
+if (tb.isPreferencesLoaded()) {
+	// Preferences database is already loaded, so query it
+	tb.getPreferences(function (preferences) {
+		tb.private.defaultLanguage = preferences.defaultLanguage;
+	});
+} else {
+	// Preferences database is not yet loaded, so schedule a query for it
+	tb.onPreferencesLoaded(function () {
+		tb.getPreferences(function (preferences) {
+			tb.private.defaultLanguage = preferences.defaultLanguage;
+		});
+	});
+}
