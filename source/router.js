@@ -21,6 +21,7 @@ tb.router = function () {
 			});
 		});
 	} else {
+		// Get the user's preferences
 		tb.getPreferences(function (preferences) {
 			// If none fit, change hash to the default page
 			window.location.hash = "#" + preferences.defaultPage;
@@ -30,5 +31,6 @@ tb.router = function () {
 
 // Returns the current page URL
 tb.getCurrentPageUrl = function () {
+	// Remove the hash character
 	return window.location.hash.substring(1);
 };
