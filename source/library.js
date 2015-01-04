@@ -76,6 +76,7 @@ tb.getLibrary = function (key, value, callback) {
 				// Calls back with the library
 				callback(library);
 			} else {
+				tb.addLibrary();
 				console.error("Error reading library database.");
 			}
 		});

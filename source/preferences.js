@@ -41,7 +41,11 @@ tb.getPreferences = function (user, callback) {
 
 	// Get the user's preferences
 	tb.private.preferencesDb.get(user, function (err, doc) {
-		callback(doc);
+		if (!err) {
+			callback(doc);
+		} else {
+			tb.addPreferences();
+		}
 	});
 };
 
