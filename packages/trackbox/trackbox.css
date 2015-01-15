@@ -183,6 +183,11 @@ body {
 	background-color:||background1||;
 }
 
+.page-selector svg {
+	width:30px;
+	height:30px;
+}
+
 
 /* /Right buttons container */
 #title-bar-right {
@@ -305,7 +310,8 @@ body {
 }
 #playback.hidden {
 	height:0;
-	transition:height 0.25s;
+	visibility:hidden;
+	transition:height 0.25s ease 0s, visibility 0s ease 0.25s
 }
 #playback.hidden #timeline-bar-sensor {
 	bottom:-9px;
