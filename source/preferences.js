@@ -57,6 +57,7 @@ tb.addPreferences = function () {
 		"defaultPage": "albums",
 		"defaultLanguage": "en"
 	});
+	location.reload();
 };
 
 tb.destroyPreferences = function () {

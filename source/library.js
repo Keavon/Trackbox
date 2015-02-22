@@ -66,7 +66,7 @@ tb.getLibrary = function (key, value, callback) {
 	// Fetches the full library efficiently
 	function queryAll() {
 		tb.private.libraryDb.allDocs({ include_docs: true }, function (err, response) {
-			if (!err) {
+			if (!err && response.rows.length > 0) {
 				// Pulls the documents out of the response
 				var library = [];
 				response.rows.forEach(function (entry) {
@@ -190,6 +190,7 @@ tb.sortByProperties = function (sortProperties) {
 ////////// DEBUGGING //////////
 tb.addLibrary = function () {
 	tb.private.libraryDb.bulkDocs(tb.private.librarySongData);
+	location.reload();
 };
 
 tb.destroyLibrary = function () {
