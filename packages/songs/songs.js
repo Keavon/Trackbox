@@ -46,10 +46,12 @@ tb.onPageLoadCompleted(function () {
 
 		// Move selection up and down and play the selected track upon hitting Enter
 		$(document).keydown(function (key) {
+			var index;
 			// Up, down, or enter
 			if (key.keyCode === 38 || key.keyCode === 40 || key.keyCode === 13) {
 				// Get the index of the currently selected row
-				var index = $("#list-frame tr.selected").index();
+				index = $("#list-frame tr.selected").index();
+				key.preventDefault();
 			}
 
 			if (key.keyCode === 38) {
