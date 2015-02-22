@@ -23,6 +23,6 @@ We believe in free and open software, which is why we're building Trackbox under
 We're still in the midst of building Trackbox, but you can help! If you're a desktop or web developer, fork the app on GitHub. Please send us an email or ping us so we can work together.
 
 ### Contact:
-[Contact@TrackboxApp.com](mailto:Contact@Trackbox.io) (General/Press)  
-[Keavon@Keavon.com](mailto:Keavon@Keavon.com) (Designer, Programmer)  
-[J@Joshua-Anderson.com](mailto:J@Joshua-Anderson.com) (Lead Programmer)
+[contact@trackbox.io](mailto:contact@trackbox.io) (General/Press)  
+[keavon@keavon.com](mailto:keavon@keavon.com) (Designer, Frontend Programmer)  
+[j@joshua-anderson.com](mailto:j@joshua-anderson.com) (Desktop Programmer)
