@@ -7,6 +7,7 @@
 	"pageIcon": "albums.svg",
 	"page": "albums.html",
 	"css": [ "albums.css" ],
+	"javascript": [ "albums.js" ],
 	"url": "trackbox-albums",
 	"standardUrl": [ "albums" ],
 	"preferredUrl": "albums"
