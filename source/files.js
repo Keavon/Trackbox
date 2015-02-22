@@ -4,8 +4,7 @@ tb.getFileContents = function (path, callback) {
 		"url": path,
 		"cache": false,
 		"dataType": "text"
-	}).done(callback)
-	.fail(function () {
+	}).done(callback).fail(function () {
 		console.error("Error reading file at '" + path + "'.");
 	});
 };
@@ -16,8 +15,7 @@ tb.getJSONFileContents = function (path, callback) {
 		"url": path,
 		"cache": false,
 		"dataType": "json"
-	}).done(callback)
-	.fail(function () {
+	}).done(callback).fail(function () {
 		console.error("Error reading or parsing JSON file at '" + path + "'.");
 	});
 };

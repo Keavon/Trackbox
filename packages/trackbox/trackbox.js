@@ -1,102 +1,161 @@
+// Run when shell is loaded
 tb.onShellLoaded(function () {
-	var pauseKeyDown = false;
-	var updateScrubber = true;
+	// REST OF INTERFACE //
 
-	// Scrubber Mouse Down
+	// Disable selection with Ctrl + A
+	$(function () {
+		$(document).keydown(function (event) {
+			// Get the target element of the keydown event
+			var target = event.target || event.srcElement;
+
+			// Ensure the target is not typing inside a textbox
+			if (target.tagName !== "textarea" && target.type !== "text") {
+				if (event.ctrlKey) {
+					if (event.keyCode === 65 || event.keyCode === 97) {
+						return false;
+					}
+				}
+			}
+		});
+	});
+
+	// Clear search bar
+	$("#search-bar > div > a").click(function () {
+		$("#search-bar > div > input").val("");
+	});
+	$("#search-bar > div > input").keydown(function (key) {
+		// Usually doesn't work in Firefox for some reason
+		if (key.keyCode === 27) {
+			$("#search-bar > div > input").val("");
+		}
+	});
+
+	var pauseKeyDown = false;
+
+	/*** SCRUBBER MOVEMENT ***/
+
+	// Determines if the scrubber gets updated with the current music time
+	var updateScrubber = false;
+
+	// Add the mouse down listener to check when the mouse clicks down on it
 	$("#timeline-bar-sensor")[0].addEventListener("mousedown", scrubMouseDownListener);
+
+	// Drag: Mouse down
 	function scrubMouseDownListener(evt) {
-		updateScrubber = false;
-		window.addEventListener("mouseup", scrubMouseUpListener);
 
 		// Disable text selection while dragging
 		evt.preventDefault();
+
+		// Stop the scrubber from moving from playback
+		updateScrubber = false;
+
+		// Add listener for mouse down
+		window.addEventListener("mouseup", scrubMouseUpListener);
 
 		// Bind and call the move listener
 		document.addEventListener("mousemove", scrubMouseDownListener);
 		scrubMouseMoveListener(evt);
 	}
 
-	// Scrubber mouse up
+	// Drag: Mouse up
 	function scrubMouseUpListener() {
+
+		// Re-enable the scrubber's movement from playback
 		updateScrubber = true;
+
+		// Remove the mouse up and mouse move listeners
 		window.removeEventListener("mouseup", scrubMouseUpListener);
 		document.removeEventListener("mousemove", scrubMouseDownListener);
 
 		// Get slider position
 		var timePercent = $("#timeline-bar-sensor .slider-knob")[0].style.left.substring(0, $("#timeline-bar-sensor .slider-knob")[0].style.left.length - 1) / 100;
 
-		// Set track time
+		// Set the new track time
 		tb.setCurrentTime(timePercent * tb.getLength());
 	}
 
-	// Scrubber mouse movement
+	// Drag: Mouse movement
 	function scrubMouseMoveListener(evt) {
+
 		// Get mouse movement
 		var percentage = (evt.clientX / document.body.clientWidth) * 100;
 
 		// Constrain movement inside timeline
-		if (percentage < 0) { percentage = 0; }
-		if (percentage > 100) { percentage = 100; }
+		if (percentage < 0) {
+			percentage = 0;
+		} else if (percentage > 100) {
+			percentage = 100;
+		}
 
 		// Set slider position
 		$("#timeline-bar-sensor .slider-knob").css("left", percentage + "%");
 		$("#timeline-bar").css("width", percentage + "%");
 	}
 
-	// Get and display track information
-	tb.onTrackLoad(function () {
-		updateScrubber = true;
-		var metadata = tb.getCurrentTrack();
-		$("#current-track-title").html(metadata.title);
-		$("#current-track-album").html(metadata.album);
-		$("#current-track-artist").html(metadata.artists[0]);
-		$("<img src='" + metadata.artwork + "' />").appendTo($("#playback-art").html(""));
-		$("#playback").removeClass("hidden");
-		timelineUpdater();
-	});
-
-	// Hide the playback bar when the track is unloaded
-	tb.onTrackUnload(function () {
-		$("#playback").addClass("hidden");
-	});
-
-	// Right click on the playback button to close the track
-	$(document).on("mousedown", "#playback-play-pause", function (event) {
-		if (event.which === 3) {
-			updateScrubber = false;
-			tb.setCurrentTrack();
-		}
-	});
-
-	// Update slider position
-	function timelineUpdater() {
+	// Update scrubber position with music time
+	function scrubberUpdater() {
+		// Only update scrubber if updateScrubber is enabled
 		if (updateScrubber) {
+			// Get the percentage from the time over the total time
 			var percentage = tb.getCurrentTime() / tb.getLength() * 100;
-			if (percentage >= 100) {
+
+			// Limit the length to a max of 100%
+			if (percentage > 100) {
 				percentage = 100;
 			}
+
+			// Update the slider in the DOM with the percent
 			$("#timeline-bar-sensor .slider-knob").css("left", percentage + "%");
 			$("#timeline-bar").css("width", percentage + "%");
 			$("#song-time").html(tb.formatTime(Math.floor(tb.getCurrentTime())) + " / " + tb.formatTime(Math.round(tb.getLength())));
 		}
 
-		requestAnimationFrame(timelineUpdater);
+		// Call the function again next time the page is repainted
+		requestAnimationFrame(scrubberUpdater);
 	}
-	// Spacebar pause
-	$("body").keydown(function (e) {
-		var target = e.target || e.srcElement;
-		if (target.tagName !== "textarea" && target.type !== "text") {
-			if (e.keyCode === 32) {
-				if (!pauseKeyDown) {
-					pauseKeyDown = true;
-					tb.togglePlayPause();
-				}
-				return false;
-			}
+
+	// Call the scrubber updater
+	scrubberUpdater();
+
+	/*** PLAYBACK BAR ***/
+
+	// Get and display track information
+	tb.onTrackLoad(function () {
+		// Get the metadata for the current track
+		var metadata = tb.getCurrentTrack();
+
+		// Add the title, album, and artist
+		$("#current-track-title").html(metadata.title);
+		$("#current-track-album").html(metadata.album);
+		$("#current-track-artist").html(metadata.artists[0]);
+
+		// Add the album art image
+		$("<img src='" + metadata.artwork + "' />").appendTo($("#playback-art").html(""));
+
+		if ($("#playback").hasClass("hidden")) {
+			// Make the playback bar visible
+			$("#playback").removeClass("hidden");
+
+			// Make the scrubber update while it's visible
+			updateScrubber = true;
 		}
-	}).keyup(function (e) {
-		if (e.keyCode === 32 && pauseKeyDown) {
-			pauseKeyDown = false;
+	});
+
+	// Hide the playback bar when the track is unloaded
+	tb.onTrackUnload(function () {
+		// Hide the playback bar
+		$("#playback").addClass("hidden");
+
+		// Stop updating the scrubber while it's not shown
+		updateScrubber = false;
+	});
+
+	// Right click on the playback button to close the track
+	$(document).on("mousedown", "#playback-play-pause", function (event) {
+		// Check for right click, event 3
+		if (event.which === 3) {
+			// Unload the track
+			tb.setCurrentTrack();
 		}
 	});
 
@@ -119,28 +178,31 @@ tb.onShellLoaded(function () {
 		$("#playback-play-pause").attr("title", tb.getTranslation("Play"));
 	});
 
-	// REST OF INTERFACE //
+	// Spacebar pause
+	$("body").keydown(function (event) {
+		// Check if the key is the spacebar
+		if (event.keyCode === 32) {
+			// Get the target element of the keydown event
+			var target = event.target || event.srcElement;
 
-	// Clear search bar
-	$("#search-bar > div > a").click(function () {
-		$("#search-bar > div > input").val("");
-	});
-	$("#search-bar > div > input").keydown(function (key) {
-		// Usually doesn't work in Firefox for some reason
-		if (key.keyCode === 27) {
-			$("#search-bar > div > input").val("");
-		}
-	});
+			// Ensure the target is not typing inside a textbox
+			if (target.tagName !== "textarea" && target.type !== "text") {
+				// Ensure the pause key is not already held down (if so, this would be a refiring of the event because it's held down)
+				if (!pauseKeyDown) {
+					// The pause key is now down, so mark it as such to ensure it can't toggle multiple times while being held down
+					pauseKeyDown = true;
 
-	// Disable selection with Ctrl + A
-	$(function () {
-		$(document).keydown(function (objEvent) {
-			if (objEvent.ctrlKey) {
-				if (objEvent.keyCode === 65 || objEvent.keyCode === 97) {
-					return false;
+					// Toggle pause/play
+					tb.togglePlayPause();
 				}
 			}
-		});
+		}
+	}).keyup(function (event) {
+		// Release spacebar
+		if (event.keyCode === 32 && pauseKeyDown) {
+			// Mark the pause key as up again
+			pauseKeyDown = false;
+		}
 	});
 
 	// Volume slider mouse down
