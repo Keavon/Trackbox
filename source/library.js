@@ -189,8 +189,9 @@ tb.sortByProperties = function (sortProperties) {
 
 ////////// DEBUGGING //////////
 tb.addLibrary = function () {
-	tb.private.libraryDb.bulkDocs(tb.private.librarySongData);
-	location.reload();
+	tb.private.libraryDb.bulkDocs(tb.private.librarySongData, function () {
+		location.reload();
+	});
 };
 
 tb.destroyLibrary = function () {
