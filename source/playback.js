@@ -95,6 +95,23 @@ tb.onPause = function (callback) {
 	});
 };
 
+// Triggers onTrackEnded when the track ends
+tb.private.audioPlayer.addEventListener("ended", function () {
+	tb.triggerOnTrackEnded();
+});
+
+// Triggers onTrackEnded
+tb.triggerOnTrackEnded = function () {
+	$(window).trigger("onTrackEnded");
+};
+
+// Calls back when the track ends
+tb.onTrackEnded = function (callback) {
+	$(window).on("onTrackEnded", function () {
+		callback();
+	});
+};
+
 // Pause the playing track
 tb.pause = function () {
 	tb.triggerOnPause();

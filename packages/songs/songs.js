@@ -38,10 +38,13 @@ tb.onPageLoadCompleted(function () {
 			selectRow($(this).attr("data-track-id"));
 		});
 
+		var currentTrackIndex;
+
 		// Play a song on double click
 		$('#list-frame').on('dblclick', 'tr', function () {
 			// Load the selected track
 			tb.setCurrentTrack($(this).attr("data-track-id"), true);
+			currentTrackIndex = $(this).index();
 		});
 
 		// Move selection up and down and play the selected track upon hitting Enter
@@ -75,6 +78,7 @@ tb.onPageLoadCompleted(function () {
 
 					// Load the selected track
 					tb.setCurrentTrack($("#list-frame tr:nth-child(" + (index + 1) + ")").attr("data-track-id"), true);
+					currentTrackIndex = index;
 				}
 			}
 		});
@@ -113,5 +117,11 @@ tb.onPageLoadCompleted(function () {
 				}
 			}
 		}
+
+		// When the track ends, move on to the next track
+		tb.onTrackEnded(function () {
+			currentTrackIndex++;
+			tb.setCurrentTrack($("#list-frame tr:nth-child(" + (currentTrackIndex + 1) + ")").attr("data-track-id"), true);
+		});
 	});
 });
