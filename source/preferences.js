@@ -56,8 +56,9 @@ tb.addPreferences = function () {
 		"currentShellPath": "packages/trackbox",
 		"defaultPage": "albums",
 		"defaultLanguage": "en"
+	}, function () {
+		location.reload();
 	});
-	location.reload();
 };
 
 tb.destroyPreferences = function () {
