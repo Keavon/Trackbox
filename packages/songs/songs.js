@@ -46,35 +46,36 @@ tb.onPageLoadCompleted(function () {
 
 		// Move selection up and down and play the selected track upon hitting Enter
 		$(document).keydown(function (key) {
-			var index;
 			// Up, down, or enter
-			if (key.keyCode === 38 || key.keyCode === 40 || key.keyCode === 13) {
+			if (key.keyCode === 38 || key.keyCode === 40 || key.keyCode === 13 || key.keyCode === 32) {
 				// Get the index of the currently selected row
-				index = $("#list-frame tr.selected").index();
+				var index = $("#list-frame tr.selected").index();
+
+				// Prevent up/down/spacebar from scrolling the window
 				key.preventDefault();
-			}
 
-			if (key.keyCode === 38) {
-				// Up
+				if (key.keyCode === 38) {
+					// Up
 
-				// Make sure it's not already at the top
-				if (index > 0) {
-					// Select the track above it
-					selectRow($("#list-frame tr:nth-child(" + index + ")").attr("data-track-id"));
+					// Make sure it's not already at the top
+					if (index > 0) {
+						// Select the track above it
+						selectRow($("#list-frame tr:nth-child(" + index + ")").attr("data-track-id"));
+					}
+				} else if (key.keyCode === 40) {
+					// Down
+
+					// Make sure it's not already at the bottom
+					if (index < $("#list-frame tr").length - 1) {
+						// Select the track below it
+						selectRow($("#list-frame tr:nth-child(" + (index + 2) + ")").attr("data-track-id"));
+					}
+				} else if (key.keyCode === 13) {
+					// Play
+
+					// Load the selected track
+					tb.setCurrentTrack($("#list-frame tr:nth-child(" + (index + 1) + ")").attr("data-track-id"), true);
 				}
-			} else if (key.keyCode === 40) {
-				// Down
-
-				// Make sure it's not already at the bottom
-				if (index < $("#list-frame tr").length - 1) {
-					// Select the track below it
-					selectRow($("#list-frame tr:nth-child(" + (index + 2) + ")").attr("data-track-id"));
-				}
-			} else if (key.keyCode === 13) {
-				// Play
-
-				// Load the selected track
-				tb.setCurrentTrack($("#list-frame tr:nth-child(" + (index + 1) + ")").attr("data-track-id"), true);
 			}
 		});
 
