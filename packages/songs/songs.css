@@ -227,25 +227,6 @@ tr > td:last-child {
 	content: "\2605";
 }
 
-/* Play/skip once checkbox */
-input[type=checkbox].play-skip-once + label:before {
-	opacity:0.25;
-	content: "\25BA  \25BA";
-	-webkit-transform:scale(0.5, 1);
-	transform:scale(0.5, 1);
-	word-spacing:-6px;
-	width:10px;
-	left:-3px;
-	white-space:nowrap;
-}
-input[type=checkbox].play-skip-once:checked + label:before {
-	opacity:0.25;
-	content: "\25BA";
-	left:-1px;
-	transform:scale(1, 1);
-	-webkit-transform:scale(1, 1);
-}
-
 /* Checkboxes */
 input[type="checkbox"] {
 	display: none;
@@ -256,24 +237,18 @@ input[type="checkbox"] + label {
 	display: inline-block;
 	border: 1px solid #ccc;
 	border-radius:1px;
-	position:relative;
-	line-height:2;
+	background-color:#fff;
+	background-size:cover;
 }
 input[type="checkbox"] + label:hover {
 	background-color: #f9f9f9;
 }
-input[type=checkbox] + label:before {
-	color:#666;
-	font-size: 12px;
-	position:absolute;
-	top:-8px;
-	left:1px;
+input[type=checkbox]:checked + label {
+	background-image:url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve"><polygon fill="||solid2||" points="949.4257813,197.9501953 884.90625,126.7460938 337.684082,730.6591797 114.5576172,484.4189453 50.0375977,555.6220703 337.5131836,873.2529297 337.6826172,873.0654297 337.8535156,873.2539063" /></svg>');
 }
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	input[type=checkbox] + label:before {
-		top:-7px;
-	}
+input[type=checkbox].once + label {
+	background-image:url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve"><path fill="||solid2||" d="M70,70v860l860-430L70,70z M300,700V400H200V300h200v400H300z" /></svg>');
 }
-input[type=checkbox]:checked + label:before {
-	content: "\2713";
+input[type=checkbox].once:checked + label {
+	background-image:url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve"><polygon fill="||solid2||" points="649.2216797,645.3466797 843.6953125,331.3745117 956.7910156,618.6376953" /><path fill="||solid2||" d="M792.53125,578.1181641C305.2792969,215.8657227,42,711.3613281,42,711.3613281 S174.6757813,90.3320313,808.7314453,476.7993164L792.53125,578.1181641z" /></svg>');
 }

@@ -123,5 +123,20 @@ tb.onPageLoadCompleted(function () {
 			currentTrackIndex++;
 			tb.setCurrentTrack($("#list-frame tr:nth-child(" + (currentTrackIndex + 1) + ")").attr("data-track-id"), true);
 		});
+
+		// Switch checkbox between enable/disable track and play/skip once
+		$("#list-frame").on("mousedown", "input + label", function (event) {
+			// Check for right click, event 3
+			if (event.which === 3) {
+				var checkbox = $(this).prev();
+				if (checkbox.hasClass("once")) {
+					// Turn it to once
+					checkbox.removeClass("once");
+				} else {
+					// Turn it to normal checkmark
+					checkbox.addClass("once");
+				}
+			}
+		});
 	});
 });
