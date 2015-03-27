@@ -2,27 +2,18 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="description" content="Trackbox, the simple, beautiful music player desktop app. Experience your music collection, built around you. Entirely free, open-source, and customizable." />
-	<title>Trackbox, the Simple and Beautiful Music Player</title>
+	<meta name="description" content="Trackbox, the simple, beautiful music player desktop app. Experience your music collection, built around you. Entirely free, open-source, and customizable.">
+	<title>Trackbox</title>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400|Open+Sans:300,300italic,400,400italic' rel='stylesheet' type='text/css'>
 	<link rel="shortcut icon" href="favicon.ico?v=1">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
-	<link href="reset.css" rel="stylesheet" />
-	<link href="style.css" rel="stylesheet" />
-	<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-54662805-1', 'auto');
-	ga('send', 'pageview');
-	</script>
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script>(function (n, t, i, r, u, f, e) { n.GoogleAnalyticsObject = u; n[u] = n[u] || function () { (n[u].q = n[u].q || []).push(arguments) }; n[u].l = 1 * new Date; f = t.createElement(i); e = t.getElementsByTagName(i)[0]; f.async = 1; f.src = r; e.parentNode.insertBefore(f, e) })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga"); ga("create", "UA-54662805-1", "auto"); ga("send", "pageview");</script>
 </head>
 <body>
 	<header>
 		<div>
 			<div>
-				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve"><rect fill="#4777A4" width="16" height="16" /><rect x="1" y="1" fill="#99B8D6" width="14" height="2" /><rect x="1" y="5" fill="#99B8D6" width="14" height="2" /><rect x="1" y="9" fill="#99B8D6" width="14" height="2" /><rect x="1" y="13" fill="#99B8D6" width="14" height="2" /><rect x="1" y="7" fill="#5C8FBF" width="14" height="2" /><rect x="1" y="3" fill="#5C8FBF" width="14" height="2" /><rect x="1" y="11" fill="#5C8FBF" width="14" height="2" /></svg>
-				<h1>Trackbox</h1>
+				<a href="/"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve"><rect fill="#4777A4" width="16" height="16" /><rect x="1" y="1" fill="#99B8D6" width="14" height="2" /><rect x="1" y="5" fill="#99B8D6" width="14" height="2" /><rect x="1" y="9" fill="#99B8D6" width="14" height="2" /><rect x="1" y="13" fill="#99B8D6" width="14" height="2" /><rect x="1" y="7" fill="#5C8FBF" width="14" height="2" /><rect x="1" y="3" fill="#5C8FBF" width="14" height="2" /><rect x="1" y="11" fill="#5C8FBF" width="14" height="2" /></svg><h1>Trackbox</h1></a>
 				<a href="http://github.com/Trackbox/Trackbox" class="button">Contribute on GitHub</a>
 			</div>
 		</div>
@@ -37,13 +28,13 @@
 		</div>
 	</section>
 
-	<section id="interface">
+	<section id="interface" class="gray">
 		<div>
 			<div>
-				<h1>A clean interface for all your music</h1>
+				<h1>A clean interface for all your music.</h1>
 				<p>Play your music with a focused and clutter-free interface designed from the ground up to help you organize and play your songs with ease.</p>
 				<br />
-				<img src="app.png" width="980" height="700" />
+				<img src="screenshot.png" width="980" height="700" />
 			</div>
 		</div>
 	</section>
@@ -51,26 +42,17 @@
 	<section id="tags">
 		<div>
 			<div>
-				<h1>Describe your music with tags</h1>
-				<p>The best way to sort your music is to describe it. First add tags to your albums, artists, and tracks. Then simply click on a tag to view all corresponding songs.</p><br />
+				<h1>Describe your music with tags.</h1>
+				<p>The best way to sort your music is to describe it. First add tags to your albums, artists, and tracks. Then simply click on a tag to view all corresponding songs.</p>
 			</div>
 		</div>
 	</section>
 
-	<section id="boxes">
+	<section id="boxes" class="gray">
 		<div>
 			<div>
-				<h1>Automatically sort your music into boxes</h1>
+				<h1>Sort your music in boxes.</h1>
 				<p>Traditional playlists are static and designed for individual songs, not music collections. We set out to fix that with boxes. Just drag and drop tracks and any combination of albums, artists, and tags into one of your boxes to create a collection of songs fitting those terms. As your library grows, matching songs are added to your boxes automatically.</p>
-			</div>
-		</div>
-	</section>
-
-	<section id="mixed">
-		<div>
-			<div>
-				<h1>Never grow tired of your music</h1>
-				<p>Hit the Mixed Playback button to enjoy hours of your favorite music selected specially for you, weighted for your playback terms and your favorite songs. It even avoids frequent repeats to keep things fresh.</p>
 			</div>
 		</div>
 	</section>
@@ -78,16 +60,16 @@
 	<section id="customization">
 		<div>
 			<div>
-				<h1>100% customizable with plug-ins, and skins</h1>
+				<h1>100% customizable.</h1>
 				<p>Trackbox is built on Web technologies—HTML, CSS, and JavaScript—so everyone can easily make plug-ins and skins to extend and customize any part of the experience.</p>
 			</div>
 		</div>
 	</section>
 
-	<section id="open">
+	<section id="open" class="gray">
 		<div>
 			<div>
-				<h1>Free, open source, and cross-platform</h1>
+				<h1>Free, open source, and cross-platform.</h1>
 				<p>We believe in free and open software, which is why we're building Trackbox under the <a href="http://opensource.org/licenses/gpl-3.0.html">GPLv3</a> license where everyone is encouraged to share, remix, and contribute. We're also committed to bringing it to Windows, Mac, Linux, and the Web.</p>
 			</div>
 		</div>
@@ -102,14 +84,13 @@
 		</div>
 	</section>
 
-	<section id="email">
+	<section id="email" class="gray">
 		<div>
 			<div>
-				<h1>Sound exciting? Get an email when it's ready</h1>
+				<h1>Sound exciting? Get an email when it's ready.</h1>
 				<form action="http://keavon.com/trackbox_emails/email.php" method="POST">
 					<div id="failure"></div>
 					<p>Invalid email address. Please try again:</p>
-
 					<div id="success"></div>
 					<p>Thanks for signing up! We'll send you an email when Trackbox is ready.</p>
 					<input type="email" name="email" placeholder="Enter email then hit return">
@@ -121,25 +102,24 @@
 	<footer>
 		<div>
 			<div>
-				<div style="text-align:left;">
+				<div>
 					<p class="footer-head">TEAM</p>
 					<p>Keavon Chambers - Designer, Programmer</p>
-					<a href="http://www.keavon.com">Keavon.com</a>
-					<p>Joshua Anderson - Lead Programmer</p>
-					<a href="http://www.joshua-anderson.com">Joshua-Anderson.com</a>
+					<a href="http://keavon.com">Keavon.com</a>
+					<p>Joshua Anderson - Desktop Programmer</p>
+					<a href="http://joshua-anderson.com">Joshua-Anderson.com</a>
 				</div>
-				<div style="text-align:center;">
+				<div>
 					<p class="footer-head">CONTACT</p>
-					<a href="mailto:contact@trackboxapp.com">Contact@TrackboxApp.com <span style="font-size:10px;">(General/Press)</span></a>
+					<a href="mailto:contact@trackbox.io">Contact@Trackbox.io <span style="font-size:10px;">(General/Press)</span></a>
 					<a href="mailto:keavon@keavon.com">Keavon@Keavon.com</a>
 					<a href="mailto:j@joshua-anderson.com">J@Joshua-Anderson.com</a>
 				</div>
-				<div style="text-align:right;">
+				<div>
 					<p class="footer-head">DEVELOPMENT</p>
-					<a href="http://github.com/Trackbox/Trackbox">GitHub Repo</a>
-					<a href="http://trello.com/b/Bv2A5vKb">Trello Board</a>
+					<a href="https://github.com/Trackbox/Trackbox">GitHub Repo</a>
+					<a href="https://trello.com/b/Bv2A5vKb">Trello Board</a>
 				</div>
-				<div></div>
 			</div>
 		</div>
 	</footer>
