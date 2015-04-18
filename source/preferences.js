@@ -1,7 +1,7 @@
 // Initialize the preferences database
 tb.private.preferencesDb = new PouchDB("preferences", function () {
-	tb.triggerOnPreferencesLoaded();
 	tb.private.preferencesLoaded = true;
+	tb.triggerOnPreferencesLoaded();
 });
 
 // Returns true if the preferences database is loaded
@@ -11,11 +11,7 @@ tb.isPreferencesLoaded = function () {
 
 // Sets the preferencesLoaded to true by default or false if argument is given
 tb.setPreferencesLoaded = function (loaded) {
-	if (typeof loaded !== "boolean" || loaded === true) {
-		tb.private.preferencesLoaded = true;
-	} else {
-		tb.private.preferencesLoaded = false;
-	}
+	tb.private.preferencesLoaded = loaded || false;
 };
 
 // Triggers onPreferencesLoaded

@@ -1,7 +1,13 @@
 // 1) Load shell
-tb.onPreferencesLoaded(function () {
+if (tb.private.preferencesLoaded) {
+	// Load shell if the preferences are already loaded
 	tb.loadShellPackage();
-});
+} else {
+	// If preferences aren't yet loaded, load shell when preferences load
+	tb.onPreferencesLoaded(function () {
+		tb.loadShellPackage();
+	});
+}
 
 // 2) Load packages
 tb.onShellPackageLoaded(function () {
