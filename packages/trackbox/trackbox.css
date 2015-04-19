@@ -63,6 +63,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	user-select: none;
+	overflow:hidden;
 }
 #wrapper {
 	height: 100%;
@@ -75,6 +76,11 @@ body {
 	overflow-x:hidden;
 	color:||solid2||;
 }
+#wrapper.border {
+	width: calc(100% - 2px);
+	height: calc(100% - 2px);
+	border:1px solid ||accent1||;
+}
 
 /**********
  Title Bar
@@ -86,6 +92,11 @@ body {
 	-webkit-flex-direction: row;
 	height:63px;
 	background-color:||background2||;
+	-webkit-app-region: drag;
+}
+
+#title-bar #search-bar div, #title-bar #page-tabs, #title-bar #window-buttons a {
+	-webkit-app-region: no-drag;
 }
 
 /* /Logo and title */
@@ -189,15 +200,11 @@ body {
 }
 
 
-/* /Right buttons container */
-#title-bar-right {
+/* //Window buttons */
+#window-buttons {
 	float:right;
 	flex:0 0 auto;
 	-webkit-flex: 0 0 auto;
-}
-
-/* //Window buttons */
-#window-buttons {
     display: inline-block;
     height: auto;
     width: auto;

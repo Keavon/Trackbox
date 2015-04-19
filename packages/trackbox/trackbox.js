@@ -316,4 +316,31 @@ tb.onShellLoaded(function () {
 		$("#page-tabs > a").removeClass("page-selector-active");
 		$("#" + repo).addClass("page-selector-active");
 	}
+
+	// Window button functionality
+	$("#window-buttons > a").eq(0).click(function () {
+		require("remote").getCurrentWindow().minimize();
+	});
+	$("#window-buttons > a").eq(1).click(function () {
+		require("remote").getCurrentWindow().maximize();
+	});
+	$("#window-buttons > a").eq(2).click(function () {
+		require("remote").getCurrentWindow().unmaximize();
+	});
+	$("#window-buttons > a").eq(3).click(function () {
+		require("remote").getCurrentWindow().close();
+	});
+
+	tb.onWindowMaximize(function () {
+		$("#window-buttons > a").eq(1).hide();
+		$("#window-buttons > a").eq(2).show();
+		$("#wrapper").removeClass("border");
+	});
+
+	tb.onWindowUnmaximize(function () {
+		$("#window-buttons > a").eq(1).show();
+		$("#window-buttons > a").eq(2).hide();
+		$("#wrapper").addClass("border");
+	});
+
 });
