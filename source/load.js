@@ -1,4 +1,4 @@
-// 1) Load shell
+// Load shell
 if (tb.private.preferencesLoaded) {
 	// Load shell if the preferences are already loaded
 	tb.loadShellPackage();
@@ -9,7 +9,7 @@ if (tb.private.preferencesLoaded) {
 	});
 }
 
-// 2) Load packages
+// Load packages
 tb.onShellPackageLoaded(function () {
 	// Get the user preferences
 	tb.getPreferences(function (preferences) {
@@ -21,7 +21,7 @@ tb.onShellPackageLoaded(function () {
 	});
 });
 
-// 3) Bind hash change and open the current page
+// Bind hash change and open the current page
 tb.onPackagesLoaded(function () {
 	window.onhashchange = tb.router;
 });

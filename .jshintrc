@@ -28,7 +28,7 @@
 	"debug": true,
 	"eqnull": false,
 	"es5": false,
-	"esnext": false,
+	"esnext": true,
 	"moz": false,
 	"evil": false,
 	"expr": true,
