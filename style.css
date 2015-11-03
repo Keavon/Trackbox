@@ -5,7 +5,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 html, body {
 	width: 100%;
 	height: 100%;
-	font-family: 'Open Sans';
+	font-family: 'Roboto';
 	font-weight: 300;
 	color: #666;
 	background-color: #243743;
@@ -76,7 +76,7 @@ header h1 {
 	font-size: 36px;
 	line-height: 1;
 	display: inline-block;
-	font-family: "Montserrat", "Open Sans", sans-serif;
+	font-family: "Montserrat", "Roboto", sans-serif;
 	font-weight: 400;
 }
 
@@ -132,7 +132,7 @@ footer {
 		}
 
 		footer p.footer-head {
-			font-family: "Montserrat", "Open Sans", sans-serif;
+			font-family: "Montserrat", "Roboto", sans-serif;
 		}
 
 	footer p {
@@ -176,7 +176,7 @@ section {
 	section h1 {
 		margin-bottom: 20px;
 		text-align: center;
-		font-family: "Montserrat","Open Sans",sans-serif;
+		font-family: "Montserrat", "Roboto", sans-serif;
 	}
 
 	section p {
@@ -205,7 +205,7 @@ section {
 		font-weight: 400;
 		margin-bottom: 20px;
 		font-size: 40px;
-		font-family: "Montserrat","Open Sans",sans-serif;
+		font-family: "Montserrat", "Roboto", sans-serif;
 	}
 
 /* Section: Interface */
@@ -226,7 +226,7 @@ section {
 
 #email input {
 	font-size: 24px;
-	font-family: 'Open Sans';
+	font-family: 'Roboto';
 	width: 100%;
 	max-width: 450px;
 	-moz-box-sizing: border-box;
